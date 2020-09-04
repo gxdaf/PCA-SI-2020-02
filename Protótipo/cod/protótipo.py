@@ -34,7 +34,7 @@ coord_x_az = [90, 120,  110, 60, 50, 110, 170, 190, 220, 280, 330, 390, 450, 510
 coord_y_az = [280, 220, 160, 110, 50, 30, 60, 130, 190, 210, 160, 120, 125, 180, 250, 320, 390, 450, 500, 490, 430, 370, 310, 290, 330, 380, 420, 440, 410, 340, 280]
 pontos_az = 0
 
-mens_box_sorteio = pygame.image.load('../img/img_jog_car/mens_sort.png')
+mens_box_sorteio = pygame.image.load('../img/img_jog_car/guarda_mens.png')
 mens_box_buraco = pygame.image.load('../img/img_jog_car/mens_box_buraco.png')
 mens_box_perg = pygame.image.load('../img/img_jog_car/mens_box_perg.png')
 mens_box_am_prim = pygame.image.load('../img/img_jog_car/mens_box_am_prim.png')
@@ -82,7 +82,7 @@ def carteira_cinza():
     janela.blit(cart_pb, (carteira_x[x],carteira_y[y]))
 
 def mens_txt_sort():
-    janela.blit(mens_box_sorteio,(mens_box_x,mens_box_y))
+    janela.blit(mens_box_sorteio,(0,0))
 
 def mens_txt_buraco():
     janela.blit(mens_box_buraco, (mens_box_x, mens_box_y))
