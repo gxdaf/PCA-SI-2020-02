@@ -1,4 +1,4 @@
-import pygame, math, random
+import pygame, math, random, time
 
 pygame.init()
 pygame.font.init()
@@ -8,8 +8,13 @@ nome = pygame.display.set_caption(('City Driving Guide'))
 icone = pygame.image.load('../img/img_jog_car/carro-am.png')
 pygame.display.set_icon(icone)
 
+fonte_tit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 26)
+fonte_stit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 12)
+menu_titulo = fonte_tit.render('CITY DRIVING GUIDE', True, (255,255,255))
+menu_subtitulo = fonte_stit.render('CLIQUE EM QUALQUER LUGAR PARA COMEÇAR', True, (255,255,255))
+
 fundo_jogo = pygame.image.load('../img/pistas/fundo.jpg')
-fundo_sorteio = pygame.image.load('../img/pistas/fundo-intro.png')
+fundo_menu = pygame.image.load('../img/pistas/fundo-intro.png')
 
 jogadores = ['Amarelo', 'Azul']
 
@@ -18,23 +23,33 @@ coord_x_am = [90, 120,  110, 60, 50, 110, 170, 190, 220, 280, 330, 390, 450, 510
 coord_y_am = [280, 220, 160, 110, 50, 30, 60, 130, 190, 210, 160, 120, 125, 180, 250, 320, 390, 450, 500, 490, 430, 370, 310, 290, 330, 380, 420, 440, 410, 340, 280]
 pontos_am = 0
 
+carteira_x = [30, 440]
+carteira_y = [490, 30]
+
 cart_amarela = pygame.image.load('../img/img_jog_car/cart-amarela.png')
-cart_am_x = 30
-cart_am_y = 490
+cart_azul = pygame.image.load('../img/img_jog_car/cart-azul.png')
 
 carro_img_az = pygame.image.load('../img/img_jog_car/carro-az.png')
 coord_x_az = [90, 120,  110, 60, 50, 110, 170, 190, 220, 280, 330, 390, 450, 510, 510, 510,510, 500, 450, 390, 350, 370, 410, 350, 280, 240, 190, 120, 55, 60, 90]
 coord_y_az = [280, 220, 160, 110, 50, 30, 60, 130, 190, 210, 160, 120, 125, 180, 250, 320, 390, 450, 500, 490, 430, 370, 310, 290, 330, 380, 420, 440, 410, 340, 280]
 pontos_az = 0
 
-cart_azul = pygame.image.load('../img/img_jog_car/cart-azul.png')
-cart_az_x = 440
-cart_az_y = 30
+mens_box_sorteio = pygame.image.load('../img/img_jog_car/mens_sort.png')
+mens_box_buraco = pygame.image.load('../img/img_jog_car/mens_box_buraco.png')
+mens_box_perg = pygame.image.load('../img/img_jog_car/mens_box_perg.png')
+mens_box_am_prim = pygame.image.load('../img/img_jog_car/mens_box_am_prim.png')
+mens_box_az_prim = pygame.image.load('../img/img_jog_car/mens_box_az_prim.png')
+
+mens_box_x = 150
+mens_box_y = 170
 
 ponteiro_am = 0
 ponteiro_az = 0
 
-sorteio = True
+cart_pb = pygame.image.load('../img/img_jog_car/cart-bw.png')
+
+menu = True
+sorteio = False
 jogo = False
 
 mens_pos = ['Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Buraco!', 'Buraco!', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!']
@@ -47,6 +62,10 @@ dado_y = 25
 
 casas = ['uma', 'duas', 'três', 'quatro', 'cinco', 'seis']
 
+def menu_txt():
+    janela.blit(menu_titulo, (70,150))
+    janela.blit(menu_subtitulo, (70,400))
+
 def carro_jog_az():
     janela.blit(carro_img_az, (coord_x_az[ponteiro_az], coord_y_az[ponteiro_az]))
 
@@ -54,22 +73,52 @@ def carro_jog_am():
     janela.blit(carro_img_am, (coord_x_am[ponteiro_am], coord_y_am[ponteiro_am]))
 
 def carteira_amarela ():
-    janela.blit(cart_amarela, (cart_am_x,cart_am_y))
+    janela.blit(cart_amarela, (carteira_x[0],carteira_y[0]))
 
 def carteira_azul():
-    janela.blit(cart_azul, (cart_az_x, cart_az_y))
+    janela.blit(cart_azul, (carteira_x[1], carteira_y[1]))
+
+def carteira_cinza():
+    janela.blit(cart_pb, (carteira_x[x],carteira_y[y]))
+
+def mens_txt_sort():
+    janela.blit(mens_box_sorteio,(mens_box_x,mens_box_y))
+
+def mens_txt_buraco():
+    janela.blit(mens_box_buraco, (mens_box_x, mens_box_y))
+
+def mens_txt_perg():
+    janela.blit(mens_box_perg, (mens_box_x, mens_box_y))
+
+def mens_txt_am_prim():
+    janela.blit(mens_box_am_prim,(mens_box_x,mens_box_y))
+
+def mens_txt_az_prim():
+    janela.blit(mens_box_az_prim, (mens_box_x,mens_box_y))
 
 pygame.display.flip()
 
 while True:
 
-    while sorteio:
-        janela.blit(fundo_sorteio, (0, 0))
+    while menu:
+        janela.blit(fundo_menu, (0, 0))
+        menu_txt()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            if event.type == pygame.VIDEOEXPOSE:
-                print('Aperte espaço para sortear!')
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == pygame.BUTTON_LEFT:
+                    menu = False
+                    sorteio = True
+
+        pygame.display.flip()
+
+    while sorteio:
+        janela.blit(fundo_jogo, (0, 0))
+        mens_txt_sort()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     escolha = random.choice(jogadores)
@@ -79,7 +128,7 @@ while True:
                     sorteio = False
                     jogo = True
 
-        pygame.display.update()
+        pygame.display.flip()
 
     while jogo:
 
@@ -94,10 +143,9 @@ while True:
                 if event.key == pygame.K_SPACE and escolha == 'Amarelo':
                     dado = random.randint(1, 6)
                     ponteiro_am += dado
-                    coord_x_am[(ponteiro_am)]
-                    coord_y_am[(ponteiro_am)]
                     dado_am_vez = pygame.image.load(dado_am[dado - 1])
                     janela.blit(dado_am_vez, (dado_x, dado_y))
+                    pygame.display.update()
                     status_casa = mens_pos[ponteiro_am]
                     if dado == 1:
                         print('Você andou uma casa!')
@@ -121,10 +169,9 @@ while True:
                 elif event.key == pygame.K_SPACE and escolha == 'Azul':
                     dado = random.randint(1, 6)
                     ponteiro_az += dado
-                    coord_x_az[(ponteiro_az)]
-                    coord_y_az[(ponteiro_az)]
                     dado_az_vez = pygame.image.load(dado_az[dado - 1])
                     janela.blit(dado_az_vez, (dado_x, dado_y))
+                    pygame.display.flip()
                     status_casa = mens_pos[ponteiro_az]
                     if dado == 1:
                         print('Você andou uma casa!')
@@ -145,8 +192,4 @@ while True:
                             print('Você errou e agora tem {} pontos na carteira! Vez do Amarelo.'.format(pontos_az))
                             escolha = 'Amarelo'
 
-
-        carteira_amarela()
-        carteira_azul()
-
-        pygame.display.update()
+        pygame.display.flip()
