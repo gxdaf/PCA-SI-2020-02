@@ -77,8 +77,8 @@ dado_x = 255
 dado_y = 25
 
 def dado_regra():
-        dado_regra = pygame.image.load(dado_am[0])
-        janela.blit(dado_regra,(dado_x, dado_y))
+    dado_regra = pygame.image.load(dado_am[0])
+    janela.blit(dado_regra,(dado_x, dado_y))
 
 casas = ['uma', 'duas', 'três', 'quatro', 'cinco', 'seis']
 
@@ -113,6 +113,10 @@ def menu_opc():
         opc_sair = pygame.draw.rect(janela, (0, 0, 0), (60, 450, 200, 50))
         menu_botao4 = fonte_botao.render('SAIR DO JOGO', True, (255, 255, 255))
         janela.blit(menu_botao4, (90, 470))
+
+def escolha_txt():
+    escolha_txt = fonte_botao.render('ESCOLHA UM DOS MODOS', True, (255, 255, 255))
+    janela.blit(escolha_txt, (190, 150))
 
 def modos_jogo():
     mouse = pygame.mouse.get_pos()
@@ -385,6 +389,8 @@ while True:
     while escolha_modo:
         janela.blit(fundo_menu, (0, 0))
         modos_jogo()
+        menu_txt()
+        escolha_txt()
         mouse = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
