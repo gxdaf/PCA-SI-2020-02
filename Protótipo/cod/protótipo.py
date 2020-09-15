@@ -51,6 +51,9 @@ ponteiro_az = 0
 cart_pb = pygame.image.load('../img/img_jog_car/cart-bw.png')
 
 menu = True
+escolha_modo = False
+modo_infantil = False
+modo_adulto = False
 conf_audio = False
 conf_tam = False
 regra1 = False
@@ -60,10 +63,11 @@ regra4 = False
 regra5 = False
 regra6 = False
 sorteio = False
-jogo = False
+jogo_infantil = False
+jogo_adulto = False
 
 
-mens_pos = ['Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Buraco!', 'Buraco!', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!']
+mens_pos = ['Pergunta', 'Pergunta', 'Buraco!', 'Ponte', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Ponte', 'Buraco!', 'Buraco!', 'Pergunta', 'Ponte', 'Pergunta', 'Ponte', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!']
 resp_pos = ['Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Buraco','Buraco', 'Resposta','Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Buraco!']
 
 dado_am = ['../img/dados/dado-am-1.png', '../img/dados/dado-am-2.png', '../img/dados/dado-am-3.png', '../img/dados/dado-am-4.png', '../img/dados/dado-am-5.png', '../img/dados/dado-am-6.png']
@@ -108,6 +112,23 @@ def menu_opc():
         opc_sair = pygame.draw.rect(janela, (0, 0, 0), (60, 450, 200, 50))
         menu_botao4 = fonte_botao.render('SAIR DO JOGO', True, (255, 255, 255))
         janela.blit(menu_botao4, (90, 470))
+
+def modos_jogo():
+    mouse = pygame.mouse.get_pos()
+    jog_modo_inf = pygame.draw.rect(janela, (255, 255, 255), (90, 300, 200, 50))
+    opc_inf = fonte_botao.render('INFANTIL', True, (0, 0, 0))
+    janela.blit(opc_inf, (145, 320))
+    jog_modo_ad = pygame.draw.rect(janela, (255, 255, 255), (320, 300, 200, 50))
+    opc_ad = fonte_botao.render('ADULTO', True, (0, 0, 0))
+    janela.blit(opc_ad, (390, 320))
+    if 290 > mouse [0] > 90 and 350 > mouse [1] > 300:
+        jog_modo_inf = pygame.draw.rect(janela, (0, 0, 0), (90, 300, 200, 50))
+        opc_inf = fonte_botao.render('INFANTIL', True, (255, 255, 255))
+        janela.blit(opc_inf, (145, 320))
+    elif 520 > mouse [0] > 320 and 350 > mouse[1] > 300:
+        jog_modo_ad = pygame.draw.rect(janela, (0, 0, 0), (320, 300, 200, 50))
+        opc_ad = fonte_botao.render('ADULTO', True, (255, 255, 255))
+        janela.blit(opc_ad, (390, 320))
 
 def regra_1():
     janela.blit(guarda_regras, (0, 0))
@@ -244,7 +265,7 @@ while True:
                 mouse = pygame.mouse.get_pos()
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 200 > mouse[1] > 150:
                     menu = False
-                    regra1 = True
+                    escolha_modo = True
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 300 > mouse[1] > 250:
                     janela.blit(mens_menu, (250, 200))
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 400 > mouse[1] > 350:
@@ -252,181 +273,195 @@ while True:
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 500 > mouse[1] > 450:
                     pygame.quit()
 
-        pygame.display.update()
-
-    while regra1:
-        janela.blit(fundo_jogo, (0, 0))
-        pygame.draw.rect(janela, (255, 0, 0), (253, dado_y, 50, 50))
-        dado_regra()
-        regra_1()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    regra1 = False
-                    regra2 = True
-
-        pygame.display.update()
-
-    while regra2:
-        janela.blit(fundo_jogo, (0, 0))
-        dado_regra()
-        pygame.draw.rect(janela, (255, 0, 0), (carteira_x[1], carteira_y[1], 127, 90))
-        carteira_azul()
-        regra_2()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    regra2 = False
-                    regra3 = True
-
-        pygame.display.update()
-
-    while regra3:
-        janela.blit(fundo_jogo, (0, 0))
-        dado_regra()
-        carteira_azul()
-        regra_3()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    regra3 = False
-                    regra4 = True
-
-        pygame.display.update()
-
-    while regra4:
-        janela.blit(fundo_jogo, (0, 0))
-        dado_regra()
-        carteira_azul()
-        regra_4()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    regra4 = False
-                    regra5 = True
-
-        pygame.display.update()
-
-    while regra5:
-        janela.blit(fundo_jogo, (0, 0))
-        dado_regra()
-        carteira_azul()
-        regra_5()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    regra5 = False
-                    regra6 = True
-
-        pygame.display.update()
-
-    while regra6:
-        janela.blit(fundo_jogo, (0, 0))
-        dado_regra()
-        carteira_azul()
-        placas()
-        regra_6()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    regra6 = False
-
         pygame.display.flip()
 
-
-    mens_txt_sort()
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                sorteio = True
-                print('O primeiro a jogar será o: {}! Aperte espaço para jogar o dado.'.format(escolha))
-
-    pygame.display.flip()
-
-    while sorteio:
-
-        janela.blit(fundo_jogo, (0, 0))
-
+    while escolha_modo:
+        janela.blit(fundo_menu, (0, 0))
+        modos_jogo()
+        mouse = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_SPACE:
-                    sorteio = False
-                    jogo = True
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == pygame.BUTTON_LEFT and 290 > mouse[0] > 90 and 350 > mouse[1] > 300:
+                    escolha_modo = False
+                    modo_infantil = True
+                    regra1 = True
+                elif event.button == pygame.BUTTON_LEFT and 520 > mouse[0] > 320 and 350 > mouse[1] > 300:
+                    escolha_modo = False
+                    modo_adulto = True
 
         pygame.display.update()
 
-    while jogo:
-        janela.blit(fundo_jogo, (0, 0))
-        carro_jog_am()
-        carro_jog_az()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and escolha == 'Amarelo':
-                    dado = random.randint(1, 6)
-                    ponteiro_am += dado
-                    dado_am_vez = pygame.image.load(dado_am[dado - 1])
-                    janela.blit(dado_am_vez, (dado_x, dado_y))
-                    pygame.display.update()
-                    status_casa = mens_pos[ponteiro_am]
-                    if dado == 1:
-                        print('Você andou uma casa!')
-                    else:
-                        print('Você andou {} casas!'.format(casas[dado - 1]))
+    while modo_infantil:
 
-                    if 'Buraco!' in status_casa:
-                        print('Você caiu no buraco! Vez do Azul.')
-                        escolha = 'Azul'
-                    else:
-                        print(mens_pos[ponteiro_am])
-                        resposta = input('Digite aqui a resposta:')
-                        resposta = resposta.title()
-                        if resposta in resp_pos[ponteiro_am]:
-                            prox_part = print('Você acertou! Jogue novamente.')
+        while regra1:
+            janela.blit(fundo_jogo, (0, 0))
+            pygame.draw.rect(janela, (255, 0, 0), (253, dado_y, 50, 50))
+            dado_regra()
+            regra_1()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra1 = False
+                        regra2 = True
+
+            pygame.display.update()
+
+        while regra2:
+            janela.blit(fundo_jogo, (0, 0))
+            dado_regra()
+            pygame.draw.rect(janela, (255, 0, 0), (carteira_x[1], carteira_y[1], 127, 90))
+            carteira_azul()
+            regra_2()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra2 = False
+                        regra3 = True
+
+            pygame.display.update()
+
+        while regra3:
+            janela.blit(fundo_jogo, (0, 0))
+            dado_regra()
+            carteira_azul()
+            regra_3()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra3 = False
+                        regra4 = True
+
+            pygame.display.update()
+
+        while regra4:
+            janela.blit(fundo_jogo, (0, 0))
+            dado_regra()
+            carteira_azul()
+            regra_4()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra4 = False
+                        regra5 = True
+
+            pygame.display.update()
+
+        while regra5:
+            janela.blit(fundo_jogo, (0, 0))
+            dado_regra()
+            carteira_azul()
+            regra_5()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra5 = False
+                        regra6 = True
+
+            pygame.display.update()
+
+        while regra6:
+            janela.blit(fundo_jogo, (0, 0))
+            dado_regra()
+            carteira_azul()
+            placas()
+            regra_6()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra6 = False
+                        sorteio = True
+
+        while sorteio:
+
+            janela.blit(fundo_jogo, (0, 0))
+            mens_txt_sort()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        print('O primeiro a jogar será o: {}! Aperte espaço para jogar o dado.'.format(escolha))
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_SPACE:
+                        sorteio = False
+                        jogo_infantil = True
+
+            pygame.display.flip()
+
+
+
+        while jogo_infantil:
+            janela.blit(fundo_jogo, (0, 0))
+            carro_jog_am()
+            carro_jog_az()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE and escolha == 'Amarelo':
+                        dado = random.randint(1, 6)
+                        ponteiro_am += dado
+                        dado_am_vez = pygame.image.load(dado_am[dado - 1])
+                        janela.blit(dado_am_vez, (dado_x, dado_y))
+                        pygame.display.update()
+                        status_casa = mens_pos[ponteiro_am]
+                        if dado == 1:
+                            print('Você andou uma casa!')
+                        else:
+                            print('Você andou {} casas!'.format(casas[dado - 1]))
+
+                        if 'Buraco!' in status_casa:
+                            print('Você caiu no buraco! Vez do Azul.')
+                            escolha = 'Azul'
+                        else:
+                            print(mens_pos[ponteiro_am])
+                            resposta = input('Digite aqui a resposta:')
+                            resposta = resposta.title()
+                            if resposta in resp_pos[ponteiro_am]:
+                                prox_part = print('Você acertou! Jogue novamente.')
+                                escolha = 'Amarelo'
+                            else:
+                                pontos_am += 1
+                                print('Você errou e agora tem {} pontos na carteira! Vez do Azul.'.format(pontos_am))
+                                escolha = 'Azul'
+                    elif event.key == pygame.K_SPACE and escolha == 'Azul':
+                        dado = random.randint(1, 6)
+                        ponteiro_az += dado
+                        dado_az_vez = pygame.image.load(dado_az[dado - 1])
+                        janela.blit(dado_az_vez, (dado_x, dado_y))
+                        pygame.display.flip()
+                        status_casa = mens_pos[ponteiro_az]
+                        if dado == 1:
+                            print('Você andou uma casa!')
+                        else:
+                            print('Você andou {} casas!'.format(casas[dado - 1]))
+                        if 'Buraco' in status_casa:
+                            print('Você caiu no buraco! Vez do Amarelo.')
                             escolha = 'Amarelo'
                         else:
-                            pontos_am += 1
-                            print('Você errou e agora tem {} pontos na carteira! Vez do Azul.'.format(pontos_am))
-                            escolha = 'Azul'
-                elif event.key == pygame.K_SPACE and escolha == 'Azul':
-                    dado = random.randint(1, 6)
-                    ponteiro_az += dado
-                    dado_az_vez = pygame.image.load(dado_az[dado - 1])
-                    janela.blit(dado_az_vez, (dado_x, dado_y))
-                    pygame.display.flip()
-                    status_casa = mens_pos[ponteiro_az]
-                    if dado == 1:
-                        print('Você andou uma casa!')
-                    else:
-                        print('Você andou {} casas!'.format(casas[dado - 1]))
-                    if 'Buraco' in status_casa:
-                        print('Você caiu no buraco! Vez do Amarelo.')
-                        escolha = 'Amarelo'
-                    else:
-                        print(mens_pos[ponteiro_az])
-                        resposta = input('Digite aqui a resposta:')
-                        resposta = resposta.title()
-                        if resposta in resp_pos[ponteiro_az]:
-                            print('Você acertou!')
-                            escolha = 'Azul'
-                        else:
-                            pontos_az += 1
-                            print('Você errou e agora tem {} pontos na carteira! Vez do Amarelo.'.format(pontos_az))
-                            escolha = 'Amarelo'
-
-        pygame.display.flip()
+                            print(mens_pos[ponteiro_az])
+                            resposta = input('Digite aqui a resposta:')
+                            resposta = resposta.title()
+                            if resposta in resp_pos[ponteiro_az]:
+                                print('Você acertou!')
+                                escolha = 'Azul'
+                            else:
+                                pontos_az += 1
+                                print('Você errou e agora tem {} pontos na carteira! Vez do Amarelo.'.format(pontos_az))
+                                escolha = 'Amarelo'
+            pygame.display.flip()
