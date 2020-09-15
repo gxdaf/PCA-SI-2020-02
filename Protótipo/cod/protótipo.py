@@ -13,8 +13,9 @@ fonte_botao = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 12)
 menu_titulo = fonte_tit.render('CITY DRIVING GUIDE', True, (255,255,255))
 
 escolha = ''
-fundo_jogo = pygame.image.load('../img/pistas/fundo.jpg')
 fundo_menu = pygame.image.load('../img/pistas/fundo-intro.png')
+fundo_infantil = pygame.image.load('../img/pistas/fundo.jpg')
+fundo_adulto = pygame.image.load('../img/pistas/pista_dois.jpg')
 
 jogadores = ['Amarelo', 'Azul']
 
@@ -35,7 +36,7 @@ coord_y_az = [280, 220, 160, 110, 50, 30, 60, 130, 190, 210, 160, 120, 125, 180,
 pontos_az = 0
 
 guarda_regras = pygame.image.load('../img/img_jog_car/guarda_regras.png')
-mens_menu = pygame.image.load('../img/img_jog_car/mens_box.png')
+mens_box = pygame.image.load('../img/img_jog_car/mens_box.png')
 mens_box_sorteio = pygame.image.load('../img/img_jog_car/guarda_mens.png')
 mens_box_buraco = pygame.image.load('../img/img_jog_car/mens_box_buraco.png')
 mens_box_perg = pygame.image.load('../img/img_jog_car/mens_box_perg.png')
@@ -130,7 +131,7 @@ def modos_jogo():
         opc_ad = fonte_botao.render('ADULTO', True, (255, 255, 255))
         janela.blit(opc_ad, (390, 320))
 
-def regra_1():
+def regra_infantil_1():
     janela.blit(guarda_regras, (0, 0))
     regra_linha1 = (fonte_botao.render('Um dado determina o número de casas', True, (0, 0, 0)))
     regra_linha2 = (fonte_botao.render('que o jogador deve percorrer a', True, (0, 0, 0)))
@@ -141,7 +142,7 @@ def regra_1():
     janela.blit(regra_linha3, (50, 450))
     janela.blit(espaco, (80, 490))
 
-def regra_2():
+def regra_infantil_2():
     janela.blit(guarda_regras, (0, 0))
     regra_linha1 = (fonte_botao.render('Limite de 40 pontos na habilitação.', True, (0, 0, 0)))
     regra_linha2 = (fonte_botao.render('O jogador que chegar a essa', True, (0, 0, 0)))
@@ -152,7 +153,7 @@ def regra_2():
     janela.blit(regra_linha3, (50, 450))
     janela.blit(espaco, (80, 490))
 
-def regra_3():
+def regra_infantil_3():
     janela.blit(guarda_regras, (0, 0))
     regra_linha1 = (fonte_botao.render('Ganha o jogador que percorrer todo', True, (0, 0, 0)))
     regra_linha2 = (fonte_botao.render('o tabuleiro e garantir a menor', True, (0, 0, 0)))
@@ -165,7 +166,7 @@ def regra_3():
     janela.blit(regra_linha4, (50, 470))
     janela.blit(espaco, (80, 500))
 
-def regra_4():
+def regra_infantil_4():
     janela.blit(guarda_regras, (0, 0))
     regra_linha1 = (fonte_botao.render('As pontes permitem que o jogador', True, (0, 0, 0)))
     regra_linha2 = (fonte_botao.render('avance no tabuleiro', True, (0, 0, 0)))
@@ -178,7 +179,7 @@ def regra_4():
     janela.blit(regra_linha4, (50, 475))
     janela.blit(espaco, (80, 500))
 
-def regra_5():
+def regra_infantil_5():
     janela.blit(guarda_regras, (0, 0))
     regra_linha1 = (fonte_botao.render('O jogador que cair no buraco na', True, (0, 0, 0)))
     regra_linha2 = (fonte_botao.render('estrada deverá ficar uma', True, (0, 0, 0)))
@@ -189,9 +190,9 @@ def regra_5():
     janela.blit(regra_linha3, (50, 450))
     janela.blit(espaco, (80, 500))
 
-def regra_6():
+def regra_infantil_6():
     janela.blit(guarda_regras, (0, 0))
-    regra_linha1 = (fonte_botao.render('O tabuleiro conta com uma série de ', True, (0, 0, 0)))
+    regra_linha1 = (fonte_botao.render('O tabuleiro conta com uma série de', True, (0, 0, 0)))
     regra_linha2 = (fonte_botao.render('perguntas sobre regras de', True, (0, 0, 0)))
     regra_linha3 = (fonte_botao.render('trânsito, divididas em 4 níveis', True, (0, 0, 0)))
     regra_linha4 = (fonte_botao.render('e infrações, marcadas pelas', True, (0, 0, 0)))
@@ -203,6 +204,108 @@ def regra_6():
     janela.blit(regra_linha4, (50, 465))
     janela.blit(regra_linha5, (50, 490))
     janela.blit(espaco, (80, 500))
+
+def regra_adulto_1():
+    janela.blit(mens_box, (150, 150))
+    regra_linha1 = (fonte_botao.render('Um dado determina', True, (0, 0, 0)))
+    regra_linha2 = (fonte_botao.render('o número de casas', True, (0, 0, 0)))
+    regra_linha3 = (fonte_botao.render('que o jogador', True, (0, 0, 0)))
+    regra_linha4 = (fonte_botao.render('deve percorrer a', True, (0, 0, 0)))
+    regra_linha5 = (fonte_botao.render('cada jogada.', True, (0, 0, 0)))
+    espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+    espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+    janela.blit(regra_linha1, (205, 215))
+    janela.blit(regra_linha2, (205, 240))
+    janela.blit(regra_linha3, (235, 265))
+    janela.blit(regra_linha4, (210, 290))
+    janela.blit(regra_linha5, (240, 315))
+    janela.blit(espaco, (235, 350))
+    janela.blit(espaco_2, (230, 375))
+
+def regra_adulto_2():
+    janela.blit(mens_box, (150, 150))
+    regra_linha1 = (fonte_botao.render('Limite de 40 pontos', True, (0, 0, 0)))
+    regra_linha2 = (fonte_botao.render('na habilitação. O jo-', True, (0, 0, 0)))
+    regra_linha3 = (fonte_botao.render('gador que chegar a', True, (0, 0, 0)))
+    regra_linha4 = (fonte_botao.render('essa quantidade perde', True, (0, 0, 0)))
+    regra_linha5 = (fonte_botao.render('automaticamente.', True, (0, 0, 0)))
+    espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+    espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+    janela.blit(regra_linha1, (200, 215))
+    janela.blit(regra_linha2, (190, 240))
+    janela.blit(regra_linha3, (200, 265))
+    janela.blit(regra_linha4, (185, 290))
+    janela.blit(regra_linha5, (225, 315))
+    janela.blit(espaco, (235, 350))
+    janela.blit(espaco_2, (230, 375))
+
+def regra_adulto_3():
+    janela.blit(mens_box, (150, 150))
+    regra_linha1 = (fonte_botao.render('Ganha o jogador que', True, (0, 0, 0)))
+    regra_linha2 = (fonte_botao.render('percorrer todo o ta-', True, (0, 0, 0)))
+    regra_linha3 = (fonte_botao.render('buleiro e garantir a', True, (0, 0, 0)))
+    regra_linha4 = (fonte_botao.render('menor pontuação de in-', True, (0, 0, 0)))
+    regra_linha5 = (fonte_botao.render('frações. Ou seja, a-', True, (0, 0, 0)))
+    regra_linha6 = (fonte_botao.render('certar mais perguntas.', True, (0, 0, 0)))
+    espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+    espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+    janela.blit(regra_linha1, (200, 200))
+    janela.blit(regra_linha2, (190, 225))
+    janela.blit(regra_linha3, (200, 250))
+    janela.blit(regra_linha4, (185, 275))
+    janela.blit(regra_linha5, (195, 300))
+    janela.blit(regra_linha6, (185, 325))
+    janela.blit(espaco, (235, 350))
+    janela.blit(espaco_2, (230, 375))
+
+def regra_adulto_4():
+    janela.blit(mens_box, (150, 150))
+    regra_linha1 = (fonte_botao.render('As pontes permitem', True, (0, 0, 0)))
+    regra_linha2 = (fonte_botao.render('que o jogador', True, (0, 0, 0)))
+    regra_linha3 = (fonte_botao.render('avance no tabuleiro', True, (0, 0, 0)))
+    regra_linha4 = (fonte_botao.render('cortando caminho.', True, (0, 0, 0)))
+    espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+    espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+    janela.blit(regra_linha1, (200, 225))
+    janela.blit(regra_linha2, (230, 250))
+    janela.blit(regra_linha3, (200, 275))
+    janela.blit(regra_linha4, (210, 300))
+    janela.blit(espaco, (235, 350))
+    janela.blit(espaco_2, (230, 375))
+
+def regra_adulto_5():
+    janela.blit(mens_box, (150, 150))
+    regra_linha1 = (fonte_botao.render('O jogador que cair', True, (0, 0, 0)))
+    regra_linha2 = (fonte_botao.render('no buraco na estra-', True, (0, 0, 0)))
+    regra_linha3 = (fonte_botao.render('da deverá ficar uma', True, (0, 0, 0)))
+    regra_linha4 = (fonte_botao.render('rodada sem jogar.', True, (0, 0, 0)))
+    espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+    espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+    janela.blit(regra_linha1, (200, 225))
+    janela.blit(regra_linha2, (200, 250))
+    janela.blit(regra_linha3, (195, 275))
+    janela.blit(regra_linha4, (205, 300))
+    janela.blit(espaco, (235, 350))
+    janela.blit(espaco_2, (230, 375))
+
+def regra_adulto_6():
+    janela.blit(mens_box, (150, 150))
+    regra_linha1 = (fonte_botao.render('O tabuleiro conta', True, (0, 0, 0)))
+    regra_linha2 = (fonte_botao.render('com uma série de per-', True, (0, 0, 0)))
+    regra_linha3 = (fonte_botao.render('guntas sobre regras de', True, (0, 0, 0)))
+    regra_linha4 = (fonte_botao.render('trânsito, divididas', True, (0, 0, 0)))
+    regra_linha5 = (fonte_botao.render('em 4 níveis marcados', True, (0, 0, 0)))
+    regra_linha6 = (fonte_botao.render('pelas cores das placas', True, (0, 0, 0)))
+    espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+    espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+    janela.blit(regra_linha1, (200, 200))
+    janela.blit(regra_linha2, (190, 225))
+    janela.blit(regra_linha3, (190, 250))
+    janela.blit(regra_linha4, (185, 275))
+    janela.blit(regra_linha5, (195, 300))
+    janela.blit(regra_linha6, (185, 325))
+    janela.blit(espaco, (235, 350))
+    janela.blit(espaco_2, (230, 375))
 
 def menu_txt():
     janela.blit(menu_titulo, (70,70))
@@ -232,8 +335,12 @@ def carteira_azul():
 def carteira_cinza():
     janela.blit(cart_pb, (carteira_x[x],carteira_y[y]))
 
-def mens_txt_sort():
+def mens_txt_sort_inf():
     janela.blit(mens_box_sorteio,(0,0))
+
+def mens_txt_sort_ad():
+    janela.blit(fundo_adulto,(0,0))
+    janela.blit(mens_box,(150,150))
 
 def mens_txt_buraco():
     janela.blit(mens_box_buraco, (mens_box_x, mens_box_y))
@@ -290,16 +397,17 @@ while True:
                 elif event.button == pygame.BUTTON_LEFT and 520 > mouse[0] > 320 and 350 > mouse[1] > 300:
                     escolha_modo = False
                     modo_adulto = True
+                    regra1 = True
 
         pygame.display.update()
 
     while modo_infantil:
 
         while regra1:
-            janela.blit(fundo_jogo, (0, 0))
+            janela.blit(fundo_infantil, (0, 0))
             pygame.draw.rect(janela, (255, 0, 0), (253, dado_y, 50, 50))
             dado_regra()
-            regra_1()
+            regra_infantil_1()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -311,11 +419,11 @@ while True:
             pygame.display.update()
 
         while regra2:
-            janela.blit(fundo_jogo, (0, 0))
+            janela.blit(fundo_infantil, (0, 0))
             dado_regra()
             pygame.draw.rect(janela, (255, 0, 0), (carteira_x[1], carteira_y[1], 127, 90))
             carteira_azul()
-            regra_2()
+            regra_infantil_2()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -327,10 +435,10 @@ while True:
             pygame.display.update()
 
         while regra3:
-            janela.blit(fundo_jogo, (0, 0))
+            janela.blit(fundo_infantil, (0, 0))
             dado_regra()
             carteira_azul()
-            regra_3()
+            regra_infantil_3()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -342,10 +450,10 @@ while True:
             pygame.display.update()
 
         while regra4:
-            janela.blit(fundo_jogo, (0, 0))
+            janela.blit(fundo_infantil, (0, 0))
             dado_regra()
             carteira_azul()
-            regra_4()
+            regra_infantil_4()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -357,10 +465,10 @@ while True:
             pygame.display.update()
 
         while regra5:
-            janela.blit(fundo_jogo, (0, 0))
+            janela.blit(fundo_infantil, (0, 0))
             dado_regra()
             carteira_azul()
-            regra_5()
+            regra_infantil_5()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -372,11 +480,11 @@ while True:
             pygame.display.update()
 
         while regra6:
-            janela.blit(fundo_jogo, (0, 0))
+            janela.blit(fundo_infantil, (0, 0))
             dado_regra()
             carteira_azul()
             placas()
-            regra_6()
+            regra_infantil_6()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -387,8 +495,8 @@ while True:
 
         while sorteio:
 
-            janela.blit(fundo_jogo, (0, 0))
-            mens_txt_sort()
+            janela.blit(fundo_infantil, (0, 0))
+            mens_txt_sort_inf()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -406,7 +514,7 @@ while True:
 
 
         while jogo_infantil:
-            janela.blit(fundo_jogo, (0, 0))
+            janela.blit(fundo_infantil, (0, 0))
             carro_jog_am()
             carro_jog_az()
             for event in pygame.event.get():
@@ -464,4 +572,116 @@ while True:
                                 pontos_az += 1
                                 print('Você errou e agora tem {} pontos na carteira! Vez do Amarelo.'.format(pontos_az))
                                 escolha = 'Amarelo'
+
             pygame.display.flip()
+
+    while modo_adulto:
+
+        while regra1:
+            janela.blit(fundo_adulto, (0, 0))
+            pygame.draw.rect(janela, (255, 0, 0), (253, dado_y, 50, 50))
+            dado_regra()
+            regra_adulto_1()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra1 = False
+                        regra2 = True
+
+            pygame.display.flip()
+
+        while regra2:
+            janela.blit(fundo_adulto, (0, 0))
+            dado_regra()
+            pygame.draw.rect(janela, (255, 0, 0), (carteira_x[1], carteira_y[1], 127, 90))
+            carteira_azul()
+            regra_adulto_2()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra2 = False
+                        regra3 = True
+
+            pygame.display.flip()
+
+        while regra3:
+            janela.blit(fundo_adulto, (0, 0))
+            dado_regra()
+            carteira_azul()
+            regra_adulto_3()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra3 = False
+                        regra4 = True
+
+            pygame.display.flip()
+
+        while regra4:
+            janela.blit(fundo_adulto, (0, 0))
+            dado_regra()
+            carteira_azul()
+            regra_adulto_4()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra4 = False
+                        regra5 = True
+
+            pygame.display.flip()
+
+        while regra5:
+            janela.blit(fundo_adulto, (0, 0))
+            dado_regra()
+            carteira_azul()
+            regra_adulto_5()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra5 = False
+                        regra6 = True
+
+            pygame.display.flip()
+
+        while regra6:
+            janela.blit(fundo_adulto, (0, 0))
+            dado_regra()
+            carteira_azul()
+            regra_adulto_6()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        regra6 = False
+                        sorteio = True
+
+            pygame.display.flip()
+
+        while sorteio:
+
+            janela.blit(fundo_adulto, (0, 0))
+            mens_txt_sort_ad()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        print('O primeiro a jogar será o: {}! Aperte espaço para jogar o dado.'.format(escolha))
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_SPACE:
+                        sorteio = False
+                        jogo_adulto = True
+
+                pygame.display.flip()
