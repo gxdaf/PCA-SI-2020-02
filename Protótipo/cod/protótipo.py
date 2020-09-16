@@ -10,8 +10,15 @@ janela = pygame.display.set_mode((600,600))
 nome = pygame.display.set_caption(('City Driving Guide'))
 icone = pygame.image.load('../img/img_jog_car/carro-am.png')
 pygame.display.set_icon(icone)
-mixer.music.load('../audio/buzina_intro.wav')
-
+buzina = mixer.Sound('../audio/buzina_intro.wav')
+musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
+musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
+titulo_intro_x = 70
+titulo_intro_y = 300
+cor_fundo = (0, 0, 0)
+carro_intro = pygame.image.load('../img/img_jog_car/carro_intro.png')
+carro_intro_x = 0
+carro_intro_y = 460
 
 fonte_tit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 26)
 fonte_botao = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 12)
@@ -21,6 +28,7 @@ escolha = ''
 fundo_menu = pygame.image.load('../img/pistas/fundo-intro.png')
 fundo_infantil = pygame.image.load('../img/pistas/fundo.jpg')
 fundo_adulto = pygame.image.load('../img/pistas/pista_dois.jpg')
+fundo_intro = pygame.image.load('../img/img_jog_car/fundo_estradinha.png')
 
 jogadores = ['Amarelo', 'Azul']
 
@@ -56,7 +64,8 @@ ponteiro_az = 0
 
 cart_pb = pygame.image.load('../img/img_jog_car/cart-bw.png')
 
-menu = True
+intro = True
+menu = False
 escolha_modo = False
 modo_infantil = False
 modo_adulto = False
@@ -122,6 +131,9 @@ def menu_opc():
 def escolha_txt():
     escolha_txt = fonte_botao.render('ESCOLHA UM DOS MODOS', True, (255, 255, 255))
     janela.blit(escolha_txt, (190, 150))
+
+def intro_txt():
+    janela.blit(menu_titulo, (titulo_intro_x, titulo_intro_y))
 
 def modos_jogo():
     mouse = pygame.mouse.get_pos()
@@ -368,7 +380,20 @@ pygame.display.flip()
 while True:
 
     escolha = random.choice(jogadores)
-    mixer.music.play()
+    buzina.play()
+
+    while intro:
+
+        janela.blit(fundo_intro, (0, 0))
+        intro_txt()
+        titulo_intro_y -= 2
+        janela.blit(carro_intro, (carro_intro_x,carro_intro_y))
+        carro_intro_x += 5
+        if titulo_intro_y == 70:
+            intro = False
+            menu = True
+
+        pygame.display.flip()
 
     while menu:
         janela.blit(fundo_menu, (0, 0))
@@ -526,9 +551,13 @@ while True:
 
 
         while jogo_infantil:
+
+            musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
+            mixer.music.play(-1)
             janela.blit(fundo_infantil, (0, 0))
             carro_jog_am()
             carro_jog_az()
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -696,4 +725,10 @@ while True:
                         sorteio = False
                         jogo_adulto = True
 
-                pygame.display.flip()
+        while jogo_adulto:
+
+            janela.blit(fundo_adulto, (0, 0))
+            musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
+            mixer.music.play(-1)
+
+            pygame.display.flip()
