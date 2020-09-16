@@ -1,14 +1,14 @@
-import questions, teste
+import questions
 data = questions.Data
 
 def ask():
 
+    wallet_points = 0
+
     for key, value in data.items():
         #Informa a chave da pergunta e o seu valor
-        while mens_pos != 'Ponte' or mens_pos != 'Buraco!':
-            question = '{0}: {1}'.format(key ,value['question'])
-            print(question)
-            print('Respostas:')
+        question = '{0}: {1}'.format(key ,value['question'])
+        print(question)
 
         for optionKey, optionValue in value['options'].items():
             # Informa a chave e o valor das opções
@@ -23,38 +23,18 @@ def ask():
         if user_response == value['answer']:
             print('Resposta correta!!')
         else:
-            if value['difficulty'] == 'Fácil' and escolha == "Amarelo":
+            if value['difficulty'] == 'Fácil':
                 print('Você errou uma pergunta muito fácil, +3 pontos na carteira!')
-                pontos_am += 3
-                escolha = 'Azul'
-            elif value['difficulty'] == 'Médio' and escolha == "Amarelo":
+                wallet_points += 3
+            elif value['difficulty'] == 'Médio':
                 print('Você errou uma pergunta de dificuldade média, +2 pontos na carteira!')
-                pontos_am += 4
-                escolha = 'Azul'
-            elif value['difficulty'] == 'Difícil' and escolha == "Amarelo":
+                wallet_points += 4
+            elif value['difficulty'] == 'Difícil':
                 print('Essa pergunta realmente era difícil, ganhará apenas 1 ponto na carteira!')
-                pontos_am += 5
-                escolha = 'Azul'
-            elif value['difficulty'] == 'Muito difícil' and escolha == "Amarelo":
+                wallet_points += 5
+            elif value['difficulty'] == 'Muito difícil':
                 print('Essa pergunta era praticamente impossível! +4 pontos na carteira!')
-                pontos_am += 7
-                escolha = 'Azul'
-            if value['difficulty'] == 'Fácil' and escolha == "Azul":
-                print('Você errou uma pergunta muito fácil, +3 pontos na carteira!')
-                pontos_az += 3
-                escolha = 'Amarelo'
-            elif value['difficulty'] == 'Médio' and escolha == "Azul":
-                print('Você errou uma pergunta de dificuldade média, +2 pontos na carteira!')
-                pontos_az += 4
-                escolha = 'Amarelo'
-            elif value['difficulty'] == 'Difícil' and escolha == "Azul":
-                print('Essa pergunta realmente era difícil, ganhará apenas 1 ponto na carteira!')
-                pontos_az += 5
-                escolha = 'Amarelo'
-            elif value['difficulty'] == 'Muito difícil' and escolha == "Azul":
-                print('Essa pergunta era praticamente impossível! +4 pontos na carteira!')
-                pontos_az += 7
-                escolha = 'Amarelo'
+                wallet_points += 7
 
         print()
 ask()

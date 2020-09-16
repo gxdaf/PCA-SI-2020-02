@@ -1,12 +1,17 @@
 import pygame, math, random, time
 
+from pygame import mixer
+
 pygame.init()
 pygame.font.init()
+
 
 janela = pygame.display.set_mode((600,600))
 nome = pygame.display.set_caption(('City Driving Guide'))
 icone = pygame.image.load('../img/img_jog_car/carro-am.png')
 pygame.display.set_icon(icone)
+mixer.music.load('../audio/buzina_intro.wav')
+
 
 fonte_tit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 26)
 fonte_botao = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 12)
@@ -363,6 +368,7 @@ pygame.display.flip()
 while True:
 
     escolha = random.choice(jogadores)
+    mixer.music.play()
 
     while menu:
         janela.blit(fundo_menu, (0, 0))
