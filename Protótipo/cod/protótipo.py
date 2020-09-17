@@ -6,64 +6,73 @@ pygame.init()
 pygame.font.init()
 
 
+#Configurações da janela
 janela = pygame.display.set_mode((600,600))
 nome = pygame.display.set_caption(('City Driving Guide'))
 icone = pygame.image.load('../img/img_jog_car/carro-am.png')
 pygame.display.set_icon(icone)
-buzina = mixer.Sound('../audio/buzina_intro.wav')
-musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
-musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
-titulo_intro_x = 70
-titulo_intro_y = 300
-cor_fundo = (0, 0, 0)
-carro_intro = pygame.image.load('../img/img_jog_car/carro_intro.png')
-carro_intro_x = 0
-carro_intro_y = 460
 
-fonte_tit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 26)
-fonte_botao = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 12)
-menu_titulo = fonte_tit.render('CITY DRIVING GUIDE', True, (255,255,255))
-
-escolha = ''
+#Imagens de fundo
 fundo_menu = pygame.image.load('../img/pistas/fundo-intro.png')
 fundo_infantil = pygame.image.load('../img/pistas/fundo.jpg')
 fundo_adulto = pygame.image.load('../img/pistas/pista_dois.jpg')
 fundo_intro = pygame.image.load('../img/img_jog_car/fundo_estradinha.png')
 
+#Imagens complementares
+mutar = pygame.image.load('../img/img_jog_car/mutar.png')
+mutar_mouse = pygame.image.load('../img/img_jog_car/mutar_branco.png')
+
+#Introdução do jogo
+buzina = mixer.Sound('../audio/buzina_intro.wav')
+musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
+musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
+titulo_intro_x = 70
+titulo_intro_y = 300
+carro_intro = pygame.image.load('../img/img_jog_car/carro_intro.png')
+carro_intro_x = 0
+carro_intro_y = 460
+
+#Fontes
+fonte_tit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 26)
+fonte_botao = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 12)
+
+escolha = ''
+
 jogadores = ['Amarelo', 'Azul']
 
+#Coordenadas da carteira
+carteira_x = [30, 440]
+carteira_y = [490, 30]
+
+#Jogador amarelo
 carro_img_am = pygame.image.load('../img/img_jog_car/carro-am.png')
 coord_x_am = [90, 120,  110, 60, 50, 110, 170, 190, 220, 280, 330, 390, 450, 510, 510, 510,510, 500, 450, 390, 350, 370, 410, 350, 280, 240, 190, 120, 55, 60, 90]
 coord_y_am = [280, 220, 160, 110, 50, 30, 60, 130, 190, 210, 160, 120, 125, 180, 250, 320, 390, 450, 500, 490, 430, 370, 310, 290, 330, 380, 420, 440, 410, 340, 280]
 pontos_am = 0
-
-carteira_x = [30, 440]
-carteira_y = [490, 30]
-
 cart_amarela = pygame.image.load('../img/img_jog_car/cart-amarela.png')
-cart_azul = pygame.image.load('../img/img_jog_car/cart-azul.png')
 
+#Jogador azul
 carro_img_az = pygame.image.load('../img/img_jog_car/carro-az.png')
 coord_x_az = [90, 120,  110, 60, 50, 110, 170, 190, 220, 280, 330, 390, 450, 510, 510, 510,510, 500, 450, 390, 350, 370, 410, 350, 280, 240, 190, 120, 55, 60, 90]
 coord_y_az = [280, 220, 160, 110, 50, 30, 60, 130, 190, 210, 160, 120, 125, 180, 250, 320, 390, 450, 500, 490, 430, 370, 310, 290, 330, 380, 420, 440, 410, 340, 280]
 pontos_az = 0
+cart_azul = pygame.image.load('../img/img_jog_car/cart-azul.png')
 
-guarda_regras = pygame.image.load('../img/img_jog_car/guarda_regras.png')
+#Caixas de testo
 mens_box = pygame.image.load('../img/img_jog_car/mens_box.png')
 mens_box_sorteio = pygame.image.load('../img/img_jog_car/guarda_mens.png')
 mens_box_buraco = pygame.image.load('../img/img_jog_car/mens_box_buraco.png')
-mens_box_perg = pygame.image.load('../img/img_jog_car/mens_box_perg.png')
-mens_box_am_prim = pygame.image.load('../img/img_jog_car/mens_box_am_prim.png')
-mens_box_az_prim = pygame.image.load('../img/img_jog_car/mens_box_az_prim.png')
+guarda_regras = pygame.image.load('../img/img_jog_car/guarda_regras.png')
 
+#Coordenadas da caixa de texto
 mens_box_x = 150
 mens_box_y = 170
 
+#Ponteiro das casas guiadas a dado
 ponteiro_am = 0
 ponteiro_az = 0
 
-cart_pb = pygame.image.load('../img/img_jog_car/cart-bw.png')
-
+#Etapas do programa
 intro = True
 menu = False
 escolha_modo = False
@@ -81,21 +90,27 @@ sorteio = False
 jogo_infantil = False
 jogo_adulto = False
 
-
+#Configuração das casas
 mens_pos = ['Pergunta', 'Pergunta', 'Buraco!', 'Ponte', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Ponte', 'Buraco!', 'Buraco!', 'Pergunta', 'Ponte', 'Pergunta', 'Ponte', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!']
 resp_pos = ['Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Buraco','Buraco', 'Resposta','Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Buraco!']
 
+#Dado
 dado_am = ['../img/dados/dado-am-1.png', '../img/dados/dado-am-2.png', '../img/dados/dado-am-3.png', '../img/dados/dado-am-4.png', '../img/dados/dado-am-5.png', '../img/dados/dado-am-6.png']
 dado_az = ['../img/dados/dado-az-1.png', '../img/dados/dado-az-2.png', '../img/dados/dado-az-3.png', '../img/dados/dado-az-4.png', '../img/dados/dado-az-5.png', '../img/dados/dado-az-6.png']
 dado_x = 255
 dado_y = 25
 
+#Número de casas percorridas
+casas = ['uma', 'duas', 'três', 'quatro', 'cinco', 'seis']
+
+
+
 def dado_regra():
     dado_regra = pygame.image.load(dado_am[0])
     janela.blit(dado_regra,(dado_x, dado_y))
 
-casas = ['uma', 'duas', 'três', 'quatro', 'cinco', 'seis']
 
+#Opções do menu
 def menu_opc():
     mouse = pygame.mouse.get_pos()
     mouse = pygame.mouse.get_pos()
@@ -128,13 +143,16 @@ def menu_opc():
         menu_botao4 = fonte_botao.render('SAIR DO JOGO', True, (255, 255, 255))
         janela.blit(menu_botao4, (90, 470))
 
+#Escolha dos modos
 def escolha_txt():
     escolha_txt = fonte_botao.render('ESCOLHA UM DOS MODOS', True, (255, 255, 255))
     janela.blit(escolha_txt, (190, 150))
 
+#Texto da introdução
 def intro_txt():
     janela.blit(menu_titulo, (titulo_intro_x, titulo_intro_y))
 
+#Modos do jogo
 def modos_jogo():
     mouse = pygame.mouse.get_pos()
     jog_modo_inf = pygame.draw.rect(janela, (255, 255, 255), (90, 300, 200, 50))
@@ -152,6 +170,7 @@ def modos_jogo():
         opc_ad = fonte_botao.render('ADULTO', True, (255, 255, 255))
         janela.blit(opc_ad, (390, 320))
 
+#Regras do modo infantil
 def regra_infantil_1():
     janela.blit(guarda_regras, (0, 0))
     regra_linha1 = (fonte_botao.render('Um dado determina o número de casas', True, (0, 0, 0)))
@@ -226,6 +245,7 @@ def regra_infantil_6():
     janela.blit(regra_linha5, (50, 490))
     janela.blit(espaco, (80, 500))
 
+#Regras do modo adulto
 def regra_adulto_1():
     janela.blit(mens_box, (150, 150))
     regra_linha1 = (fonte_botao.render('Um dado determina', True, (0, 0, 0)))
@@ -328,9 +348,12 @@ def regra_adulto_6():
     janela.blit(espaco, (235, 350))
     janela.blit(espaco_2, (230, 375))
 
+#Título do menu
 def menu_txt():
+    menu_titulo = fonte_tit.render('CITY DRIVING GUIDE', True, (255, 255, 255))
     janela.blit(menu_titulo, (70,70))
 
+#Placas
 def placas():
     placaazul = pygame.image.load('../img/img_jog_car/placaazul.png')
     placaverde = pygame.image.load('../img/img_jog_car/placaverde.png')
@@ -341,12 +364,14 @@ def placas():
     janela.blit(placaamarela, (100, 200))
     janela.blit(placavermelha, (250, 200))
 
+#Imagens dos jogadores
 def carro_jog_az():
     janela.blit(carro_img_az, (coord_x_az[ponteiro_az], coord_y_az[ponteiro_az]))
 
 def carro_jog_am():
     janela.blit(carro_img_am, (coord_x_am[ponteiro_am], coord_y_am[ponteiro_am]))
 
+#Imagens do sistema de pontos
 def carteira_amarela():
     janela.blit(cart_amarela, (carteira_x[0],carteira_y[0]))
 
@@ -356,6 +381,7 @@ def carteira_azul():
 def carteira_cinza():
     janela.blit(cart_pb, (carteira_x[x],carteira_y[y]))
 
+#Imagens do sorteio
 def mens_txt_sort_inf():
     janela.blit(mens_box_sorteio,(0,0))
 
@@ -363,17 +389,9 @@ def mens_txt_sort_ad():
     janela.blit(fundo_adulto,(0,0))
     janela.blit(mens_box,(150,150))
 
+#Imagem buraco
 def mens_txt_buraco():
     janela.blit(mens_box_buraco, (mens_box_x, mens_box_y))
-
-def mens_txt_perg():
-    janela.blit(mens_box_perg, (mens_box_x, mens_box_y))
-
-def mens_txt_am_prim():
-    janela.blit(mens_box_am_prim,(mens_box_x,mens_box_y))
-
-def mens_txt_az_prim():
-    janela.blit(mens_box_az_prim, (mens_box_x,mens_box_y))
 
 pygame.display.flip()
 
@@ -439,6 +457,11 @@ while True:
         pygame.display.update()
 
     while modo_infantil:
+
+        janela.blit(mutar, (520, 10))
+        musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
+        mixer.music.play(-1)
+
 
         while regra1:
             janela.blit(fundo_infantil, (0, 0))
@@ -552,8 +575,6 @@ while True:
 
         while jogo_infantil:
 
-            musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
-            mixer.music.play(-1)
             janela.blit(fundo_infantil, (0, 0))
             carro_jog_am()
             carro_jog_az()
@@ -617,6 +638,10 @@ while True:
             pygame.display.flip()
 
     while modo_adulto:
+
+        janela.blit(fundo_adulto, (0, 0))
+        musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
+        mixer.music.play(-1)
 
         while regra1:
             janela.blit(fundo_adulto, (0, 0))
@@ -727,8 +752,5 @@ while True:
 
         while jogo_adulto:
 
-            janela.blit(fundo_adulto, (0, 0))
-            musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
-            mixer.music.play(-1)
 
             pygame.display.flip()
