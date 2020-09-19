@@ -22,6 +22,10 @@ fundo_intro = pygame.image.load('../img/img_jog_car/fundo_estradinha.png')
 mutar = pygame.image.load('../img/img_jog_car/mutar.png')
 mutar_mouse = pygame.image.load('../img/img_jog_car/mutar_branco.png')
 
+#Fontes
+fonte_tit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 26)
+fonte_botao = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 12)
+
 #Introdução do jogo
 buzina = mixer.Sound('../audio/buzina_intro.wav')
 musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
@@ -31,10 +35,8 @@ titulo_intro_y = 300
 carro_intro = pygame.image.load('../img/img_jog_car/carro_intro.png')
 carro_intro_x = 0
 carro_intro_y = 460
+menu_titulo = fonte_tit.render('CITY DRIVING GUIDE', True, (255, 255, 255))
 
-#Fontes
-fonte_tit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 26)
-fonte_botao = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 12)
 
 escolha = ''
 
@@ -73,6 +75,8 @@ ponteiro_am = 0
 ponteiro_az = 0
 
 #Etapas do programa
+
+creditos = False
 intro = True
 menu = False
 escolha_modo = False
@@ -350,7 +354,6 @@ def regra_adulto_6():
 
 #Título do menu
 def menu_txt():
-    menu_titulo = fonte_tit.render('CITY DRIVING GUIDE', True, (255, 255, 255))
     janela.blit(menu_titulo, (70,70))
 
 #Placas
@@ -393,15 +396,15 @@ def mens_txt_sort_ad():
 def mens_txt_buraco():
     janela.blit(mens_box_buraco, (mens_box_x, mens_box_y))
 
+
 pygame.display.flip()
 
 while True:
 
     escolha = random.choice(jogadores)
-    buzina.play()
 
     while intro:
-
+        buzina.play()
         janela.blit(fundo_intro, (0, 0))
         intro_txt()
         titulo_intro_y -= 2
