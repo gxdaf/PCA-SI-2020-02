@@ -138,6 +138,7 @@ def menu_opc():
         opc_aud = pygame.draw.rect(janela, (0, 0, 0), (60, 250, 200, 50))
         menu_botao2 = fonte_botao.render('ÁUDIO', True, (255, 255, 255))
         janela.blit(menu_botao2, (130, 270))
+
     if 260 > mouse[0] > 60 and 400 > mouse[1] > 350:
         opc_tam = pygame.draw.rect(janela, (0, 0, 0), (60, 350, 200, 50))
         menu_botao3 = fonte_botao.render('TELA', True, (255, 255, 255))
@@ -177,14 +178,9 @@ def modos_jogo():
 #Configurações de áudio
 def conf_audio():
     mouse = pygame.mouse.get_pos()
-    mouse = pygame.mouse.get_pos()
-    config_aud = pygame.draw.rect(janela, (255, 255, 255), (340, 250, 190, 50))
-    aud_mute = fonte_botao.render('MUTAR', True, (0, 0, 0))
-    janela.blit(aud_mute, (400, 270))
-    if 530 > mouse[0] > 340 and 300 > mouse[1] > 250:
-        config_aud = pygame.draw.rect(janela, (0, 0, 0), (340, 250, 190, 50))
-        aud_mute = fonte_botao.render('MUTAR', True, (255, 255, 255))
-        janela.blit(aud_mute, (400, 270))
+
+
+
 
 #Menu replicado
 def menu_opc2():
@@ -197,7 +193,7 @@ def menu_opc2():
     menu_botao2 = fonte_botao.render('ÁUDIO', True, (0, 0, 0))
     janela.blit(menu_botao2, (130, 270))
     config_aud = pygame.draw.rect(janela, (255, 255, 255), (340, 250, 190, 50))
-    aud_mute = fonte_botao.render('MUTAR', True, (0, 0, 0))
+    aud_mute = fonte_botao.render('MUTAR', False, (0, 0, 0))
     janela.blit(aud_mute, (400, 270))
     opc_tam = pygame.draw.rect(janela, (255, 255, 255), (60, 350, 200, 50))
     menu_botao3 = fonte_botao.render('TELA', True, (0, 0, 0))
@@ -211,7 +207,7 @@ def menu_opc2():
         janela.blit(menu_botao1, (90, 170))
     if 260 > mouse[0] > 60 and 300 > mouse[1] > 250:
         opc_aud = pygame.draw.rect(janela, (0, 0, 0), (60, 250, 200, 50))
-        menu_botao2 = fonte_botao.render('ÁUDIO', True, (255, 255, 255))
+        menu_botao2 = fonte_botao.render('ÁUDIO', False, (255, 255, 255))
         janela.blit(menu_botao2, (130, 270))
     if 530 > mouse[0] > 340 and 300 > mouse[1] > 250:
         config_aud = pygame.draw.rect(janela, (0, 0, 0), (340, 250, 190, 50))
@@ -472,8 +468,7 @@ while True:
         janela.blit(fundo_menu, (0, 0))
         menu_txt()
         menu_opc()
-        menu_opc2()
-        conf_audio()
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -483,9 +478,10 @@ while True:
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 200 > mouse[1] > 150:
                     menu = False
                     escolha_modo = True
-                if event.button == pygame.BUTTON_LEFT and 530 > mouse[0] > 340 and 300 > mouse[1] > 250:
+                if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 300 > mouse[1] > 250:
                     menu = False
-                    conf_audio = True
+
+
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 400 > mouse[1] > 350:
                     janela.blit(mens_menu, (250, 200))
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 500 > mouse[1] > 450:
@@ -493,12 +489,11 @@ while True:
 
         pygame.display.flip()
 
-#Eventos audio
     while conf_audio:
         janela.blit(fundo_menu, (0, 0))
         menu_txt()
-        menu_opc()
         menu_opc2()
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -509,13 +504,14 @@ while True:
                     menu = False
                     escolha_modo = True
                     conf_audio = False
+
                 if event.button == pygame.BUTTON_LEFT and 530 > mouse[0] > 340 and 300 > mouse[1] > 250:
-                    menu = False
                     conf_audio = True
-                    mixer.music.stop()
+
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 400 > mouse[1] > 350:
-                    menu = False
+
                     conf_audio = False
+
                     janela.blit(mens_menu, (250, 200))
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 500 > mouse[1] > 450:
                     pygame.quit()
