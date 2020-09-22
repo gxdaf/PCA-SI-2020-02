@@ -160,6 +160,9 @@ def intro_txt():
 #Modos do jogo
 def modos_jogo():
     mouse = pygame.mouse.get_pos()
+# botão de voltar
+    botao_volta = pygame.image.load('../img/img_jog_car/botao_volta.png')
+    janela.blit(botao_volta, (520, 523))
     jog_modo_inf = pygame.draw.rect(janela, (255, 255, 255), (90, 300, 200, 50))
     opc_inf = fonte_botao.render('INFANTIL', True, (0, 0, 0))
     janela.blit(opc_inf, (145, 320))
@@ -178,8 +181,6 @@ def modos_jogo():
 #Configurações de áudio
 def conf_audio():
     mouse = pygame.mouse.get_pos()
-
-
 
 
 #Menu replicado
@@ -469,7 +470,6 @@ while True:
         menu_txt()
         menu_opc()
 
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -480,7 +480,6 @@ while True:
                     escolha_modo = True
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 300 > mouse[1] > 250:
                     menu = False
-
 
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 400 > mouse[1] > 350:
                     janela.blit(mens_menu, (250, 200))
@@ -493,8 +492,6 @@ while True:
         janela.blit(fundo_menu, (0, 0))
         menu_txt()
         menu_opc2()
-
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -529,6 +526,9 @@ while True:
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 80 and 603 > mouse[1] > 523:
+                    escolha_modo = False
+                    menu = True
                 if event.button == pygame.BUTTON_LEFT and 290 > mouse[0] > 90 and 350 > mouse[1] > 300:
                     escolha_modo = False
                     modo_infantil = True
