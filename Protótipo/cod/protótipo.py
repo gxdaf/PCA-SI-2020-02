@@ -78,6 +78,7 @@ ponteiro_az = 0
 
 creditos = False
 intro = True
+audio = True
 menu = False
 escolha_modo = False
 modo_infantil = False
@@ -106,8 +107,6 @@ dado_y = 25
 
 #Número de casas percorridas
 casas = ['uma', 'duas', 'três', 'quatro', 'cinco', 'seis']
-
-
 
 def dado_regra():
     dado_regra = pygame.image.load(dado_am[0])
@@ -138,7 +137,6 @@ def menu_opc():
         opc_aud = pygame.draw.rect(janela, (0, 0, 0), (60, 250, 200, 50))
         menu_botao2 = fonte_botao.render('ÁUDIO', True, (255, 255, 255))
         janela.blit(menu_botao2, (130, 270))
-
     if 260 > mouse[0] > 60 and 400 > mouse[1] > 350:
         opc_tam = pygame.draw.rect(janela, (0, 0, 0), (60, 350, 200, 50))
         menu_botao3 = fonte_botao.render('TELA', True, (255, 255, 255))
@@ -179,49 +177,21 @@ def modos_jogo():
         janela.blit(opc_ad, (390, 320))
 
 #Configurações de áudio
-def conf_audio():
+def opc_mutar():
     mouse = pygame.mouse.get_pos()
-
-
-#Menu replicado
-def menu_opc2():
-    mouse = pygame.mouse.get_pos()
-    mouse = pygame.mouse.get_pos()
-    opc_jog = pygame.draw.rect(janela, (255, 255, 255), (60, 150, 200, 50))
-    menu_botao1 = fonte_botao.render('COMEÇAR JOGO', True, (0, 0, 0))
-    janela.blit(menu_botao1, (90, 170))
-    opc_aud = pygame.draw.rect(janela, (255, 255, 255), (60, 250, 200, 50))
-    menu_botao2 = fonte_botao.render('ÁUDIO', True, (0, 0, 0))
-    janela.blit(menu_botao2, (130, 270))
     config_aud = pygame.draw.rect(janela, (255, 255, 255), (340, 250, 190, 50))
     aud_mute = fonte_botao.render('MUTAR', False, (0, 0, 0))
     janela.blit(aud_mute, (400, 270))
-    opc_tam = pygame.draw.rect(janela, (255, 255, 255), (60, 350, 200, 50))
-    menu_botao3 = fonte_botao.render('TELA', True, (0, 0, 0))
-    janela.blit(menu_botao3, (140, 370))
-    opc_sair = pygame.draw.rect(janela, (255, 255, 255), (60, 450, 200, 50))
-    menu_botao4 = fonte_botao.render('SAIR DO JOGO', True, (0, 0, 0))
-    janela.blit(menu_botao4, (90, 470))
-    if 260 > mouse[0] > 60 and 200 > mouse[1] > 150:
-        opc_jog = pygame.draw.rect(janela, (0, 0, 0), (60, 150, 200, 50))
-        menu_botao1 = fonte_botao.render('COMEÇAR JOGO', True, (255, 255, 255))
-        janela.blit(menu_botao1, (90, 170))
-    if 260 > mouse[0] > 60 and 300 > mouse[1] > 250:
-        opc_aud = pygame.draw.rect(janela, (0, 0, 0), (60, 250, 200, 50))
-        menu_botao2 = fonte_botao.render('ÁUDIO', False, (255, 255, 255))
-        janela.blit(menu_botao2, (130, 270))
     if 530 > mouse[0] > 340 and 300 > mouse[1] > 250:
         config_aud = pygame.draw.rect(janela, (0, 0, 0), (340, 250, 190, 50))
         aud_mute = fonte_botao.render('MUTAR', True, (255, 255, 255))
         janela.blit(aud_mute, (400, 270))
-    if 260 > mouse[0] > 60 and 400 > mouse[1] > 350:
-        opc_tam = pygame.draw.rect(janela, (0, 0, 0), (60, 350, 200, 50))
-        menu_botao3 = fonte_botao.render('TELA', True, (255, 255, 255))
-        janela.blit(menu_botao3, (140, 370))
-    if 260 > mouse[0] > 60 and 500 > mouse[1] > 450:
-        opc_sair = pygame.draw.rect(janela, (0, 0, 0), (60, 450, 200, 50))
-        menu_botao4 = fonte_botao.render('SAIR DO JOGO', True, (255, 255, 255))
-        janela.blit(menu_botao4, (90, 470))
+
+def botao_mutar():
+    mouse = pygame.mouse.get_pos()
+    janela.blit(mutar, (520,10))
+    if 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
+        janela.blit(mutar_mouse, (520, 10))
 
 #Regras do modo infantil
 def regra_infantil_1():
@@ -453,7 +423,7 @@ while True:
     escolha = random.choice(jogadores)
 
     while intro:
-        buzina.play()
+        #buzina.play()
         janela.blit(fundo_intro, (0, 0))
         intro_txt()
         titulo_intro_y -= 2
@@ -480,7 +450,7 @@ while True:
                     escolha_modo = True
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 300 > mouse[1] > 250:
                     menu = False
-
+                    conf_audio = True
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 400 > mouse[1] > 350:
                     janela.blit(mens_menu, (250, 200))
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 500 > mouse[1] > 450:
@@ -491,7 +461,8 @@ while True:
     while conf_audio:
         janela.blit(fundo_menu, (0, 0))
         menu_txt()
-        menu_opc2()
+        menu_opc()
+        opc_mutar()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -501,14 +472,11 @@ while True:
                     menu = False
                     escolha_modo = True
                     conf_audio = False
-
                 if event.button == pygame.BUTTON_LEFT and 530 > mouse[0] > 340 and 300 > mouse[1] > 250:
                     conf_audio = True
-
+                    audio = False
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 400 > mouse[1] > 350:
-
                     conf_audio = False
-
                     janela.blit(mens_menu, (250, 200))
                 if event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 60 and 500 > mouse[1] > 450:
                     pygame.quit()
@@ -543,8 +511,10 @@ while True:
     while modo_infantil:
 
         janela.blit(mutar, (520, 10))
-        musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
-        mixer.music.play(-1)
+        botao_mutar()
+        if audio == True:
+            musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
+            mixer.music.play(-1)
 
         while regra1:
             janela.blit(fundo_infantil, (0, 0))
@@ -661,6 +631,7 @@ while True:
             janela.blit(fundo_infantil, (0, 0))
             carro_jog_am()
             carro_jog_az()
+            botao_mutar()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -717,14 +688,28 @@ while True:
                                 pontos_az += 1
                                 print('Você errou e agora tem {} pontos na carteira! Vez do Amarelo.'.format(pontos_az))
                                 escolha = 'Amarelo'
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
+                        audio = False
+                        pygame.mixer_music.stop()
 
             pygame.display.flip()
 
     while modo_adulto:
 
         janela.blit(fundo_adulto, (0, 0))
-        musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
-        mixer.music.play(-1)
+        botao_mutar()
+
+        if audio == True:
+            musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
+            mixer.music.play(-1)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
+                    pygame.mixer.music.stop()
 
         while regra1:
             janela.blit(fundo_adulto, (0, 0))
