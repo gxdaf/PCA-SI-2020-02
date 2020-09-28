@@ -21,6 +21,7 @@ fundo_intro = pygame.image.load('../img/img_jog_car/fundo_estradinha.png')
 #Imagens complementares
 mutar = pygame.image.load('../img/img_jog_car/mutar.png')
 mutar_mouse = pygame.image.load('../img/img_jog_car/mutar_branco.png')
+botao_volta = pygame.image.load('../img/img_jog_car/botao_volta.png')
 
 #Fontes
 fonte_tit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 26)
@@ -160,8 +161,6 @@ def intro_txt():
 #Modos do jogo
 def modos_jogo():
     mouse = pygame.mouse.get_pos()
-# botão de voltar
-    botao_volta = pygame.image.load('../img/img_jog_car/botao_volta.png')
     janela.blit(botao_volta, (520, 523))
     jog_modo_inf = pygame.draw.rect(janela, (255, 255, 255), (90, 300, 200, 50))
     opc_inf = fonte_botao.render('INFANTIL', True, (0, 0, 0))
@@ -196,8 +195,6 @@ def botao_mutar():
     janela.blit(mutar, (520,10))
     if 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
         janela.blit(mutar_mouse, (520, 10))
-
-
 
 #Regras do modo infantil
 def regra_infantil_1():
@@ -553,7 +550,6 @@ while True:
 
         mouse = pygame.mouse.get_pos()
         janela.blit(mutar, (520, 10))
-        botao_mutar()
         if audio == True:
             musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
             mixer.music.play(-1)
@@ -678,8 +674,10 @@ while True:
             janela.blit(fundo_infantil, (0, 0))
             carro_jog_am()
             carro_jog_az()
+            janela.blit(botao_volta, (520, 523))
             botao_mutar()
 
+            mouse = pygame.mouse.get_pos()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -736,6 +734,10 @@ while True:
                                 print('Você errou e agora tem {} pontos na carteira! Vez do Amarelo.'.format(pontos_az))
                                 escolha = 'Amarelo'
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 80 and 603 > mouse[1] > 523:
+                        jogo_infantil = False
+                        modo_infantil = False
+                        escolha_modo = True
                     if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
                         pygame.mixer_music.stop()
 
@@ -869,6 +871,17 @@ while True:
 
         while jogo_adulto:
             botao_mutar()
+            janela.blit(botao_volta, (520, 523))
+
+            mouse = pygame.mouse.get_pos()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 80 and 603 > mouse[1] > 523:
+                        escolha_modo = True
+                        jogo_adulto = False
+                        modo_adulto = False
 
             pygame.display.flip()
 
