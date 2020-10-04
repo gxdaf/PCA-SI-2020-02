@@ -477,7 +477,7 @@ while True:
         janela.blit(fundo_menu, (0, 0))
         menu_txt()
         menu_opc()
-
+        audio = True
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -739,10 +739,9 @@ while True:
                         modo_infantil = False
                         escolha_modo = True
                         if audio == True:
-                            audio = False
                             pygame.mixer_music.stop()
                     if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
-                        pygame.mixer_music.stop()
+                        pygame.mixer_music.pause()
 
             pygame.display.flip()
 
@@ -941,7 +940,7 @@ while True:
                             audio = False
                             pygame.mixer_music.stop()
                     if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
-                        pygame.mixer_music.stop()
+                        pygame.mixer_music.pause()
 
             pygame.display.flip()
 
