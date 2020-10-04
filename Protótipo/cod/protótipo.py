@@ -738,6 +738,9 @@ while True:
                         jogo_infantil = False
                         modo_infantil = False
                         escolha_modo = True
+                        if audio == True:
+                            audio = False
+                            pygame.mixer_music.stop()
                     if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
                         pygame.mixer_music.stop()
 
@@ -750,12 +753,12 @@ while True:
 
         mouse = pygame.mouse.get_pos()
         if audio == True:
-            musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
+            musica_infantil = mixer.music.load('../audio/whatislove_8bit.wav')
             mixer.music.play(-1)
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
-                        pygame.mixer.quit()
+                        audio = False
         else:
             pygame.event.get()
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -877,11 +880,68 @@ while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE and escolha == 'Amarelo':
+                        dado = random.randint(1, 6)
+                        ponteiro_am += dado
+                        dado_am_vez = pygame.image.load(dado_am[dado - 1])
+                        janela.blit(dado_am_vez, (dado_x, dado_y))
+                        pygame.display.update()
+                        status_casa = mens_pos[ponteiro_am]
+                        if dado == 1:
+                            print('Você andou uma casa!')
+                        else:
+                            print('Você andou {} casas!'.format(casas[dado - 1]))
+
+                        if 'Buraco!' in status_casa:
+                            print('Você caiu no buraco! Vez do Azul.')
+                            escolha = 'Azul'
+                        else:
+                            print(mens_pos[ponteiro_am])
+                            resposta = input('Digite aqui a resposta:')
+                            resposta = resposta.title()
+                            if resposta in resp_pos[ponteiro_am]:
+                                prox_part = print('Você acertou! Jogue novamente.')
+                                escolha = 'Amarelo'
+                            else:
+                                pontos_am += 1
+                                print('Você errou e agora tem {} pontos na carteira! Vez do Azul.'.format(pontos_am))
+                                escolha = 'Azul'
+                    elif event.key == pygame.K_SPACE and escolha == 'Azul':
+                        dado = random.randint(1, 6)
+                        ponteiro_az += dado
+                        dado_az_vez = pygame.image.load(dado_az[dado - 1])
+                        janela.blit(dado_az_vez, (dado_x, dado_y))
+                        pygame.display.flip()
+                        status_casa = mens_pos[ponteiro_az]
+                        if dado == 1:
+                            print('Você andou uma casa!')
+                        else:
+                            print('Você andou {} casas!'.format(casas[dado - 1]))
+                        if 'Buraco' in status_casa:
+                            print('Você caiu no buraco! Vez do Amarelo.')
+                            escolha = 'Amarelo'
+                        else:
+                            print(mens_pos[ponteiro_az])
+                            resposta = input('Digite aqui a resposta:')
+                            resposta = resposta.title()
+                            if resposta in resp_pos[ponteiro_az]:
+                                print('Você acertou!')
+                                escolha = 'Azul'
+                            else:
+                                pontos_az += 1
+                                print('Você errou e agora tem {} pontos na carteira! Vez do Amarelo.'.format(pontos_az))
+                                escolha = 'Amarelo'
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 80 and 603 > mouse[1] > 523:
-                        escolha_modo = True
                         jogo_adulto = False
                         modo_adulto = False
+                        escolha_modo = True
+                        if audio == True:
+                            audio = False
+                            pygame.mixer_music.stop()
+                    if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
+                        pygame.mixer_music.stop()
 
             pygame.display.flip()
 
