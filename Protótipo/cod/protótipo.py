@@ -183,15 +183,11 @@ def modos_jogo():
 #Configurações de áudio
 def opc_mutar():
     mouse = pygame.mouse.get_pos()
-    borda = pygame.draw.rect(janela, (0,0,0), (335,245,200,60))
-    config_aud = pygame.draw.rect(janela, (255, 255, 255), (340, 250, 190, 50))
-    aud_mute = fonte_botao.render('MUTAR', False, (0, 0, 0))
-    janela.blit(aud_mute, (400, 270))
+    aud_mute = pygame.image.load('../img/img_jog_car/mutar_branco.png')
+    janela.blit(aud_mute, (340, 236))
     if 530 > mouse[0] > 340 and 300 > mouse[1] > 250:
-        borda = pygame.draw.rect(janela, (255, 255, 255), (335, 245, 200, 60))
-        config_aud = pygame.draw.rect(janela, (0, 0, 0), (340, 250, 190, 50))
-        aud_mute = fonte_botao.render('MUTAR', True, (255, 255, 255))
-        janela.blit(aud_mute, (400, 270))
+        aud_mute = pygame.image.load('../img/img_jog_car/mutar_branco.png')
+        janela.blit(aud_mute, (340, 236))
 
 def botao_mutar():
     mouse = pygame.mouse.get_pos()
