@@ -1,5 +1,9 @@
 Data = {
     1: {
+        "status": "Buraco"
+    },
+
+    2: {
         "question": "Estacionar sobre a calçada é:",
         "options": {
             "A": "Permitido à noite",
@@ -10,7 +14,7 @@ Data = {
         "answer": "C",
         "difficulty": "Fácil"
     },
-    2: {
+    3: {
         "question": "Ao se aproximar de um cruzamento com sinal vermelho é correto:",
         "options": {
             "A": "Aumentar a velocidade do veículo e passar",
@@ -21,7 +25,7 @@ Data = {
         "answer": "B",
         "difficulty": "Fácil"
     },
-    3: {
+    4: {
         "question": "Todo condutor, antes de mudar de direção, deverá:",
         "options": {
             "A": "Piscar os faróis",
@@ -32,7 +36,7 @@ Data = {
         "answer": "D",
         "difficulty": "Médio"
     },
-    4: {
+    5: {
         "question": "Quando tiver duas faixas continuas amarelas, significa que:",
         "options": {
             "A": "Não permite ultrapassagem",
@@ -43,7 +47,10 @@ Data = {
         "answer": "A",
         "difficulty": "Difícil"
     },
-    5: {
+    6: {
+        "status": "Buraco",
+        },
+    7: {
         "question": "São considerados crimes de trânsito:",
         "options": {
             "A": "Transitar na contramão de direção",
@@ -54,7 +61,10 @@ Data = {
         "answer": "D",
         "difficulty": "Fácil"
     },
-    6: {
+    8: {
+        "status": "Buraco"
+    },
+    9: {
         "question": "Para o condutor ter um comportamento seguro no trânsito ele deve:",
         "options": {
             "A": "Dirigir sem atenção",
@@ -65,7 +75,7 @@ Data = {
         "answer": "C",
         "difficulty": "Médio"
     },
-    7: {
+    10: {
         "question": "Quando for realizar uma parada de emergência o condutor deverá:",
         "options": {
             "A": "Parar sobre a via",
@@ -76,7 +86,7 @@ Data = {
         "answer": "B",
         "difficulty": "Médio"
     },
-    8: {
+    11: {
         "question": "Ao perceber que será ultrapassado, o condutor deve:",
         "options": {
             "A": "Sair para o acostamento",
@@ -87,7 +97,7 @@ Data = {
         "answer": "C",
         "difficulty": "Médio"
     },
-    9: {
+    12: {
         "question": "Em que situações devemos usar a buzina?",
         "options": {
             "A": "Em situações de simples toque breve como advertência afim de evitar acidentes",
@@ -98,7 +108,10 @@ Data = {
         "answer": "A",
         "difficulty": "Médio"
     },
-    10: {
+    13: {
+        "status": "Buraco"
+    },
+    14: {
         "question": "A educação para o trânsito é:",
         "options": {
             "A": "Para quem é motorista",
@@ -109,7 +122,7 @@ Data = {
         "answer": "D",
         "difficulty": "Médio"
     },
-    11: {
+    15: {
         "question": "Quando se está dirigindo, é preciso respeitar as áreas dos pedestres. Qual das opções abaixo não respeita essas regras?",
         "options": {
             "A": "Parar na calçada ou na faixa de pedestres",
@@ -120,7 +133,7 @@ Data = {
         "answer": "A",
         "difficulty": "Fácil"
     },
-    12: {
+    16: {
         "question": "No Transito, a segurança é sempre importante, tendo isso em mente qual das opções abaixo não condiz com essa segurança?",
         "options": {
             "A": "Evitar ultrapassagens",
@@ -131,7 +144,13 @@ Data = {
         "answer": "D",
         "difficulty": "Fácil"
     },
-    13: {
+    17: {
+        "status": "Buraco"
+    },
+    18: {
+        "status": "Buraco"
+    },
+    19: {
         "question": "É preciso ter respeito com as pessoas, e isso também se inclui no transito. Qual das opções abaixo pode ser considerada uma atitude desrespeitosa?",
         "options": {
             "A": "Dirigir nos limites da velocidade",
@@ -142,7 +161,10 @@ Data = {
         "answer": "C",
         "difficulty": "Fácil"
     },
-    14: {
+    20: {
+        "status": "Buraco"
+   },
+    21: {
         "question": "Qual das opções abaixo, jamais devem ocorrer no transito.",
         "options": {
             "A": "Dar passagem para outro carro",
@@ -153,7 +175,7 @@ Data = {
         "answer": "B",
         "difficulty": "Médio"
    },
-    15: {
+    22: {
         "question": "Quando se está fazendo uma ultrapassagem, é necessário que o carro da frente tenha uma visão completa de onde você vai passar. Tendo isso em mente, por onde você deve passar?",
         "options": {
             "A": "Por cima do carro, voando",
@@ -164,7 +186,10 @@ Data = {
         "answer": "D",
         "difficulty": "Médio"
     },
-    16: {
+    23: {
+        "status": "Buraco"
+    },
+    24: {
         "question": "A segurança é uma das partes mais importantes da direção. Qual das opções abaixo não é considerado algo seguro?",
         "options": {
             "A": "Utilizar cinto de segurança",
@@ -175,7 +200,7 @@ Data = {
         "answer": "C",
         "difficulty": "Médio"
     },
-    17: {
+    25: {
         "question": "Qual das opções abaixo pode ser considerada a MAIS perigosa, para se cometer no transito?",
         "options": {
             "A": "Não utilizar cinto de segurança",
@@ -186,7 +211,13 @@ Data = {
         "answer": "A",
         "difficulty": "Difícil"
     },
-    18: {
+    26: {
+        "status": "Buraco"
+    },
+    27: {
+        "status": "Buraco"
+    },
+    28: {
         "question": "Para se manter seguro, também é necessário estar dirigindo algo seguro, então para isso, é necessário:",
         "options": {
             "A": "Dirigir um carro quebrado.",
@@ -197,7 +228,7 @@ Data = {
         "answer": "B",
         "difficulty": "Difícil"
     },
-    19: {
+    29: {
         "question": "É extremamente importante dirigir com o máximo de atenção possível, por isso, deve se evitar dirigir após:",
         "options": {
             "A": "Beber água.",
@@ -208,7 +239,7 @@ Data = {
         "answer": "C",
         "difficulty": "Muito difícil"
     },
-    20: {
+    30: {
         "question": "O semáforo é utilizado para controlar o trânsito, ele contem três cores, vermelho, amarelo e verde. O que essas cores significam?",
         "options": {
             "A": "Vermelho: Para parar. Amarelo: Para prestar atenção. Verde: Significa que pode andar.",
