@@ -1,6 +1,6 @@
 import pygame, math, random, time
 from pygame import mixer
-
+from questions import Data
 
 pygame.init()
 pygame.font.init()
@@ -32,6 +32,7 @@ buzina = mixer.Sound('../audio/buzina_intro.wav')
 motor = mixer.Sound('../audio/motor_abertura.wav')
 musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
 musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
+mut = 0
 titulo_intro_x = 70
 titulo_intro_y = 300
 carro_intro = pygame.image.load('../img/img_jog_car/carro_intro.png')
@@ -101,6 +102,8 @@ jogo_adulto = False
 #Configuração das casas
 mens_pos = ['Pergunta', 'Pergunta', 'Buraco!', 'Ponte', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Ponte', 'Buraco!', 'Buraco!', 'Pergunta', 'Ponte', 'Pergunta', 'Ponte', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!']
 resp_pos = ['Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Buraco','Buraco', 'Resposta','Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Buraco!']
+
+
 
 #Dado
 dado_am = ['../img/dados/dado-am-1.png', '../img/dados/dado-am-2.png', '../img/dados/dado-am-3.png', '../img/dados/dado-am-4.png', '../img/dados/dado-am-5.png', '../img/dados/dado-am-6.png']
@@ -740,8 +743,12 @@ while True:
                         escolha_modo = True
                         if audio == True:
                             pygame.mixer_music.stop()
-                    if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
+                    if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10 and (mut % 2) == 0:
                         pygame.mixer_music.pause()
+                        mut += 1
+                    elif event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10 and (mut % 2) != 0:
+                        pygame.mixer_music.unpause()
+                        mut += 1
 
             pygame.display.flip()
 
@@ -939,8 +946,12 @@ while True:
                         if audio == True:
                             audio = False
                             pygame.mixer_music.stop()
-                    if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
+                    if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10 and (mut%2) == 0:
                         pygame.mixer_music.pause()
+                        mut += 1
+                    elif event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10 and (mut%2) != 0:
+                        pygame.mixer_music.unpause()
+                        mut += 1
 
             pygame.display.flip()
 
