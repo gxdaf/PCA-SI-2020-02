@@ -829,43 +829,43 @@ while True:
                                 choice = 'D'
 
                     # Pegando os valores da função
-                    ask_am_values = ask_am(ponteiro_am_perg)
-                    answer = ask_am_values["answer"]  # Resposta
-                    difficulty = ask_am_values["difficulty"]  # Dificuldade
+            ask_am_values = ask_am(ponteiro_am_perg)
+            answer = ask_am_values["answer"]  # Resposta
+            difficulty = ask_am_values["difficulty"]  # Dificuldade
 
-                    # Conferindo a resposta
-                    if choice == answer:
-                        print("Certa resposta! Amarelo joga novamente")
-                        pergunta_am = False
-                        escolha = 'Amarelo'
-                        jogo_infantil = True
-                    elif choice != answer:
-                        if difficulty == "Fácil":
-                            pontos_am += 3
-                            escolha = 'Azul'
-                            pergunta_am = False
-                            jogo_infantil = True
-                        elif difficulty == "Médio":
-                            pontos_am += 4
-                            escolha = 'Azul'
-                            pergunta_am = False
-                            jogo_infantil = True
-                        elif difficulty == "Difícil":
-                            pontos_am += 5
-                            escolha = 'Azul'
-                            pergunta_am = False
-                            jogo_infantil = True
-                        elif difficulty == 'Muito difícil':
-                            pontos_am += 7
-                            escolha = 'Azul'
-                            pergunta_am = False
-                            jogo_infantil = True
-                        print("Você errou, a resposta correta era [{}]".format(answer))
-                        print('Vez do Azul! Por favor, jogue o dado.')
-            # Chamando a função e atualizando o display a cada lopping
-            ask_am(ponteiro_am_perg)
+            # Conferindo a resposta
+            if choice == answer:
+                print("Certa resposta! Amarelo joga novamente")
+                pergunta_am = False
+                escolha = 'Amarelo'
+                jogo_infantil = True
+            elif choice != answer:
+                if difficulty == "Fácil":
+                    pontos_am += 3
+                    escolha = 'Azul'
+                    pergunta_am = False
+                    jogo_infantil = True
+                elif difficulty == "Médio":
+                    pontos_am += 4
+                    escolha = 'Azul'
+                    pergunta_am = False
+                    jogo_infantil = True
+                elif difficulty == "Difícil":
+                    pontos_am += 5
+                    escolha = 'Azul'
+                    pergunta_am = False
+                    jogo_infantil = True
+                elif difficulty == 'Muito difícil':
+                    pontos_am += 7
+                    escolha = 'Azul'
+                    pergunta_am = False
+                    jogo_infantil = True
+                print("Você errou, a resposta correta era [{}]".format(answer))
+                print('Vez do Azul! Por favor, jogue o dado.')
+    # Chamando a função e atualizando o display a cada lopping
+                ask_am(ponteiro_am_perg)
 
-        pygame.display.update()
+                pygame.display.update()
 
         while pergunta_az:
             janela.fill((255, 255, 255))
@@ -887,44 +887,44 @@ while True:
                         elif (x < mouse[0] < x + largura and y[3] < mouse[1] < y[3] + altura):
                             choice = 'D'
 
-                    # Pegando os valores da função
-                    ask_az_values = ask_az(ponteiro_az_perg)
-                    answer = ask_az_values["answer"]  # Resposta
-                    difficulty = ask_az_values["difficulty"]  # Dificuldade
+            # Pegando os valores da função
+            ask_az_values = ask_az(ponteiro_az_perg)
+            answer = ask_az_values["answer"]  # Resposta
+            difficulty = ask_az_values["difficulty"]  # Dificuldade
 
-                    # Conferindo a resposta
-                    if choice == answer:
-                        print("Certa resposta! Amarelo joga novamente")
-                        pergunta_az = False
-                        escolha = 'Azul'
-                        jogo_infantil = True
-                    else:
-                        if difficulty == "Fácil":
-                            pontos_az += 3
-                            escolha = 'Azul'
-                            pergunta_az = False
-                            jogo_infantil = True
-                        elif difficulty == "Médio":
-                            pontos_az += 4
-                            escolha = 'Azul'
-                            pergunta_az = False
-                            jogo_infantil = True
-                        elif difficulty == "Difícil":
-                            pontos_az += 5
-                            escolha = 'Azul'
-                            pergunta_az = False
-                            jogo_infantil = True
-                        elif difficulty == 'Muito difícil':
-                            pontos_az += 7
-                            escolha = 'Azul'
-                            pergunta_az = False
-                            jogo_infantil = True
-                        print("Você errou, a resposta correta era [{}]".format(answer))
-                        print('Vez do Azul! Por favor, jogue o dado.')
-            # Chamando a função e atualizando o display a cada lopping
-            ask_az(ponteiro_az_perg)
+            # Conferindo a resposta
+            if choice == answer:
+                print("Certa resposta! Amarelo joga novamente")
+                pergunta_az = False
+                escolha = 'Azul'
+                jogo_infantil = True
+            else:
+                if difficulty == "Fácil":
+                    pontos_az += 3
+                    escolha = 'Azul'
+                    pergunta_az = False
+                    jogo_infantil = True
+                elif difficulty == "Médio":
+                    pontos_az += 4
+                    escolha = 'Azul'
+                    pergunta_az = False
+                    jogo_infantil = True
+                elif difficulty == "Difícil":
+                    pontos_az += 5
+                    escolha = 'Azul'
+                    pergunta_az = False
+                    jogo_infantil = True
+                elif difficulty == 'Muito difícil':
+                    pontos_az += 7
+                    escolha = 'Azul'
+                    pergunta_az = False
+                    jogo_infantil = True
+                print("Você errou, a resposta correta era [{}]".format(answer))
+                print('Vez do Azul! Por favor, jogue o dado.')
+    # Chamando a função e atualizando o display a cada lopping
+                ask_az(ponteiro_az_perg)
 
-    pygame.display.update()
+                pygame.display.update()
 
     while modo_adulto:
 
