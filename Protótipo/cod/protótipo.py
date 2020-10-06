@@ -11,10 +11,15 @@ janela = pygame.display.set_mode((600,600))
 nome = pygame.display.set_caption(('Manual das Ruas'))
 icone = pygame.image.load('../img/img_jog_car/carro-am.png')
 pygame.display.set_icon(icone)
+x = 50
+y = [70, 130, 190, 250]
+largura = 500
+altura = 50
+choice = ''
 
 #Imagens de fundo
 fundo_menu = pygame.image.load('../img/pistas/fundo-intro.png')
-fundo_infantil = pygame.image.load('../img/pistas/fundo.jpg')
+fundo_infantil = pygame.image.load('../img/pistas/pista-pca.png')
 fundo_adulto = pygame.image.load('../img/pistas/pista_dois.jpg')
 fundo_intro = pygame.image.load('../img/img_jog_car/fundo_estradinha.png')
 
@@ -51,15 +56,15 @@ carteira_y = [490, 30]
 
 #Jogador amarelo
 carro_img_am = pygame.image.load('../img/img_jog_car/carro-am.png')
-coord_x_am = [90, 120,  110, 60, 50, 110, 170, 190, 220, 280, 330, 390, 450, 510, 510, 510,510, 500, 450, 390, 350, 370, 410, 350, 280, 240, 190, 120, 55, 60, 90]
-coord_y_am = [280, 220, 160, 110, 50, 30, 60, 130, 190, 210, 160, 120, 125, 180, 250, 320, 390, 450, 500, 490, 430, 370, 310, 290, 330, 380, 420, 440, 410, 340, 280]
+coord_x_am = [40, 40,  40, 40, 40, 110, 170, 260, 310, 330, 390, 440, 490, 500, 500, 500,500, 490, 440, 430, 425, 360, 300, 240, 220, 150, 100, 45, 40, 40]
+coord_y_am = [250, 200, 150, 100, 40, 15, 20, 40, 50, 100, 110, 110, 110, 175, 230, 285, 340, 395, 410, 465, 520, 510, 500, 490, 440, 430, 430, 415, 360, 310]
 pontos_am = 0
 cart_amarela = pygame.image.load('../img/img_jog_car/cart-amarela.png')
 
 #Jogador azul
 carro_img_az = pygame.image.load('../img/img_jog_car/carro-az.png')
-coord_x_az = [90, 120,  110, 60, 50, 110, 170, 190, 220, 280, 330, 390, 450, 510, 510, 510,510, 500, 450, 390, 350, 370, 410, 350, 280, 240, 190, 120, 55, 60, 90]
-coord_y_az = [280, 220, 160, 110, 50, 30, 60, 130, 190, 210, 160, 120, 125, 180, 250, 320, 390, 450, 500, 490, 430, 370, 310, 290, 330, 380, 420, 440, 410, 340, 280]
+coord_x_az = [40, 40,  40, 40, 40, 110, 170, 260, 310, 330, 390, 440, 490, 500, 500, 500,500, 490, 440, 430, 425, 360, 300, 240, 220, 150, 100, 45, 40, 40]
+coord_y_az = [250, 200, 150, 100, 40, 15, 20, 40, 50, 100, 110, 110, 110, 175, 230, 285, 340, 395, 410, 465, 520, 510, 500, 490, 440, 430, 430, 415, 360, 310]
 pontos_az = 0
 cart_azul = pygame.image.load('../img/img_jog_car/cart-azul.png')
 
@@ -76,6 +81,8 @@ mens_box_y = 170
 #Ponteiro das casas guiadas a dado
 ponteiro_am = 0
 ponteiro_az = 0
+ponteiro_am_perg = 0
+ponteiro_az_perg = 0
 
 #Etapas do programa
 
@@ -98,11 +105,14 @@ regra6 = False
 sorteio = False
 jogo_infantil = False
 jogo_adulto = False
+pergunta_am = False
+pergunta_az = False
 
 #Configuração das casas
+perguntas = [2, 3, 4, 5, 7, 9, 10, 11, 12, 14, 15, 16, 19, 21, 22, 24, 25, 28, 29, 30]
+buracos = [1, 6, 8, 13, 17, 18, 20, 23, 26, 27]
 mens_pos = ['Pergunta', 'Pergunta', 'Buraco!', 'Ponte', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!', 'Pergunta', 'Ponte', 'Buraco!', 'Buraco!', 'Pergunta', 'Ponte', 'Pergunta', 'Ponte', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Buraco!']
 resp_pos = ['Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Resposta', 'Buraco!', 'Resposta', 'Resposta', 'Buraco','Buraco', 'Resposta','Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Resposta', 'Buraco!']
-
 
 
 #Dado
@@ -117,7 +127,6 @@ casas = ['uma', 'duas', 'três', 'quatro', 'cinco', 'seis']
 def dado_regra():
     dado_regra = pygame.image.load(dado_am[0])
     janela.blit(dado_regra,(dado_x, dado_y))
-
 
 #Opções do menu
 def menu_opc():
@@ -417,6 +426,56 @@ def mens_txt_sort_ad():
 def mens_txt_buraco():
     janela.blit(mens_box_buraco, (mens_box_x, mens_box_y))
 
+def show_text(txt, x, y, width, color):
+    sys_font = pygame.font.SysFont('None', width)
+    text = sys_font.render(txt, True, color)
+    janela.blit(text, (x, y))
+
+
+def ask_am (number):
+    for key, value in Data.items():
+        # Informa a chave da pergunta e o seu valor
+        if ponteiro_am in perguntas:
+
+            pygame.draw.rect(janela, (50, 137, 168), (x, y[0], largura, altura))
+            pygame.draw.rect(janela, (50, 137, 168), (x, y[1], largura, altura))
+            pygame.draw.rect(janela, (50, 137, 168), (x, y[2], largura, altura))
+            pygame.draw.rect(janela, (50, 137, 168), (x, y[3], largura, altura))
+
+            if key == number:
+                question = '{0}: {1}'.format(key, value['question'])
+                show_text(question, 10, 10, 20, (0, 0, 0))
+
+                # Show options
+                show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
+                show_text(('[B]: {}'.format(value["options"]["B"])), (x + 10), (y[1] + 18), 20, (255, 255, 255))
+                show_text(('[C]: {}'.format(value["options"]["C"])), (x + 10), (y[2] + 18), 20, (255, 255, 255))
+                show_text(('[D]: {}'.format(value["options"]["D"])), (x + 10), (y[3] + 18), 20, (255, 255, 255))
+
+                return value
+
+def ask_az (number):
+    for key, value in Data.items():
+        # Informa a chave da pergunta e o seu valor
+        if ponteiro_az in perguntas:
+
+            pygame.draw.rect(janela, (50, 137, 168), (x, y[0], largura, altura))
+            pygame.draw.rect(janela, (50, 137, 168), (x, y[1], largura, altura))
+            pygame.draw.rect(janela, (50, 137, 168), (x, y[2], largura, altura))
+            pygame.draw.rect(janela, (50, 137, 168), (x, y[3], largura, altura))
+
+            if key == number:
+                question = '{0}: {1}'.format(key, value['question'])
+                show_text(question, 10, 10, 20, (0, 0, 0))
+
+                # Show options
+                show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
+                show_text(('[B]: {}'.format(value["options"]["B"])), (x + 10), (y[1] + 18), 20, (255, 255, 255))
+                show_text(('[C]: {}'.format(value["options"]["C"])), (x + 10), (y[2] + 18), 20, (255, 255, 255))
+                show_text(('[D]: {}'.format(value["options"]["D"])), (x + 10), (y[3] + 18), 20, (255, 255, 255))
+
+                return value
+
 
 pygame.display.flip()
 
@@ -683,55 +742,37 @@ while True:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE and escolha == 'Amarelo':
                         dado = random.randint(1, 6)
+                        ponteiro_am_perg += dado
                         ponteiro_am += dado
                         dado_am_vez = pygame.image.load(dado_am[dado - 1])
                         janela.blit(dado_am_vez, (dado_x, dado_y))
                         pygame.display.update()
-                        status_casa = mens_pos[ponteiro_am]
                         if dado == 1:
                             print('Você andou uma casa!')
                         else:
                             print('Você andou {} casas!'.format(casas[dado - 1]))
-
-                        if 'Buraco!' in status_casa:
+                        if ponteiro_am_perg in buracos:
                             print('Você caiu no buraco! Vez do Azul.')
                             escolha = 'Azul'
-                        else:
-                            print(mens_pos[ponteiro_am])
-                            resposta = input('Digite aqui a resposta:')
-                            resposta = resposta.title()
-                            if resposta in resp_pos[ponteiro_am]:
-                                prox_part = print('Você acertou! Jogue novamente.')
-                                escolha = 'Amarelo'
-                            else:
-                                pontos_am += 1
-                                print('Você errou e agora tem {} pontos na carteira! Vez do Azul.'.format(pontos_am))
-                                escolha = 'Azul'
-                    elif event.key == pygame.K_SPACE and escolha == 'Azul':
+                        elif ponteiro_am_perg in perguntas:
+                            pergunta_am = True
+                            jogo_infantil = False
+                    if event.key == pygame.K_SPACE and escolha == 'Azul':
                         dado = random.randint(1, 6)
                         ponteiro_az += dado
                         dado_az_vez = pygame.image.load(dado_az[dado - 1])
                         janela.blit(dado_az_vez, (dado_x, dado_y))
-                        pygame.display.flip()
-                        status_casa = mens_pos[ponteiro_az]
+                        pygame.display.update()
                         if dado == 1:
                             print('Você andou uma casa!')
                         else:
                             print('Você andou {} casas!'.format(casas[dado - 1]))
-                        if 'Buraco' in status_casa:
+                        if ponteiro_az in buracos:
                             print('Você caiu no buraco! Vez do Amarelo.')
                             escolha = 'Amarelo'
-                        else:
-                            print(mens_pos[ponteiro_az])
-                            resposta = input('Digite aqui a resposta:')
-                            resposta = resposta.title()
-                            if resposta in resp_pos[ponteiro_az]:
-                                print('Você acertou!')
-                                escolha = 'Azul'
-                            else:
-                                pontos_az += 1
-                                print('Você errou e agora tem {} pontos na carteira! Vez do Amarelo.'.format(pontos_az))
-                                escolha = 'Amarelo'
+                        elif ponteiro_am in perguntas:
+                            pergunta_az = True
+                            jogo_infantil = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 80 and 603 > mouse[1] > 523:
                         jogo_infantil = False
@@ -745,8 +786,140 @@ while True:
                     elif event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10 and (mut % 2) != 0:
                         pygame.mixer_music.unpause()
                         mut += 1
+            if pontos_am >= 40:
+                print('Fim de jogo. Vitória do azul!')
+                pygame.quit()
+            elif pontos_az >= 40:
+                print('Fim de jogo. Vitória do amarelo!')
 
-            pygame.display.flip()
+            if ponteiro_am_perg > 30 and pontos_az < 40 and pontos_am < 40:
+                ponteiro_am_perg = 0
+            elif ponteiro_az_perg > 30 and pontos_az < 40 and pontos_am < 40:
+                ponteiro_az_perg = 0
+
+                # Placar de pontos
+            show_points_am = "Carteira amarela: " + str(pontos_am)
+            show_points_az = "Carteira azul: " + str(pontos_az)
+            show_text(show_points_am, 10, 580, 25, (0, 0, 0))
+            show_text(show_points_az, 460, 580, 25, (0, 0, 0))
+
+        while pergunta_am:
+            janela.fill((255, 255, 255))
+            for event in pygame.event.get():
+                # Quit game
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                # Evento de Click
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        mouse = pygame.mouse.get_pos()
+                        # Posição dos botões
+                        if (x < mouse[0] < x + largura and y[0] < mouse[1] < y[0] + altura):
+                            choice = 'A'
+                        elif (x < mouse[0] < x + largura and y[1] < mouse[1] < y[1] + altura):
+                            choice = 'B'
+                        elif (x < mouse[0] < x + largura and y[2] < mouse[1] < y[2] + altura):
+                            choice = 'C'
+                        elif (x < mouse[0] < x + largura and y[3] < mouse[1] < y[3] + altura):
+                            choice = 'D'
+
+                    # Pegando os valores da função
+                    ask_am_values = ask_am(ponteiro_am_perg)
+                    answer = ask_am_values["answer"]  # Resposta
+                    difficulty = ask_am_values["difficulty"]  # Dificuldade
+
+                    # Conferindo a resposta
+                    if choice == answer:
+                        print("Certa resposta! Amarelo joga novamente")
+                        pergunta_am = False
+                        escolha = 'Amarelo'
+                        jogo_infantil = True
+                    else:
+                        if difficulty == "Fácil":
+                            pontos_am += 3
+                            escolha = 'Azul'
+                            pergunta_am = False
+                            jogo_infantil = True
+                        elif difficulty == "Médio":
+                            pontos_am += 4
+                            escolha = 'Azul'
+                            pergunta_am = False
+                            jogo_infantil = True
+                        elif difficulty == "Difícil":
+                            pontos_am += 5
+                            escolha = 'Azul'
+                            pergunta_am = False
+                            jogo_infantil = True
+                        elif difficulty == 'Muito difícil':
+                            pontos_am += 7
+                            escolha = 'Azul'
+                            pergunta_am = False
+                            jogo_infantil = True
+                        print("Você errou, a resposta correta era [{}]".format(answer))
+                        print('Vez do Azul! Por favor, jogue o dado.')
+            # Chamando a função e atualizando o display a cada lopping
+            ask_am(ponteiro_am_perg)
+
+        pygame.display.update()
+
+        while pergunta_az:
+            janela.fill((255, 255, 255))
+            for event in pygame.event.get():
+                # Quit game
+                if event.type == pygame.QUIT:
+                    runing = False
+                if event.type == pygame.KEYDOWN:
+                # Evento de Click
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        mouse = pygame.mouse.get_pos()
+                        # Posição dos botões
+                        if (x < mouse[0] < x + largura and y[0] < mouse[1] < y[0] + altura):
+                            choice = 'A'
+                        elif (x < mouse[0] < x + largura and y[1] < mouse[1] < y[1] + altura):
+                            choice = 'B'
+                        elif (x < mouse[0] < x + largura and y[2] < mouse[1] < y[2] + altura):
+                            choice = 'C'
+                        elif (x < mouse[0] < x + largura and y[3] < mouse[1] < y[3] + altura):
+                            choice = 'D'
+
+                    # Pegando os valores da função
+                    ask_az_values = ask_az(ponteiro_az_perg)
+                    answer = ask_az_values["answer"]  # Resposta
+                    difficulty = ask_az_values["difficulty"]  # Dificuldade
+
+                    # Conferindo a resposta
+                    if choice == answer:
+                        print("Certa resposta! Amarelo joga novamente")
+                        pergunta_az = False
+                        escolha = 'Azul'
+                        jogo_infantil = True
+                    else:
+                        if difficulty == "Fácil":
+                            pontos_az += 3
+                            escolha = 'Azul'
+                            pergunta_az = False
+                            jogo_infantil = True
+                        elif difficulty == "Médio":
+                            pontos_az += 4
+                            escolha = 'Azul'
+                            pergunta_az = False
+                            jogo_infantil = True
+                        elif difficulty == "Difícil":
+                            pontos_az += 5
+                            escolha = 'Azul'
+                            pergunta_az = False
+                            jogo_infantil = True
+                        elif difficulty == 'Muito difícil':
+                            pontos_az += 7
+                            escolha = 'Azul'
+                            pergunta_az = False
+                            jogo_infantil = True
+                        print("Você errou, a resposta correta era [{}]".format(answer))
+                        print('Vez do Azul! Por favor, jogue o dado.')
+            # Chamando a função e atualizando o display a cada lopping
+            ask_az(ponteiro_az_perg)
+
+    pygame.display.update()
 
     while modo_adulto:
 
