@@ -97,47 +97,49 @@ while runing:
 
                 # Conferindo a resposta
                 if escolha == 'Amarelo':
-                    if choice == answer:
-                        print("Certa resposta! Amarelo joga novamente")
-                    else:
-                        if difficulty == "Fácil":
-                            points_am += 3
-                            escolha = 'Azul'
-                        elif difficulty == "Médio":
-                            points_am += 4
-                            escolha = 'Azul'
-                        elif difficulty == "Difícil":
-                            points_am += 5
-                            escolha = 'Azul'
-                        elif difficulty == 'Muito difícil':
-                            points_am += 7
-                            escolha = 'Azul'
-                        print("Você errou, a resposta correta era [{}]".format(answer))
-                        print('Vez do Azul! Por favor, jogue o dado.')
-                    if case in buracos:
+                    if case in perguntas:
+                        if choice == answer:
+                            print("Certa resposta! Amarelo joga novamente")
+                        else:
+                            if difficulty == "Fácil":
+                                points_am += 3
+                                escolha = 'Azul'
+                            elif difficulty == "Médio":
+                                points_am += 4
+                                escolha = 'Azul'
+                            elif difficulty == "Difícil":
+                                points_am += 5
+                                escolha = 'Azul'
+                            elif difficulty == 'Muito difícil':
+                                points_am += 7
+                                escolha = 'Azul'
+                            print("Você errou, a resposta correta era [{}]".format(answer))
+                            print('Vez do Azul! Por favor, jogue o dado.')
+                    elif case in buracos:
                         escolha = 'Azul'
-                        show_text(('Buraco! Vez do {}'.format(escolha)), 350, 300, 20, (0, 0, 0))
+                        print('Buraco! Vez do {}'.format(escolha))
                 elif escolha == 'Azul':
-                    if choice == answer:
-                        print("Certa resposta! Azul joga novamente")
-                    else:
-                        if difficulty == "Fácil":
-                            points_az += 3
-                            escolha = 'Amarelo'
-                        elif difficulty == "Médio":
-                            points_az += 4
-                            escolha = 'Amarelo'
-                        elif difficulty == "Difícil":
-                            points_az += 5
-                            escolha = 'Amarelo'
-                        elif difficulty == 'Muito difícil':
-                            points_az += 7
-                            escolha = 'Amarelo'
-                        print("Você errou, a resposta correta era [{}]".format(answer))
-                        print('Vez do Amarelo! Por favor, jogue o dado.')
-                    if case in buracos:
+                    if case in perguntas:
+                        if choice == answer:
+                            print("Certa resposta! Azul joga novamente")
+                        else:
+                            if difficulty == "Fácil":
+                                points_az += 3
+                                escolha = 'Amarelo'
+                            elif difficulty == "Médio":
+                                points_az += 4
+                                escolha = 'Amarelo'
+                            elif difficulty == "Difícil":
+                                points_az += 5
+                                escolha = 'Amarelo'
+                            elif difficulty == 'Muito difícil':
+                                points_az += 7
+                                escolha = 'Amarelo'
+                            print("Você errou, a resposta correta era [{}]".format(answer))
+                            print('Vez do Amarelo! Por favor, jogue o dado.')
+                    elif case in buracos:
                         print(case)
-                        escolha = 'Azul'
+                        escolha = 'Amarelo'
                         print('Buraco! Vez do {}'.format(escolha))
 
         if points_am >= 40:
