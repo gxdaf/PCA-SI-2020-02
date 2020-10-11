@@ -18,7 +18,7 @@ altura = 50
 
 #Imagens de fundo
 fundo_menu = pygame.image.load('../img/pistas/fundo-intro.png')
-fundo_infantil = pygame.image.load('../img/pistas/pista-pca.png')
+fundo_infantil = pygame.image.load('../img/pistas/pista-pca-2.png')
 fundo_adulto = pygame.image.load('../img/pistas/pista_dois.jpg')
 fundo_intro = pygame.image.load('../img/img_jog_car/fundo_estradinha.png')
 
@@ -807,7 +807,7 @@ while True:
             carteira_amarela()
             show_text(show_points_am, 10, 540, 20, (0, 0, 0))
             show_text(show_points_az, 460, 540, 20, (0, 0, 0))
-
+            pygame.display.update()
 
         while pergunta_am:
             janela.fill((255, 255, 255))
@@ -852,9 +852,10 @@ while True:
                         pergunta_am = False
                         jogo_infantil = True
 
-                ask_am(ponteiro_am_perg)
-            pygame.display.flip()
-
+                    ask_am(ponteiro_am_perg)
+                    pygame.display.flip()
+                pygame.display.update()
+            pygame.display.update()
         while pergunta_az:
             choice = ''
             janela.fill((255, 255, 255))
@@ -894,13 +895,16 @@ while True:
                             escolha = 'Amarelo'
                         print("Você errou, a resposta correta era [{}]! Agora você tem {} pontos na carteira.".format(answer, pontos_az))
                         print('Vez do Amarelo! Por favor, jogue o dado.')
+
                 if event.type == pygame.MOUSEBUTTONUP:
                     if event.button == pygame.BUTTON_LEFT:
                         pergunta_az = False
                         jogo_infantil = True
+                        pygame.display.flip()
+                    ask_az(ponteiro_az_perg)
 
-                ask_az(ponteiro_az_perg)
-                pygame.display.flip()
+                    pygame.display.flip()
+                pygame.display.update()
 
 
     while modo_adulto:
@@ -910,7 +914,7 @@ while True:
 
         mouse = pygame.mouse.get_pos()
         if audio == True:
-            musica_infantil = mixer.music.load('../audio/whatislove_8bit.wav')
+            musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
             mixer.music.play(-1)
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
