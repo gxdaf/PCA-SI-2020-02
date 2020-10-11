@@ -11,9 +11,9 @@ janela = pygame.display.set_mode((600,600))
 nome = pygame.display.set_caption(('Manual das Ruas'))
 icone = pygame.image.load('../img/img_jog_car/carro-am.png')
 pygame.display.set_icon(icone)
-x = 50
-y = [70, 130, 190, 250]
-largura = 500
+x = 55
+y = [180, 240, 300, 360]
+largura = 480
 altura = 50
 
 #Imagens de fundo
@@ -72,6 +72,7 @@ mens_box = pygame.image.load('../img/img_jog_car/mens_box.png')
 mens_box_sorteio = pygame.image.load('../img/img_jog_car/guarda_mens.png')
 mens_box_buraco = pygame.image.load('../img/img_jog_car/mens_box_buraco.png')
 guarda_regras = pygame.image.load('../img/img_jog_car/guarda_regras.png')
+perg_box = pygame.image.load('../img/img_jog_car/perg.png')
 
 #Coordenadas da caixa de texto
 mens_box_x = 150
@@ -106,6 +107,11 @@ jogo_infantil = False
 jogo_adulto = False
 pergunta_am = False
 pergunta_az = False
+acerto_am = False
+acerto_az = False
+erro_am = False
+erro_az = False
+buraco = False
 
 #Configuração das casas
 perguntas = [2, 3, 4, 5, 7, 9, 10, 11, 12, 14, 15, 16, 19, 21, 22, 24, 25, 28, 29, 30]
@@ -427,7 +433,7 @@ def show_text(txt, x, y, width, color):
     wrap = txt.find('  ')
 
     if wrap > 0:
-        top_text = sys_font.render(txt[:wrap], True, color)
+        top_text = sys_font.render(txt[:wrap - 5], True, color)
         bottom_text = sys_font.render(txt[wrap:], True, color)
         janela.blit(top_text, (x, y - 9))
         janela.blit(bottom_text, (x, y + 9))
@@ -448,7 +454,7 @@ def ask_am (number):
 
             if key == number:
                 question = '{0}: {1}'.format(key, value['question'])
-                show_text(question, 10, 10, 20, (0, 0, 0))
+                show_text(question, 90, 100, 20, (0, 0, 0))
 
                 # Show options
                 show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
@@ -470,7 +476,7 @@ def ask_az (number):
 
             if key == number:
                 question = '{0}: {1}'.format(key, value['question'])
-                show_text(question, 10, 10, 20, (0, 0, 0))
+                show_text(question, 90, 100, 20, (0, 0, 0))
 
                 # Show options
                 show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
@@ -755,11 +761,12 @@ while True:
                         else:
                             print('Você andou {} casas!'.format(casas[dado - 1]))
                         if ponteiro_am_perg in buracos:
-                            print('Você caiu no buraco! Vez do Azul.')
                             escolha = 'Azul'
+                            
+                            buraco = True
                         elif ponteiro_am_perg in perguntas:
                             pergunta_am = True
-                            jogo_infantil = False
+
                     if event.key == pygame.K_SPACE and escolha == 'Azul':
                         dado = random.randint(1, 6)
                         ponteiro_az_perg += dado
@@ -772,14 +779,15 @@ while True:
                         else:
                             print('Você andou {} casas!'.format(casas[dado - 1]))
                         if ponteiro_az_perg in buracos:
-                            print('Você caiu no buraco! Vez do Amarelo.')
                             escolha = 'Amarelo'
+
+                            buraco = True
                         elif ponteiro_az_perg in perguntas:
                             pergunta_az = True
-                            jogo_infantil = False
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 80 and 603 > mouse[1] > 523:
-                        jogo_infantil = False
+
                         modo_infantil = False
                         escolha_modo = True
                         if audio == True:
@@ -818,104 +826,233 @@ while True:
             show_text(show_points_az, 460, 540, 20, (0, 0, 0))
             pygame.display.update()
 
-        while pergunta_am:
-            janela.fill((255, 255, 255))
-            choice = ''
-            ask_values = ask_am(ponteiro_am_perg)
-            answer = ask_values["answer"]  # Resposta
-            difficulty = ask_values["difficulty"]  # Dificuldade
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse = pygame.mouse.get_pos()
-                    # Posição dos botões
-                    if event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[0] < mouse[1] < y[0] + altura):
-                        choice = 'A'
-                    elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[1] < mouse[1] < y[1] + altura):
-                        choice = 'B'
-                    elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[2] < mouse[1] < y[2] + altura):
-                        choice = 'C'
-                    elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[3] < mouse[1] < y[3] + altura):
-                        choice = 'D'
-                    if choice == answer:
-                        print("Certa resposta! Amarelo joga novamente")
-                        escolha = 'Amarelo'
-                    else:
-                        if difficulty == "Fácil":
-                            pontos_am += 3
-                            escolha = 'Azul'
-                        elif difficulty == "Médio":
-                            pontos_am += 4
-                            escolha = 'Azul'
-                        elif difficulty == "Difícil":
-                            pontos_am += 5
-                            escolha = 'Azul'
-                        elif difficulty == 'Muito difícil':
-                            pontos_am += 7
-                            escolha = 'Azul'
-                        print("Você errou, a resposta correta era [{}]. Agora você tem {} pontos na carteira.".format(answer, pontos_am))
-                        print('Vez do Azul! Por favor, jogue o dado.')
-                if event.type == pygame.MOUSEBUTTONUP:
-                    if event.button == pygame.BUTTON_LEFT:
-                        pergunta_am = False
-                        jogo_infantil = True
+            while pergunta_am:
+                choice = ''
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(perg_box, (0, 0))
+                ask_values = ask_am(ponteiro_am_perg)
+                answer = ask_values["answer"]  # Resposta
+                difficulty = ask_values["difficulty"]  # Dificuldade
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        mouse = pygame.mouse.get_pos()
+                        # Posição dos botões
+                        if event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[0] < mouse[1] < y[0] + altura):
+                            choice = 'A'
+                        elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[1] < mouse[1] < y[1] + altura):
+                            choice = 'B'
+                        elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[2] < mouse[1] < y[2] + altura):
+                            choice = 'C'
+                        elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[3] < mouse[1] < y[3] + altura):
+                            choice = 'D'
+                        if choice == answer:
+                            print("Certa resposta! Amarelo joga novamente")
+                            escolha = 'Amarelo'
+                            pergunta_am = False
+                            acerto_am = True
+                        else:
+                            if difficulty == "Fácil":
+                                pontos_am += 3
+                                escolha = 'Azul'
+                                pergunta_am = False
+                                erro_am = True
+                            elif difficulty == "Médio":
+                                pontos_am += 4
+                                escolha = 'Azul'
+                                pergunta_am = False
+                                erro_am = True
+                            elif difficulty == "Difícil":
+                                pontos_am += 5
+                                escolha = 'Azul'
+                                pergunta_am = False
+                                erro_am = True
+                            elif difficulty == 'Muito difícil':
+                                pontos_am += 7
+                                escolha = 'Azul'
+                                pergunta_am = False
+                                erro_am = True
+                            print("Você errou, a resposta correta era [{}]. Agora você tem {} pontos na carteira.".format(answer, pontos_am))
+                            print('Vez do Azul! Por favor, jogue o dado.')
 
-                    ask_am(ponteiro_am_perg)
-                    pygame.display.flip()
-                pygame.display.update()
-            pygame.display.update()
-        while pergunta_az:
-            choice = ''
-            janela.fill((255, 255, 255))
-            ask_values = ask_az(ponteiro_az_perg)
-            answer = ask_values["answer"]  # Resposta
-            difficulty = ask_values["difficulty"]  # Dificuldade
-            for event in pygame.event.get():
-                # Quit game
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse = pygame.mouse.get_pos()
-                    # Posição dos botões
-                    if event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[0] < mouse[1] < y[0] + altura):
-                        choice = 'A'
-                    elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[1] < mouse[1] < y[1] + altura):
-                        choice = 'B'
-                    elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[2] < mouse[1] < y[2] + altura):
-                        choice = 'C'
-                    elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[3] < mouse[1] < y[3] + altura):
-                        choice = 'D'
-                    if choice == answer:
-                        print("Certa resposta! Azul joga novamente")
-                        escolha = 'Azul'
-                    else:
-                        if difficulty == "Fácil":
-                            pontos_az += 3
-                            escolha = 'Amarelo'
-                        elif difficulty == "Médio":
-                            pontos_az += 4
-                            escolha = 'Amarelo'
-                        elif difficulty == "Difícil":
-                            pontos_az += 5
-                            escolha = 'Amarelo'
-                        elif difficulty == 'Muito difícil':
-                            pontos_az += 7
-                            escolha = 'Amarelo'
-                        print("Você errou, a resposta correta era [{}]! Agora você tem {} pontos na carteira.".format(answer, pontos_az))
-                        print('Vez do Amarelo! Por favor, jogue o dado.')
 
-                if event.type == pygame.MOUSEBUTTONUP:
-                    if event.button == pygame.BUTTON_LEFT:
-                        pergunta_az = False
-                        jogo_infantil = True
+                        ask_am(ponteiro_am_perg)
                         pygame.display.flip()
-                    ask_az(ponteiro_az_perg)
-
-                    pygame.display.flip()
+                    pygame.display.update()
                 pygame.display.update()
 
+            while pergunta_az:
+                choice = ''
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(perg_box, (0, 0))
+                ask_values = ask_az(ponteiro_az_perg)
+                answer = ask_values["answer"]  # Resposta
+                difficulty = ask_values["difficulty"]  # Dificuldade
+                for event in pygame.event.get():
+                    # Quit game
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        mouse = pygame.mouse.get_pos()
+                        # Posição dos botões
+                        if event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[0] < mouse[1] < y[0] + altura):
+                            choice = 'A'
+                        elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[1] < mouse[1] < y[1] + altura):
+                            choice = 'B'
+                        elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[2] < mouse[1] < y[2] + altura):
+                            choice = 'C'
+                        elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[3] < mouse[1] < y[3] + altura):
+                            choice = 'D'
+                        if choice == answer:
+                            print("Certa resposta! Azul joga novamente")
+                            escolha = 'Azul'
+                            pergunta_az = False
+                            acerto_az = True
+                        else:
+                            if difficulty == "Fácil":
+                                pontos_az += 3
+                                escolha = 'Amarelo'
+                                pergunta_az = False
+                                acerto_az = True
+                            elif difficulty == "Médio":
+                                pontos_az += 4
+                                escolha = 'Amarelo'
+                                pergunta_az = False
+                                erro_az = True
+                            elif difficulty == "Difícil":
+                                pontos_az += 5
+                                escolha = 'Amarelo'
+                                pergunta_az = False
+                                erro_az = True
+                            elif difficulty == 'Muito difícil':
+                                pontos_az += 7
+                                escolha = 'Amarelo'
+                                pergunta_az = False
+                                erro_az = True
+                            print("Você errou, a resposta correta era [{}]! Agora você tem {} pontos na carteira.".format(answer, pontos_az))
+                            print('Vez do Amarelo! Por favor, jogue o dado.')
 
+                            pygame.display.flip()
+                        ask_az(ponteiro_az_perg)
+
+                        pygame.display.flip()
+                    pygame.display.update()
+
+            while acerto_am:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                acerto1 = (fonte_botao.render('Parabéns! Você', True, (0, 0, 0)))
+                acerto2 = (fonte_botao.render('acertou!', True, (0, 0, 0)))
+                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                janela.blit(acerto1, (220, 220))
+                janela.blit(acerto2, (250, 245))
+                janela.blit(espaco, (235, 350))
+                janela.blit(espaco_2, (230, 375))
+                carro_jog_am()
+                carro_jog_az()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            acerto_am = False
+                            jogo_infantil = True
+
+                pygame.display.update()
+
+            while acerto_az:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                acerto1 = (fonte_botao.render('Parabéns! Você', True, (0, 0, 0)))
+                acerto2 = (fonte_botao.render('acertou!', True, (0, 0, 0)))
+                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                janela.blit(acerto1, (220, 220))
+                janela.blit(acerto2, (250, 245))
+                janela.blit(espaco, (235, 350))
+                janela.blit(espaco_2, (230, 375))
+                carro_jog_am()
+                carro_jog_az()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            acerto_az = False
+                            jogo_infantil = True
+
+                pygame.display.update()
+
+            while erro_am:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
+                erro2 = (fonte_botao.render('uma infração', True, (0, 0, 0)))
+                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                janela.blit(erro1, (230, 200))
+                janela.blit(erro2, (230, 225))
+                janela.blit(espaco, (235, 350))
+                janela.blit(espaco_2, (230, 375))
+                carro_jog_am()
+                carro_jog_az()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            erro_am = False
+                            jogo_infantil = True
+
+                pygame.display.update()
+
+            while erro_az:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
+                erro2 = (fonte_botao.render('uma infração', True, (0, 0, 0)))
+                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                janela.blit(erro1, (230, 200))
+                janela.blit(erro2, (230, 225))
+                janela.blit(espaco, (235, 350))
+                janela.blit(espaco_2, (230, 375))
+                carro_jog_am()
+                carro_jog_az()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            erro_az = False
+                            jogo_infantil = True
+
+                pygame.display.update()
+
+            while buraco:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                buraco1 = (fonte_botao.render('Que pena!', True, (0, 0, 0)))
+                buraco2 = (fonte_botao.render('Você caiu no buraco!', True, (0, 0, 0)))
+                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                janela.blit(buraco1, (250, 200))
+                janela.blit(buraco2, (200, 225))
+                janela.blit(espaco, (235, 350))
+                janela.blit(espaco_2, (230, 375))
+                carro_jog_am()
+                carro_jog_az()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            buraco = False
+                            jogo_infantil = True
+
+                pygame.display.update()
 
     while modo_adulto:
 
