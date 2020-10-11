@@ -55,7 +55,7 @@ Data = {
         "options": {
             "A": "Transitar na contramão de direção",
             "B": "Dirigir sem habilitação",
-            "C": "Transitar em velocidade superior à máxima permitida em mais de 50%.",
+            "C": "Transitar em velocidade superior à máxima permitida em mais  de 50%.",
             "D": "Todas as opções a cima"
         },
         "answer": "D",
@@ -100,7 +100,7 @@ Data = {
     12: {
         "question": "Em que situações devemos usar a buzina?",
         "options": {
-            "A": "Em situações de simples toque breve como advertência afim de evitar acidentes",
+            "A": "Em situações de simples toque breve como advertência afim de  evitar acidentes",
             "B": "Após às 4 horas da manhã",
             "C": "Em situações de engarrafamentos",
             "D": "Perto de hospitais"
@@ -123,7 +123,7 @@ Data = {
         "difficulty": "Médio"
     },
     15: {
-        "question": "Quando se está dirigindo, é preciso respeitar as áreas dos pedestres. Qual das opções abaixo não respeita essas regras?",
+        "question": "Quando se está dirigindo, é preciso respeitar as áreas dos pedestres. Qual das  opções abaixo não respeita essas regras?",
         "options": {
             "A": "Parar na calçada ou na faixa de pedestres",
             "B": "Não Parar na calçada ou na faixa de pedestres",
@@ -134,7 +134,7 @@ Data = {
         "difficulty": "Fácil"
     },
     16: {
-        "question": "No Transito, a segurança é sempre importante, tendo isso em mente qual das opções abaixo não condiz com essa segurança?",
+        "question": "No Transito, a segurança é sempre importante, tendo isso em mente qual das  opções abaixo não condiz com essa segurança?",
         "options": {
             "A": "Evitar ultrapassagens",
             "B": "Não dirigir após beber alguma bebida alcoolica",
@@ -151,7 +151,7 @@ Data = {
         "status": "Buraco"
     },
     19: {
-        "question": "É preciso ter respeito com as pessoas, e isso também se inclui no transito. Qual das opções abaixo pode ser considerada uma atitude desrespeitosa?",
+        "question": "É preciso ter respeito com as pessoas, e isso também se inclui no transito. Qual  das opções abaixo pode ser considerada uma atitude desrespeitosa?",
         "options": {
             "A": "Dirigir nos limites da velocidade",
             "B": "Estacionar nos locais certos",
@@ -176,7 +176,7 @@ Data = {
         "difficulty": "Médio"
    },
     22: {
-        "question": "Quando se está fazendo uma ultrapassagem, é necessário que o carro da frente tenha uma visão completa de onde você vai passar. Tendo isso em mente, por onde você deve passar?",
+        "question": "Em uma ultrapassagem, é necessário que o carro da frente tenha boa visão de  onde você vai passar. Tendo isso em mente, por onde você deve passar?",
         "options": {
             "A": "Por cima do carro, voando",
             "B": "Por baixo do carro.",
@@ -190,7 +190,7 @@ Data = {
         "status": "Buraco"
     },
     24: {
-        "question": "A segurança é uma das partes mais importantes da direção. Qual das opções abaixo não é considerado algo seguro?",
+        "question": "A segurança é uma das partes mais importantes da direção. Qual das opções  abaixo não é considerado algo seguro?",
         "options": {
             "A": "Utilizar cinto de segurança",
             "B": "Ter atenção no transito e em seu redor",
@@ -201,7 +201,7 @@ Data = {
         "difficulty": "Médio"
     },
     25: {
-        "question": "Qual das opções abaixo pode ser considerada a MAIS perigosa, para se cometer no transito?",
+        "question": "Qual das opções abaixo pode ser considerada a MAIS perigosa, para se cometer  no transito?",
         "options": {
             "A": "Não utilizar cinto de segurança",
             "B": "Não dar seta ao fazer a curva",
@@ -218,7 +218,7 @@ Data = {
         "status": "Buraco"
     },
     28: {
-        "question": "Para se manter seguro, também é necessário estar dirigindo algo seguro, então para isso, é necessário:",
+        "question": "Para se manter seguro, também é necessário estar dirigindo algo seguro, então  para isso, é necessário:",
         "options": {
             "A": "Dirigir um carro quebrado.",
             "B": "Dirigir um carro em bom estado de conservação.",
@@ -229,7 +229,7 @@ Data = {
         "difficulty": "Difícil"
     },
     29: {
-        "question": "É extremamente importante dirigir com o máximo de atenção possível, por isso, deve se evitar dirigir após:",
+        "question": "É extremamente importante dirigir com o máximo de atenção possível, por isso,  deve se evitar dirigir após:",
         "options": {
             "A": "Beber água.",
             "B": "Comer Algo.",
@@ -240,12 +240,12 @@ Data = {
         "difficulty": "Muito difícil"
     },
     30: {
-        "question": "O semáforo é utilizado para controlar o trânsito, ele contem três cores, vermelho, amarelo e verde. O que essas cores significam?",
+        "question": "O semáforo é utilizado para controlar o trânsito, ele contem três cores,  vermelho, amarelo e verde. O que essas cores significam?",
         "options": {
-            "A": "Vermelho: Para parar. Amarelo: Para prestar atenção. Verde: Significa que pode andar.",
-            "B": "Vermelho: Para andar mais rápido. Amarelo: Significa para manter uma velocidade. Verde: Significa para parar.",
-            "C": "Vermelho: Para prestar atenção. Amarelo: Significa que pode andar. Verde: Para parar.",
-            "D": "Vermelho: Significa que pode andar. Amarelo: Para prestar atenção. Verde: Para parar."
+            "A": "Vermelho: Para parar. Amarelo: Para prestar atenção.  Verde: Significa que pode andar.",
+            "B": "Vermelho: Para andar mais rápido. Amarelo: Significa para manter  uma velocidade. Verde: Significa para parar.",
+            "C": "Vermelho: Para prestar atenção. Amarelo: Significa que pode  andar. Verde: Para parar.",
+            "D": "Vermelho: Significa que pode andar. Amarelo: Para prestar  atenção. Verde: Para parar."
         },
         "answer": "A",
         "difficulty": "Muito difícil"
