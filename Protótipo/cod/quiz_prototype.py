@@ -5,7 +5,7 @@ pygame.init()
 pygame.font.init()
 
 screen = pygame.display.set_mode((600, 600))
-name = pygame.display.set_caption(('City Driving Guide'))
+name = pygame.display.set_caption(('Manual das Ruas'))
 runing = True
 sorteio = True
 texto_sorteio = 'Aperte TAB em seu teclado para efetuar o sorteio!'
@@ -30,8 +30,16 @@ jogadores = ['Amarelo', 'Azul']
 
 def show_text(txt, x, y, width, color):
     sys_font = pygame.font.SysFont('None', width)
-    text = sys_font.render(txt, True, color)
-    screen.blit(text, (x, y))
+    wrap = txt.find('  ')
+
+    if wrap > 0:
+        top_text = sys_font.render(txt[:wrap], True, color)
+        bottom_text = sys_font.render(txt[wrap:], True, color)
+        screen.blit(top_text, (x, y - 9))
+        screen.blit(bottom_text, (x, y + 9))
+    else:
+        text = sys_font.render(txt, True, color)
+        screen.blit(text, (x, y))
 
 
 def ask(number):
@@ -46,7 +54,7 @@ def ask(number):
 
             if key == number:
                 question = '{0}: {1}'.format(key, value['question'])
-                show_text(question, 10, 10, 20, (0, 0, 0))
+                show_text(question, 10, 15, 20, (0, 0, 0))
 
                 # Show options
                 show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
