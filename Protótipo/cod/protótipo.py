@@ -424,8 +424,16 @@ def mens_txt_buraco():
 
 def show_text(txt, x, y, width, color):
     sys_font = pygame.font.SysFont('None', width)
-    text = sys_font.render(txt, True, color)
-    janela.blit(text, (x, y))
+    wrap = txt.find('  ')
+
+    if wrap > 0:
+        top_text = sys_font.render(txt[:wrap], True, color)
+        bottom_text = sys_font.render(txt[wrap:], True, color)
+        janela.blit(top_text, (x, y - 9))
+        janela.blit(bottom_text, (x, y + 9))
+    else:
+        text = sys_font.render(txt, True, color)
+        janela.blit(text, (x, y))
 
 
 def ask_am (number):
@@ -782,6 +790,7 @@ while True:
                     elif event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10 and (mut % 2) != 0:
                         pygame.mixer_music.unpause()
                         mut += 1
+
             if pontos_am >= 40:
                 print('Fim de jogo. Vitória do azul!')
                 pygame.quit()
@@ -905,6 +914,7 @@ while True:
 
                     pygame.display.flip()
                 pygame.display.update()
+
 
 
     while modo_adulto:
