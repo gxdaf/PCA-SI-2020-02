@@ -49,7 +49,8 @@ menu_titulo = fonte_tit.render('MANUAL DAS RUAS', True, (255, 255, 255))
 
 
 escolha = ''
-
+vencedor = ''
+perdedor = ''
 jogadores = ['Amarelo', 'Azul']
 
 #Coordenadas da carteira
@@ -120,7 +121,7 @@ erro_az_f = False
 erro_az_m = False
 erro_az_d = False
 erro_az_md = False
-buraco = False
+buraco_casa = False
 fim = False
 
 #Configuração das casas
@@ -505,6 +506,68 @@ def placas_dif():
     elif difficulty == "Muito difícil":
         janela.blit(placavermelha, (240, 410))
 
+#Textos
+acerto1 = (fonte_botao.render('Parabéns! Você', True, (0, 0, 0)))
+acerto2 = (fonte_botao.render('acertou!', True, (0, 0, 0)))
+pontos = ''
+erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
+erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
+pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
+buraco1 = (fonte_botao.render('Que pena!', True, (0, 0, 0)))
+buraco2 = (fonte_botao.render('Você caiu no buraco!', True, (0, 0, 0)))
+vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
+espaco = fonte_botao.render('Aperte espaço para voltar ao menu.', True, (0, 0, 0))
+espaco_1 = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+
+def buraco():
+    vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
+    janela.blit(mens_box, (150, 150))
+    janela.blit(buraco1, (250, 200))
+    janela.blit(buraco2, (190, 225))
+    janela.blit(vez1, (200, 300))
+    janela.blit(vez2, (210, 325))
+    janela.blit(espaco_1, (235, 350))
+    janela.blit(espaco_2, (230, 375))
+
+def acerto():
+    vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
+    janela.blit(mens_box, (150, 150))
+    janela.blit(acerto1, (225, 220))
+    janela.blit(acerto2, (260, 245))
+    janela.blit(vez1, (200, 270))
+    janela.blit(vez2, (210, 295))
+    janela.blit(espaco_1, (235, 350))
+    janela.blit(espaco_2, (230, 375))
+
+
+def erro():
+    vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
+    if escolha == 'Azul':
+        pontos = pontos_am
+    elif escolha == 'Amarelo':
+        pontos = pontos_az
+    pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos), True, (0, 0, 0)))
+    janela.blit(mens_box, (150, 150))
+    janela.blit(erro1, (230, 200))
+    janela.blit(erro2, (200, 225))
+    janela.blit(pontos1, (210, 250))
+    janela.blit(pontos2, (185, 275))
+    janela.blit(vez1, (200, 300))
+    janela.blit(vez2, (210, 325))
+    janela.blit(espaco_1, (235, 350))
+    janela.blit(espaco_2, (230, 375))
+
+def fim():
+    fim1 = (fonte_botao.render('O {} alcançou o número máximo de'.format(perdedor), True, (0, 0, 0)))
+    fim2 = (fonte_botao.render('infrações.', True, (0, 0, 0)))
+    fim3 = (fonte_botao.render('O {} é o vencedor da partida!'.format(vencedor), True, (0, 0, 0)))
+    janela.blit(guarda_regras, (0, 0))
+    janela.blit(fim1, (50, 390))
+    janela.blit(fim2, (50, 415))
+    janela.blit(fim3, (50, 440))
+    janela.blit(espaco, (70, 490))
+
 pygame.display.flip()
 
 while True:
@@ -790,7 +853,7 @@ while True:
                         pygame.display.update()
                         if ponteiro_am_perg in buracos:
                             escolha = 'Azul'
-                            buraco = True
+                            buraco_casa = True
                         elif ponteiro_am_perg in perguntas:
                             pergunta_am = True
                     if event.key == pygame.K_SPACE and escolha == 'Azul':
@@ -800,13 +863,9 @@ while True:
                         dado_az_vez = pygame.image.load(dado_az[dado - 1])
                         janela.blit(dado_az_vez, (dado_x, dado_y))
                         pygame.display.update()
-                        if dado == 1:
-                            print('Você andou uma casa!')
-                        else:
-                            print('Você andou {} casas!'.format(casas[dado - 1]))
                         if ponteiro_az_perg in buracos:
                             escolha = 'Amarelo'
-                            buraco = True
+                            buraco_casa = True
                         elif ponteiro_az_perg in perguntas:
                             pergunta_az = True
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -880,28 +939,23 @@ while True:
                         elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[3] < mouse[1] < y[3] + altura):
                             choice = 'D'
                         if choice == answer:
-                            escolha = 'Amarelo'
                             pergunta_am = False
                             acerto_am = True
                         else:
                             if difficulty == "Fácil":
                                 pontos_am += 3
-                                escolha = 'Azul'
                                 pergunta_am = False
                                 erro_am_f = True
                             elif difficulty == "Médio":
                                 pontos_am += 4
-                                escolha = 'Azul'
                                 pergunta_am = False
                                 erro_am_m = True
                             elif difficulty == "Difícil":
                                 pontos_am += 5
-                                escolha = 'Azul'
                                 pergunta_am = False
                                 erro_am_d = True
                             elif difficulty == 'Muito difícil':
                                 pontos_am += 7
-                                escolha = 'Azul'
                                 pergunta_am = False
                                 erro_am_md = True
 
@@ -936,28 +990,23 @@ while True:
                         elif event.button == pygame.BUTTON_LEFT and (x < mouse[0] < x + largura and y[3] < mouse[1] < y[3] + altura):
                             choice = 'D'
                         if choice == answer:
-                            escolha = 'Azul'
                             pergunta_az = False
                             acerto_az = True
                         else:
                             if difficulty == "Fácil":
                                 pontos_az += 3
-                                escolha = 'Amarelo'
                                 pergunta_az = False
                                 erro_az_f = True
                             elif difficulty == "Médio":
                                 pontos_az += 4
-                                escolha = 'Amarelo'
                                 pergunta_az = False
                                 erro_az_m = True
                             elif difficulty == "Difícil":
                                 pontos_az += 5
-                                escolha = 'Amarelo'
                                 pergunta_az = False
                                 erro_az_d = True
                             elif difficulty == 'Muito difícil':
                                 pontos_az += 7
-                                escolha = 'Amarelo'
                                 pergunta_az = False
                                 erro_az_md = True
 
@@ -968,20 +1017,9 @@ while True:
                     pygame.display.update()
 
             while acerto_am:
+                escolha = 'Amarelo'
                 janela.blit(fundo_infantil, (0, 0))
-                janela.blit(mens_box, (150, 150))
-                acerto1 = (fonte_botao.render('Parabéns! Você', True, (0, 0, 0)))
-                acerto2 = (fonte_botao.render('acertou!', True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(acerto1, (225, 220))
-                janela.blit(acerto2, (260, 245))
-                janela.blit(vez1, (200, 270))
-                janela.blit(vez2, (210, 295))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                acerto()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -995,20 +1033,9 @@ while True:
                 pygame.display.update()
 
             while acerto_az:
+                escolha = 'Azul'
                 janela.blit(fundo_infantil, (0, 0))
-                janela.blit(mens_box, (150, 150))
-                acerto1 = (fonte_botao.render('Parabéns! Você', True, (0, 0, 0)))
-                acerto2 = (fonte_botao.render('acertou!', True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(acerto1, (225, 220))
-                janela.blit(acerto2, (260, 245))
-                janela.blit(vez1, (200, 270))
-                janela.blit(vez2, (210, 295))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                acerto()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -1022,24 +1049,9 @@ while True:
                 pygame.display.update()
 
             while erro_am_f:
+                escolha = 'Azul'
                 janela.blit(fundo_infantil, (0, 0))
-                janela.blit(mens_box, (150, 150))
-                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-                erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
-                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
-                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(erro1, (230, 200))
-                janela.blit(erro2, (200, 225))
-                janela.blit(pontos1, (210, 250))
-                janela.blit(pontos2, (185, 275))
-                janela.blit(vez1, (200, 300))
-                janela.blit(vez2, (210, 325))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                erro()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -1053,24 +1065,9 @@ while True:
                 pygame.display.update()
 
             while erro_am_m:
+                escolha = 'Azul'
                 janela.blit(fundo_infantil, (0, 0))
-                janela.blit(mens_box, (150, 150))
-                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-                erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
-                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
-                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(erro1, (230, 200))
-                janela.blit(erro2, (200, 225))
-                janela.blit(pontos1, (210, 250))
-                janela.blit(pontos2, (185, 275))
-                janela.blit(vez1, (200, 300))
-                janela.blit(vez2, (210, 325))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                erro()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -1084,24 +1081,9 @@ while True:
                 pygame.display.update()
 
             while erro_am_d:
+                escolha = 'Azul'
                 janela.blit(fundo_infantil, (0, 0))
-                janela.blit(mens_box, (150, 150))
-                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-                erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
-                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
-                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(erro1, (230, 200))
-                janela.blit(erro2, (200, 225))
-                janela.blit(pontos1, (210, 250))
-                janela.blit(pontos2, (185, 275))
-                janela.blit(vez1, (200, 300))
-                janela.blit(vez2, (210, 325))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                erro()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -1115,24 +1097,9 @@ while True:
                 pygame.display.update()
 
             while erro_am_md:
+                escolha = 'Azul'
                 janela.blit(fundo_infantil, (0, 0))
-                janela.blit(mens_box, (150, 150))
-                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-                erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
-                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
-                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(erro1, (230, 200))
-                janela.blit(erro2, (200, 225))
-                janela.blit(pontos1, (210, 250))
-                janela.blit(pontos2, (185, 275))
-                janela.blit(vez1, (200, 300))
-                janela.blit(vez2, (210, 325))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                erro()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -1146,24 +1113,9 @@ while True:
                 pygame.display.update()
 
             while erro_az_f:
+                escolha = 'Amarelo'
                 janela.blit(fundo_infantil, (0, 0))
-                janela.blit(mens_box, (150, 150))
-                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-                erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
-                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
-                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(erro1, (230, 200))
-                janela.blit(erro2, (200, 225))
-                janela.blit(pontos1, (210, 250))
-                janela.blit(pontos2, (185, 275))
-                janela.blit(vez1, (200, 300))
-                janela.blit(vez2, (210, 325))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                erro()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -1177,24 +1129,9 @@ while True:
                 pygame.display.update()
 
             while erro_az_m:
+                escolha = 'Amarelo'
                 janela.blit(fundo_infantil, (0, 0))
-                janela.blit(mens_box, (150, 150))
-                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-                erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
-                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
-                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(erro1, (230, 200))
-                janela.blit(erro2, (200, 225))
-                janela.blit(pontos1, (210, 250))
-                janela.blit(pontos2, (185, 275))
-                janela.blit(vez1, (200, 300))
-                janela.blit(vez2, (210, 325))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                erro()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -1208,24 +1145,9 @@ while True:
                 pygame.display.update()
 
             while erro_az_d:
+                escolha = 'Amarelo'
                 janela.blit(fundo_infantil, (0, 0))
-                janela.blit(mens_box, (150, 150))
-                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-                erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
-                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
-                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(erro1, (230, 200))
-                janela.blit(erro2, (200, 225))
-                janela.blit(pontos1, (210, 250))
-                janela.blit(pontos2, (185, 275))
-                janela.blit(vez1, (200, 300))
-                janela.blit(vez2, (210, 325))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                erro()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -1239,24 +1161,10 @@ while True:
                 pygame.display.update()
 
             while erro_az_md:
+                escolha = 'Amarelo'
                 janela.blit(fundo_infantil, (0, 0))
                 janela.blit(mens_box, (150, 150))
-                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-                erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
-                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
-                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(erro1, (230, 200))
-                janela.blit(erro2, (200, 225))
-                janela.blit(pontos1, (210, 250))
-                janela.blit(pontos2, (185, 275))
-                janela.blit(vez1, (200, 300))
-                janela.blit(vez2, (210, 325))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                erro()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -1269,25 +1177,14 @@ while True:
 
                 pygame.display.update()
 
-            while buraco:
+            while buraco_casa:
                 janela.blit(fundo_infantil, (0, 0))
                 janela.blit(mens_box, (150, 150))
                 if escolha == 'Azul':
                     janela.blit(dado_am_vez, (dado_x, dado_y))
                 elif escolha == 'Amarelo':
                     janela.blit(dado_az_vez, (dado_x, dado_y))
-                buraco1 = (fonte_botao.render('Que pena!', True, (0, 0, 0)))
-                buraco2 = (fonte_botao.render('Você caiu no buraco!', True, (0, 0, 0)))
-                vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
-                vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(buraco1, (250, 200))
-                janela.blit(buraco2, (190, 225))
-                janela.blit(vez1, (200, 300))
-                janela.blit(vez2, (210, 325))
-                janela.blit(espaco, (235, 350))
-                janela.blit(espaco_2, (230, 375))
+                buraco()
                 carro_jog_am()
                 carro_jog_az()
                 for event in pygame.event.get():
@@ -1295,22 +1192,14 @@ while True:
                         pygame.quit()
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE:
-                            buraco = False
+                            buraco_casa = False
                             jogo_infantil = True
 
                 pygame.display.update()
 
         while fim:
             janela.blit(fundo_infantil, (0, 0))
-            janela.blit(guarda_regras, (0, 0))
-            fim1 = (fonte_botao.render('O {} alcançou o número máximo de'.format(perdedor), True, (0, 0, 0)))
-            fim2 = (fonte_botao.render('infrações.', True, (0, 0, 0)))
-            fim3 = (fonte_botao.render('O {} é o vencedor da partida!'.format(vencedor), True, (0, 0, 0)))
-            espaco = fonte_botao.render('Aperte espaço para voltar ao menu.', True, (0, 0, 0))
-            janela.blit(fim1, (50, 390))
-            janela.blit(fim2, (50, 415))
-            janela.blit(fim3, (50, 440))
-            janela.blit(espaco, (70, 490))
+            fim()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
