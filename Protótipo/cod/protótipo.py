@@ -26,7 +26,10 @@ fundo_intro = pygame.image.load('../img/img_jog_car/fundo_estradinha.png')
 mutar = pygame.image.load('../img/img_jog_car/mutar.png')
 mutar_mouse = pygame.image.load('../img/img_jog_car/mutar_branco.png')
 botao_volta = pygame.image.load('../img/img_jog_car/botao_volta.png')
-
+placaazul = pygame.image.load('../img/img_jog_car/placaazul.png')
+placaverde = pygame.image.load('../img/img_jog_car/placaverde.png')
+placaamarela = pygame.image.load('../img/img_jog_car/placaamarela.png')
+placavermelha = pygame.image.load('../img/img_jog_car/placavermelha.png')
 #Fontes
 fonte_tit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 26)
 fonte_botao = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 12)
@@ -67,7 +70,7 @@ coord_y_az = [250, 200, 150, 100, 40, 15, 20, 40, 50, 100, 110, 110, 110, 175, 2
 pontos_az = 0
 cart_azul = pygame.image.load('../img/img_jog_car/cart-azul.png')
 
-#Caixas de testo
+#Caixas de texto
 mens_box = pygame.image.load('../img/img_jog_car/mens_box.png')
 mens_box_sorteio = pygame.image.load('../img/img_jog_car/guarda_mens.png')
 mens_box_buraco = pygame.image.load('../img/img_jog_car/mens_box_buraco.png')
@@ -109,8 +112,14 @@ pergunta_am = False
 pergunta_az = False
 acerto_am = False
 acerto_az = False
-erro_am = False
-erro_az = False
+erro_am_f = False
+erro_am_m = False
+erro_am_d = False
+erro_am_md = False
+erro_az_f = False
+erro_az_m = False
+erro_az_d = False
+erro_az_md = False
 buraco = False
 
 #Configuração das casas
@@ -390,10 +399,6 @@ def menu_txt():
 
 #Placas
 def placas():
-    placaazul = pygame.image.load('../img/img_jog_car/placaazul.png')
-    placaverde = pygame.image.load('../img/img_jog_car/placaverde.png')
-    placaamarela = pygame.image.load('../img/img_jog_car/placaamarela.png')
-    placavermelha = pygame.image.load('../img/img_jog_car/placavermelha.png')
     janela.blit(placaazul, (100,100))
     janela.blit(placaverde, (250, 100))
     janela.blit(placaamarela, (100, 200))
@@ -445,7 +450,7 @@ def show_text(txt, x, y, width, color):
 def ask_am (number):
     for key, value in Data.items():
         # Informa a chave da pergunta e o seu valor
-        if ponteiro_am in perguntas:
+        if ponteiro_am_perg in perguntas:
 
             pygame.draw.rect(janela, (222, 188, 0), (x, y[0], largura, altura))
             pygame.draw.rect(janela, (222, 188, 0), (x, y[1], largura, altura))
@@ -467,7 +472,7 @@ def ask_am (number):
 def ask_az (number):
     for key, value in Data.items():
         # Informa a chave da pergunta e o seu valor
-        if ponteiro_az in perguntas:
+        if ponteiro_az_perg in perguntas:
 
             pygame.draw.rect(janela, (50, 137, 168), (x, y[0], largura, altura))
             pygame.draw.rect(janela, (50, 137, 168), (x, y[1], largura, altura))
@@ -486,6 +491,15 @@ def ask_az (number):
 
                 return value
 
+def placas_dif():
+    if difficulty == "Fácil":
+        janela.blit(placaazul, (240, 410))
+    elif difficulty == "Médio":
+        janela.blit(placaverde, (240, 410))
+    elif difficulty == "Difícil":
+        janela.blit(placaamarela, (240, 410))
+    elif difficulty == "Muito difícil":
+        janela.blit(placavermelha, (240, 410))
 
 pygame.display.flip()
 
@@ -726,15 +740,35 @@ while True:
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        print('O primeiro a jogar será o: {}! Aperte espaço para jogar o dado.'.format(escolha))
+                        escolha = random.choice(jogadores)
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_SPACE:
                         sorteio = False
-                        jogo_infantil = True
+                        sorteado = True
 
             pygame.display.flip()
 
+        while sorteado:
+            janela.blit(fundo_infantil, (0, 0))
+            janela.blit(guarda_regras, (0, 0))
+            sorteio1 = (fonte_botao.render('O primeiro a jogar será o {}!'.format(escolha), True, (0, 0, 0)))
+            sorteio2 = (fonte_botao.render('Preste bastante atenção, tenha', True, (0, 0, 0)))
+            sorteio3 = (fonte_botao.render('calma e boa sorte!', True, (0, 0, 0)))
+            espaco = fonte_botao.render('Aperte espaço para continuar', True, (0, 0, 0))
+            janela.blit(sorteio1, (50, 390))
+            janela.blit(sorteio2, (50, 415))
+            janela.blit(sorteio3, (50, 440))
+            janela.blit(espaco, (80, 490))
 
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        sorteado = False
+                        jogo_infantil = True
+
+            pygame.display.flip()
 
         while jogo_infantil:
 
@@ -762,7 +796,7 @@ while True:
                             print('Você andou {} casas!'.format(casas[dado - 1]))
                         if ponteiro_am_perg in buracos:
                             escolha = 'Azul'
-                            
+
                             buraco = True
                         elif ponteiro_am_perg in perguntas:
                             pergunta_am = True
@@ -818,12 +852,12 @@ while True:
                 ponteiro_az += dado
 
                 # Placar de pontos
-            show_points_am = "Carteira amarela: " + str(pontos_am)
-            show_points_az = "Carteira azul: " + str(pontos_az)
+            show_points_am = str(pontos_am)
+            show_points_az = str(pontos_az)
             carteira_azul()
             carteira_amarela()
-            show_text(show_points_am, 10, 540, 20, (0, 0, 0))
-            show_text(show_points_az, 460, 540, 20, (0, 0, 0))
+            show_text(show_points_am, 105, 540, 30, (0, 0, 0))
+            show_text(show_points_az, 555, 540, 30, (0, 0, 0))
             pygame.display.update()
 
             while pergunta_am:
@@ -833,6 +867,7 @@ while True:
                 ask_values = ask_am(ponteiro_am_perg)
                 answer = ask_values["answer"]  # Resposta
                 difficulty = ask_values["difficulty"]  # Dificuldade
+                placas_dif()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
@@ -857,27 +892,27 @@ while True:
                                 pontos_am += 3
                                 escolha = 'Azul'
                                 pergunta_am = False
-                                erro_am = True
+                                erro_am_f = True
                             elif difficulty == "Médio":
                                 pontos_am += 4
                                 escolha = 'Azul'
                                 pergunta_am = False
-                                erro_am = True
+                                erro_am_m = True
                             elif difficulty == "Difícil":
                                 pontos_am += 5
                                 escolha = 'Azul'
                                 pergunta_am = False
-                                erro_am = True
+                                erro_am_d = True
                             elif difficulty == 'Muito difícil':
                                 pontos_am += 7
                                 escolha = 'Azul'
                                 pergunta_am = False
-                                erro_am = True
+                                erro_am_md = True
                             print("Você errou, a resposta correta era [{}]. Agora você tem {} pontos na carteira.".format(answer, pontos_am))
                             print('Vez do Azul! Por favor, jogue o dado.')
 
-
                         ask_am(ponteiro_am_perg)
+
                         pygame.display.flip()
                     pygame.display.update()
                 pygame.display.update()
@@ -889,6 +924,7 @@ while True:
                 ask_values = ask_az(ponteiro_az_perg)
                 answer = ask_values["answer"]  # Resposta
                 difficulty = ask_values["difficulty"]  # Dificuldade
+                placas_dif()
                 for event in pygame.event.get():
                     # Quit game
                     if event.type == pygame.QUIT:
@@ -914,22 +950,22 @@ while True:
                                 pontos_az += 3
                                 escolha = 'Amarelo'
                                 pergunta_az = False
-                                acerto_az = True
+                                erro_az_f = True
                             elif difficulty == "Médio":
                                 pontos_az += 4
                                 escolha = 'Amarelo'
                                 pergunta_az = False
-                                erro_az = True
+                                erro_az_m = True
                             elif difficulty == "Difícil":
                                 pontos_az += 5
                                 escolha = 'Amarelo'
                                 pergunta_az = False
-                                erro_az = True
+                                erro_az_d = True
                             elif difficulty == 'Muito difícil':
                                 pontos_az += 7
                                 escolha = 'Amarelo'
                                 pergunta_az = False
-                                erro_az = True
+                                erro_az_md = True
                             print("Você errou, a resposta correta era [{}]! Agora você tem {} pontos na carteira.".format(answer, pontos_az))
                             print('Vez do Amarelo! Por favor, jogue o dado.')
 
@@ -946,8 +982,8 @@ while True:
                 acerto2 = (fonte_botao.render('acertou!', True, (0, 0, 0)))
                 espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
                 espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(acerto1, (220, 220))
-                janela.blit(acerto2, (250, 245))
+                janela.blit(acerto1, (225, 220))
+                janela.blit(acerto2, (260, 245))
                 janela.blit(espaco, (235, 350))
                 janela.blit(espaco_2, (230, 375))
                 carro_jog_am()
@@ -969,8 +1005,8 @@ while True:
                 acerto2 = (fonte_botao.render('acertou!', True, (0, 0, 0)))
                 espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
                 espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-                janela.blit(acerto1, (220, 220))
-                janela.blit(acerto2, (250, 245))
+                janela.blit(acerto1, (225, 220))
+                janela.blit(acerto2, (260, 245))
                 janela.blit(espaco, (235, 350))
                 janela.blit(espaco_2, (230, 375))
                 carro_jog_am()
@@ -985,15 +1021,19 @@ while True:
 
                 pygame.display.update()
 
-            while erro_am:
+            while erro_am_f:
                 janela.blit(fundo_infantil, (0, 0))
                 janela.blit(mens_box, (150, 150))
                 erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-                erro2 = (fonte_botao.render('uma infração', True, (0, 0, 0)))
+                erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
+                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
+                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
                 espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
                 espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
                 janela.blit(erro1, (230, 200))
-                janela.blit(erro2, (230, 225))
+                janela.blit(erro2, (200, 225))
+                janela.blit(pontos1, (210, 275))
+                janela.blit(pontos2, (185, 300))
                 janela.blit(espaco, (235, 350))
                 janela.blit(espaco_2, (230, 375))
                 carro_jog_am()
@@ -1003,20 +1043,24 @@ while True:
                         pygame.quit()
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE:
-                            erro_am = False
+                            erro_am_f = False
                             jogo_infantil = True
 
                 pygame.display.update()
 
-            while erro_az:
+            while erro_am_m:
                 janela.blit(fundo_infantil, (0, 0))
                 janela.blit(mens_box, (150, 150))
                 erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-                erro2 = (fonte_botao.render('uma infração', True, (0, 0, 0)))
+                erro2 = (fonte_botao.render('uma infração média!', True, (0, 0, 0)))
+                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
+                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
                 espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
                 espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
                 janela.blit(erro1, (230, 200))
-                janela.blit(erro2, (230, 225))
+                janela.blit(erro2, (200, 225))
+                janela.blit(pontos1, (210, 275))
+                janela.blit(pontos2, (185, 300))
                 janela.blit(espaco, (235, 350))
                 janela.blit(espaco_2, (230, 375))
                 carro_jog_am()
@@ -1026,10 +1070,172 @@ while True:
                         pygame.quit()
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE:
-                            erro_az = False
+                            erro_am_m = False
                             jogo_infantil = True
 
                 pygame.display.update()
+
+            while erro_am_d:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
+                erro2 = (fonte_botao.render('uma infração grave!', True, (0, 0, 0)))
+                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
+                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
+                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                janela.blit(erro1, (230, 200))
+                janela.blit(erro2, (200, 225))
+                janela.blit(pontos1, (210, 275))
+                janela.blit(pontos2, (185, 300))
+                janela.blit(espaco, (235, 350))
+                janela.blit(espaco_2, (230, 375))
+                carro_jog_am()
+                carro_jog_az()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            erro_am_d = False
+                            jogo_infantil = True
+
+                pygame.display.update()
+
+            while erro_am_md:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
+                erro2 = (fonte_botao.render('uma infração gravíssima!', True, (0, 0, 0)))
+                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
+                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_am), True, (0, 0, 0)))
+                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                janela.blit(erro1, (230, 200))
+                janela.blit(erro2, (200, 225))
+                janela.blit(pontos1, (210, 275))
+                janela.blit(pontos2, (185, 300))
+                janela.blit(espaco, (235, 350))
+                janela.blit(espaco_2, (230, 375))
+                carro_jog_am()
+                carro_jog_az()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            erro_am_md = False
+                            jogo_infantil = True
+
+                pygame.display.update()
+
+            while erro_az_f:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
+                erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
+                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
+                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_az), True, (0, 0, 0)))
+                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                janela.blit(erro1, (230, 200))
+                janela.blit(erro2, (200, 225))
+                janela.blit(pontos1, (210, 275))
+                janela.blit(pontos2, (185, 300))
+                janela.blit(espaco, (235, 350))
+                janela.blit(espaco_2, (230, 375))
+                carro_jog_am()
+                carro_jog_az()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            erro_az_f = False
+                            jogo_infantil = True
+
+                pygame.display.update()
+
+            while erro_az_m:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
+                erro2 = (fonte_botao.render('uma infração média!', True, (0, 0, 0)))
+                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
+                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_az), True, (0, 0, 0)))
+                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                janela.blit(erro1, (230, 200))
+                janela.blit(erro2, (200, 225))
+                janela.blit(pontos1, (210, 275))
+                janela.blit(pontos2, (185, 300))
+                janela.blit(espaco, (235, 350))
+                janela.blit(espaco_2, (230, 375))
+                carro_jog_am()
+                carro_jog_az()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            erro_az_m = False
+                            jogo_infantil = True
+
+                pygame.display.update()
+
+            while erro_az_d:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
+                erro2 = (fonte_botao.render('uma infração grave!', True, (0, 0, 0)))
+                pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
+                pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_az), True, (0, 0, 0)))
+                espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                janela.blit(erro1, (230, 200))
+                janela.blit(erro2, (200, 225))
+                janela.blit(pontos1, (210, 275))
+                janela.blit(pontos2, (185, 300))
+                janela.blit(espaco, (235, 350))
+                janela.blit(espaco_2, (230, 375))
+                carro_jog_am()
+                carro_jog_az()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            erro_az_d = False
+                            jogo_infantil = True
+
+                pygame.display.update()
+
+                while erro_az_md:
+                    janela.blit(fundo_infantil, (0, 0))
+                    janela.blit(mens_box, (150, 150))
+                    erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
+                    erro2 = (fonte_botao.render('uma infração gravíssima!', True, (0, 0, 0)))
+                    pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
+                    pontos2 = (fonte_botao.render('{} pontos na carteira.'.format(pontos_az), True, (0, 0, 0)))
+                    espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
+                    espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+                    janela.blit(erro1, (230, 200))
+                    janela.blit(erro2, (200, 225))
+                    janela.blit(pontos1, (210, 275))
+                    janela.blit(pontos2, (185, 300))
+                    janela.blit(espaco, (235, 350))
+                    janela.blit(espaco_2, (230, 375))
+                    carro_jog_am()
+                    carro_jog_az()
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            pygame.quit()
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_SPACE:
+                                erro_az_md = False
+                                jogo_infantil = True
+
+                    pygame.display.update()
 
             while buraco:
                 janela.blit(fundo_infantil, (0, 0))
@@ -1039,7 +1245,7 @@ while True:
                 espaco = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
                 espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
                 janela.blit(buraco1, (250, 200))
-                janela.blit(buraco2, (200, 225))
+                janela.blit(buraco2, (190, 225))
                 janela.blit(espaco, (235, 350))
                 janela.blit(espaco_2, (230, 375))
                 carro_jog_am()
