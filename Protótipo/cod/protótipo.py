@@ -122,11 +122,13 @@ erro_az_m = False
 erro_az_d = False
 erro_az_md = False
 buraco_casa = False
+pontes_casa = False
 fim = False
 
 #Configuração das casas
 perguntas = [2, 3, 4, 5, 7, 9, 10, 11, 12, 14, 15, 16, 19, 21, 22, 24, 25, 28, 29, 30]
-buracos = [1, 6, 8, 13, 17, 18, 20, 23, 26, 27]
+pontes = [6, 8, 17, 18, 23]
+buracos = [1, 13, 20, 26, 27]
 
 #Dado
 dado_am = ['../img/dados/dado-am-1.png', '../img/dados/dado-am-2.png', '../img/dados/dado-am-3.png', '../img/dados/dado-am-4.png', '../img/dados/dado-am-5.png', '../img/dados/dado-am-6.png']
@@ -515,10 +517,23 @@ erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
 pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
 buraco1 = (fonte_botao.render('Que pena!', True, (0, 0, 0)))
 buraco2 = (fonte_botao.render('Você caiu no buraco!', True, (0, 0, 0)))
+ponte1 = (fonte_botao.render('Olhe só! Você', True, (0, 0, 0)))
+ponte2 = (fonte_botao.render('encontrou uma ponte!', True, (0, 0, 0)))
+pulo1 = (fonte_botao.render('Por isso, você pode', True, (0, 0, 0)))
+pulo2 = (fonte_botao.render('avançar 4 casas!', True, (0, 0, 0)))
 vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
 espaco = fonte_botao.render('Aperte espaço para voltar ao menu.', True, (0, 0, 0))
 espaco_1 = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
 espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
+
+def ponte():
+    janela.blit(mens_box, (150, 150))
+    janela.blit(ponte1, (235, 200))
+    janela.blit(ponte2, (190, 225))
+    janela.blit(pulo1, (200, 300))
+    janela.blit(pulo2, (210, 325))
+    janela.blit(espaco_1, (235, 350))
+    janela.blit(espaco_2, (230, 375))
 
 def buraco():
     vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
@@ -792,6 +807,8 @@ while True:
                         regra6 = False
                         sorteio = True
 
+            pygame.display.update()
+
         while sorteio:
 
             janela.blit(fundo_infantil, (0, 0))
@@ -808,7 +825,7 @@ while True:
                         sorteio = False
                         sorteado = True
 
-            pygame.display.flip()
+            pygame.display.update()
 
         while sorteado:
             janela.blit(fundo_infantil, (0, 0))
@@ -856,6 +873,10 @@ while True:
                             buraco_casa = True
                         elif ponteiro_am_perg in perguntas:
                             pergunta_am = True
+                        elif ponteiro_am_perg in pontes:
+                            ponteiro_am += 4
+                            ponteiro_am_perg += 4
+                            pontes_casa = True
                     if event.key == pygame.K_SPACE and escolha == 'Azul':
                         dado = random.randint(1, 6)
                         ponteiro_az_perg += dado
@@ -868,6 +889,11 @@ while True:
                             buraco_casa = True
                         elif ponteiro_az_perg in perguntas:
                             pergunta_az = True
+                        elif ponteiro_az_perg in pontes:
+                            ponteiro_az += 4
+                            ponteiro_az_perg += 4
+                            pontes_casa = True
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 80 and 603 > mouse[1] > 523:
                         jogo_infantil = False
@@ -896,8 +922,10 @@ while True:
 
             if ponteiro_am_perg > 30 and pontos_az < 40 and pontos_am < 40:
                 ponteiro_am_perg = 0
+                ponteiro_am_perg += dado
             elif ponteiro_az_perg > 30 and pontos_az < 40 and pontos_am < 40:
                 ponteiro_az_perg = 0
+                ponteiro_az_perg += dado
 
             if ponteiro_am >= 30:
                 ponteiro_am = 0
@@ -1193,6 +1221,26 @@ while True:
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE:
                             buraco_casa = False
+                            jogo_infantil = True
+
+                pygame.display.update()
+
+            while pontes_casa:
+                janela.blit(fundo_infantil, (0, 0))
+                janela.blit(mens_box, (150, 150))
+                ponte()
+                carro_jog_am()
+                carro_jog_az()
+                if escolha == 'Amarelo':
+                    janela.blit(dado_am_vez, (dado_x, dado_y))
+                elif escolha == 'Azul':
+                    janela.blit(dado_az_vez, (dado_x, dado_y))
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            pontes_casa = False
                             jogo_infantil = True
 
                 pygame.display.update()
