@@ -1,48 +1,27 @@
 import pygame, math, random, time
 from pygame import mixer
 from questions import Data
+from imagens import *
+from audio import *
+from eventos import *
+from textos import *
 
 pygame.init()
 pygame.font.init()
 
-
 #Configurações da janela
 janela = pygame.display.set_mode((600,600))
 nome = pygame.display.set_caption(('Manual das Ruas'))
-icone = pygame.image.load('../img/img_jog_car/carro-am.png')
 pygame.display.set_icon(icone)
 x = 55
 y = [180, 240, 300, 360]
 largura = 480
 altura = 50
 
-#Imagens de fundo
-fundo_menu = pygame.image.load('../img/pistas/fundo-intro.png')
-fundo_infantil = pygame.image.load('../img/pistas/pista-pca-2.png')
-fundo_adulto = pygame.image.load('../img/pistas/pista_dois.jpg')
-fundo_intro = pygame.image.load('../img/img_jog_car/fundo_estradinha.png')
-
-#Imagens complementares
-mutar = pygame.image.load('../img/img_jog_car/mutar.png')
-mutar_mouse = pygame.image.load('../img/img_jog_car/mutar_branco.png')
-botao_volta = pygame.image.load('../img/img_jog_car/botao_volta.png')
-placaazul = pygame.image.load('../img/img_jog_car/placaazul.png')
-placaverde = pygame.image.load('../img/img_jog_car/placaverde.png')
-placaamarela = pygame.image.load('../img/img_jog_car/placaamarela.png')
-placavermelha = pygame.image.load('../img/img_jog_car/placavermelha.png')
-#Fontes
-fonte_tit = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 26)
-fonte_botao = pygame.font.Font('../font/PressStart2P-vaV7.ttf', 12)
-
 #Introdução do jogo
-buzina = mixer.Sound('../audio/buzina_intro.wav')
-motor = mixer.Sound('../audio/motor_abertura.wav')
-musica_infantil = mixer.music.load('../audio/signal_8bit.wav')
-musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
 mut = 0
 titulo_intro_x = 120
 titulo_intro_y = 300
-carro_intro = pygame.image.load('../img/img_jog_car/carro_intro.png')
 carro_intro_x = 0
 carro_intro_y = 460
 menu_titulo = fonte_tit.render('MANUAL DAS RUAS', True, (255, 255, 255))
@@ -57,43 +36,19 @@ jogadores = ['Jogador 1', 'Jogador 2']
 carteira_x = [30, 440]
 carteira_y = [490, 30]
 
-#Carros
-carro_azul = pygame.image.load('../img/img_jog_car/carro-az.png')
-carro_verde = pygame.image.load('../img/img_jog_car/carro-verde.png')
-carro_amarelo = pygame.image.load('../img/img_jog_car/carro-am.png')
-carro_rosa = pygame.image.load('../img/img_jog_car/carro-rosa.png')
-carro_cinza = pygame.image.load('../img/img_jog_car/carro-cinza.png')
-
-#X
-x_vermelho = pygame.image.load('../img/img_jog_car/x.png')
-
-#Carteiras
-cart_amarela = pygame.image.load('../img/img_jog_car/cart-amarela-2.png')
-cart_azul = pygame.image.load('../img/img_jog_car/cart-azul-2.png')
-cart_cinza = pygame.image.load('../img/img_jog_car/cart-cinza.png')
-cart_rosa = pygame.image.load('../img/img_jog_car/cart-rosa.png')
-cart_verde = pygame.image.load('../img/img_jog_car/cart-verde.png')
-
-#Jogador amarelo
+#Jogador 1
 carro_img_1 = ''
 coord_x_1 = [40, 40,  40, 40, 40, 110, 170, 260, 310, 330, 390, 440, 490, 500, 500, 500,500, 490, 440, 430, 425, 360, 300, 240, 220, 150, 100, 45, 40, 40]
 coord_y_1 = [250, 200, 150, 100, 40, 15, 20, 40, 50, 100, 110, 110, 110, 175, 230, 285, 340, 395, 410, 465, 520, 510, 500, 490, 440, 430, 430, 415, 360, 310]
 pontos_1 = 0
 cart_1 = ''
 
-#Jogador azul
+#Jogador 2
 carro_img_2 = ''
 coord_x_2 = [40, 40,  40, 40, 40, 110, 170, 260, 310, 330, 390, 440, 490, 500, 500, 500,500, 490, 440, 430, 425, 360, 300, 240, 220, 150, 100, 45, 40, 40]
 coord_y_2 = [250, 200, 150, 100, 40, 15, 20, 40, 50, 100, 110, 110, 110, 175, 230, 285, 340, 395, 410, 465, 520, 510, 500, 490, 440, 430, 430, 415, 360, 310]
 pontos_2 = 0
 cart_2 = ''
-
-#Caixas
-carro_box = pygame.image.load('../img/img_jog_car/carro_box.png')
-mens_box = pygame.image.load('../img/img_jog_car/mens_box.png')
-mens_box_sorteio = pygame.image.load('../img/img_jog_car/guarda_mens.png')
-guarda_regras = pygame.image.load('../img/img_jog_car/guarda_regras.png')
-perg_box = pygame.image.load('../img/img_jog_car/perg.png')
 
 #Coordenadas da caixa de texto
 mens_box_x = 150
@@ -105,62 +60,16 @@ ponteiro_2 = 0
 ponteiro_1_perg = 0
 ponteiro_2_perg = 0
 
-#Etapas do programa
-
-creditos = False
-abertura = True
-intro = False
-menu = False
-audio = True
-escolha_modo = False
-modo_infantil = False
-modo_adulto = False
-conf_audio = False
-customizacao_1 = False
-customizacao_2 = False
-regra1 = False
-regra2 = False
-regra3 = False
-regra4 = False
-regra5 = False
-regra6 = False
-sorteio = False
-jogo_infantil = False
-jogo_adulto = False
-pergunta_1 = False
-pergunta_2 = False
-acerto_1 = False
-acerto_2 = False
-erro_1_f = False
-erro_1_m = False
-erro_1_d = False
-erro_1_md = False
-erro_2_f = False
-erro_2_m = False
-erro_2_d = False
-erro_2_md = False
-buraco_casa = False
-pontes_casa = False
-fim = False
-
 #Configuração das casas
 perguntas = [2, 3, 4, 5, 7, 9, 10, 11, 12, 14, 15, 16, 19, 21, 22, 24, 25, 28, 29, 30]
 pontes = [6, 8, 17, 18, 23]
 buracos = [1, 13, 20, 26, 27]
 
-#Dado
-dado_am = ['../img/dados/dado-am-1.png', '../img/dados/dado-am-2.png', '../img/dados/dado-am-3.png', '../img/dados/dado-am-4.png', '../img/dados/dado-am-5.png', '../img/dados/dado-am-6.png']
-dado_az = ['../img/dados/dado-az-1.png', '../img/dados/dado-az-2.png', '../img/dados/dado-az-3.png', '../img/dados/dado-az-4.png', '../img/dados/dado-az-5.png', '../img/dados/dado-az-6.png']
-dado_rosa = ['../img/dados/dado-rosa-1.png', '../img/dados/dado-rosa-2.png', '../img/dados/dado-rosa-3.png', '../img/dados/dado-rosa-4.png', '../img/dados/dado-rosa-5.png', '../img/dados/dado-rosa-6.png']
-dado_cinza = ['../img/dados/dado-cinza-1.png', '../img/dados/dado-cinza-2.png', '../img/dados/dado-cinza-3.png', '../img/dados/dado-cinza-4.png', '../img/dados/dado-cinza-5.png', '../img/dados/dado-cinza-6.png']
-dado_verde = ['../img/dados/dado-verde-1.png', '../img/dados/dado-verde-2.png', '../img/dados/dado-verde-3.png', '../img/dados/dado-verde-4.png', '../img/dados/dado-verde-5.png', '../img/dados/dado-verde-6.png']
+#Coordenadas dos dados
 dado_1 = ''
 dado_2 = ''
 dado_x = 255
 dado_y = 5
-
-#Número de casas percorridas
-casas = ['uma', 'duas', 'três', 'quatro', 'cinco', 'seis']
 
 def dado_regra():
     dado_regra = pygame.image.load(dado_am[0])
@@ -168,7 +77,6 @@ def dado_regra():
 
 #Opções do menu
 def menu_opc():
-    mouse = pygame.mouse.get_pos()
     mouse = pygame.mouse.get_pos()
     opc_jog = pygame.draw.rect(janela, (255, 255, 255), (60, 150, 200, 50))
     menu_botao1 = fonte_botao.render('COMEÇAR JOGO', True, (0, 0, 0))
@@ -233,6 +141,7 @@ def opc_mutar():
         aud_mute = pygame.image.load('../img/img_jog_car/mutar_branco.png')
         janela.blit(aud_mute, (340, 236))
 
+#Escolha das cores dos carros
 def custom():
     escolha_txt = fonte_botao.render('JOGADOR 1, ESCOLHA UMA COR!', True, (255, 255, 255))
     janela.blit(escolha_txt, (130, 150))
@@ -580,24 +489,6 @@ def placas_dif():
     elif difficulty == "Muito difícil":
         janela.blit(placavermelha, (240, 410))
 
-#Textos
-acerto1 = (fonte_botao.render('Parabéns! Você', True, (0, 0, 0)))
-acerto2 = (fonte_botao.render('acertou!', True, (0, 0, 0)))
-pontos = ''
-erro1 = (fonte_botao.render('Você cometeu', True, (0, 0, 0)))
-erro2 = (fonte_botao.render('uma infração leve!', True, (0, 0, 0)))
-pontos1 = (fonte_botao.render('Agora você possui', True, (0, 0, 0)))
-buraco1 = (fonte_botao.render('Que pena!', True, (0, 0, 0)))
-buraco2 = (fonte_botao.render('Você caiu no buraco!', True, (0, 0, 0)))
-ponte1 = (fonte_botao.render('Olhe só! Você', True, (0, 0, 0)))
-ponte2 = (fonte_botao.render('encontrou uma ponte!', True, (0, 0, 0)))
-pulo1 = (fonte_botao.render('Por isso, você pode', True, (0, 0, 0)))
-pulo2 = (fonte_botao.render('avançar 4 casas!', True, (0, 0, 0)))
-vez2 = (fonte_botao.render('Pode jogar o dado.', True, (0, 0, 0)))
-espaco = fonte_botao.render('Aperte espaço para voltar ao menu.', True, (0, 0, 0))
-espaco_1 = fonte_botao.render('Aperte espaço', True, (0, 0, 0))
-espaco_2 = fonte_botao.render('para continuar', True, (0, 0, 0))
-
 def ponte():
     janela.blit(mens_box, (150, 150))
     janela.blit(ponte1, (235, 200))
@@ -826,15 +717,15 @@ while True:
         menu_txt()
         custom()
         if carro_img_1 == carro_amarelo:
-            janela.blit(x_vermelho, (80,220))
+            janela.blit(x_vermelho, (90,230))
         elif carro_img_1 == carro_azul:
-            janela.blit(x_vermelho, (240,220))
+            janela.blit(x_vermelho, (250,230))
         elif carro_img_1 == carro_rosa:
-            janela.blit(x_vermelho, (400,220))
+            janela.blit(x_vermelho, (410,230))
         elif carro_img_1 == carro_verde:
-            janela.blit(x_vermelho, (160,350))
+            janela.blit(x_vermelho, (170,360))
         elif carro_img_1 == carro_cinza:
-            janela.blit(x_vermelho, (320,350))
+            janela.blit(x_vermelho, (330,360))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
