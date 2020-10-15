@@ -1029,6 +1029,12 @@ while True:
                             opcoes = False
                             modo_infantil = False
                             jogo_infantil = False
+                            ponteiro_1 = 0
+                            ponteiro_1_perg = 0
+                            pontos_1 = 0
+                            ponteiro_2 = 0
+                            ponteiro_2_perg = 0
+                            pontos_2 = 0
                             fim = False
                             escolha_modo = True
 
