@@ -21,7 +21,9 @@ placaazul = pygame.image.load('../img/img_jog_car/placaazul.png')
 placaverde = pygame.image.load('../img/img_jog_car/placaverde.png')
 placaamarela = pygame.image.load('../img/img_jog_car/placaamarela.png')
 placavermelha = pygame.image.load('../img/img_jog_car/placavermelha.png')
-
+menu_acesso_img = pygame.image.load('../img/img_jog_car/menu_acesso.png')
+menu_acesso_img_m = pygame.image.load('../img/img_jog_car/menu_acesso_g.png')
+menu_opcoes_img = pygame.image.load('../img/img_jog_car/menu_int_peq.png')
 
 #X
 x_vermelho = pygame.image.load('../img/img_jog_car/x.png')

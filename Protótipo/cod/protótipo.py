@@ -162,12 +162,15 @@ def custom():
 
 def botao_mutar():
     mouse = pygame.mouse.get_pos()
-    janela.blit(mutar, (520,10))
-    if 600 > mouse[0] > 520 and 90 > mouse[1] > 10:
-        janela.blit(mutar_mouse, (520, 10))
+    janela.blit(mutar, (205, 257))
+    if 285 > mouse[0] > 205 and 337 > mouse[1] > 257:
+        janela.blit(mutar_mouse, (205, 257))
 
 def botao_voltar():
-    janela.blit(botao_volta, (520, 523))
+    if escolha_modo == True:
+        janela.blit(botao_volta, (520, 532))
+    elif opcoes == True:
+        janela.blit(botao_volta, (315, 257))
 
 #Regras do modo infantil
 def regra_infantil_1():
@@ -489,6 +492,15 @@ def placas_dif():
     elif difficulty == "Muito difícil":
         janela.blit(placavermelha, (240, 410))
 
+def menu_acesso():
+    mouse = pygame.mouse.get_pos()
+    janela.blit(menu_acesso_img, (510, 20))
+    if 585 > mouse[0] > 510 and 47 > mouse[1] > 20:
+        janela.blit(menu_acesso_img_m, (500, 15))
+
+def menu_peq():
+    mouse = pygame.mouse.get_pos()
+    janela.blit(menu_opcoes_img, (175, 217))
 def ponte():
     janela.blit(mens_box, (150, 150))
     janela.blit(ponte1, (235, 200))
@@ -913,8 +925,7 @@ while True:
             janela.blit(fundo_infantil, (0, 0))
             carro_jog_1()
             carro_jog_2()
-            botao_mutar()
-            botao_voltar()
+            menu_acesso()
             mouse = pygame.mouse.get_pos()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -952,20 +963,10 @@ while True:
                             ponteiro_2 += 4
                             ponteiro_2_perg += 4
                             pontes_casa = True
-
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 80 and 603 > mouse[1] > 523:
-                        jogo_infantil = False
-                        modo_infantil = False
-                        escolha_modo = True
-                        if audio == True:
-                            pygame.mixer_music.stop()
-                    if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10 and (mut % 2) == 0:
-                        pygame.mixer_music.pause()
-                        mut += 1
-                    elif event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 520 and 90 > mouse[1] > 10 and (mut % 2) != 0:
-                        pygame.mixer_music.unpause()
-                        mut += 1
+                    if event.button == pygame.BUTTON_LEFT and 585 > mouse [0] > 510 and 47 > mouse[1] > 20:
+                        opcoes = True
+
 
             if pontos_1 >= 40:
                 perdedor = 'Jogador 1'
@@ -1001,6 +1002,41 @@ while True:
             show_text(show_points_1, 45, 525, 30, (0, 0, 0))
             show_text(show_points_2, 155, 525, 30, (0, 0, 0))
             pygame.display.update()
+
+            while opcoes:
+                janela.blit(fundo_infantil, (0, 0))
+                menu_peq()
+                botao_mutar()
+                botao_voltar()
+                carro_jog_1()
+                carro_jog_2()
+                mouse = pygame.mouse.get_pos()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if event.button == pygame.BUTTON_LEFT and 405 > mouse[0] > 390 and 235 > mouse[1] > 225:
+                            opcoes = False
+                        elif event.button == pygame.BUTTON_LEFT and 285 > mouse[0] > 205 and 337 > mouse[1] > 257 and (mut % 2) == 0:
+                            pygame.mixer_music.pause()
+                            mut += 1
+                        elif event.button == pygame.BUTTON_LEFT and 285 > mouse[0] > 205 and 337 > mouse[1] > 257 and (mut % 2) != 0:
+                            pygame.mixer_music.unpause()
+                            mut += 1
+                        elif event.button == pygame.BUTTON_LEFT and 395 > mouse[0] > 315 and 337 > mouse[1] > 257:
+                            if audio == True:
+                                pygame.mixer_music.stop()
+                            opcoes = False
+                            modo_infantil = False
+                            jogo_infantil = False
+                            fim = False
+                            escolha_modo = True
+
+
+                        pygame.display.flip()
+                    pygame.display.update()
+                pygame.display.update()
+
 
             while pergunta_1:
                 choice = ''

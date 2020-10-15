@@ -20,6 +20,7 @@ regra6 = False
 sorteio = False
 jogo_infantil = False
 jogo_adulto = False
+opcoes = False
 pergunta_1 = False
 pergunta_2 = False
 acerto_1 = False
