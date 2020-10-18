@@ -35,4 +35,4 @@ erro_2_d = False
 erro_2_md = False
 buraco_casa = False
 pontes_casa = False
-fim = False
+fim_jogo = False

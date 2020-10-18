@@ -592,6 +592,8 @@ while True:
             abertura = False
             intro = True
 
+            pygame.display.flip()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -972,13 +974,13 @@ while True:
                 perdedor = 'Jogador 1'
                 vencedor = 'Jogador 2'
                 jogo_infantil = False
-                fim = True
+                fim_jogo = True
                 pygame.quit()
             elif pontos_2 >= 40:
                 perdedor = 'Jogador 2'
                 vencedor = 'Jogador 1'
                 jogo_infantil = False
-                fim = True
+                fim_jogo = True
 
             if ponteiro_1_perg > 30 and pontos_2 < 40 and pontos_1 < 40:
                 ponteiro_1_perg = 0
@@ -997,8 +999,8 @@ while True:
                 # Placar de pontos
             show_points_1 = str(pontos_1)
             show_points_2 = str(pontos_2)
-            carteira_2()
             carteira_1()
+            carteira_2()
             show_text(show_points_1, 45, 525, 30, (0, 0, 0))
             show_text(show_points_2, 155, 525, 30, (0, 0, 0))
             pygame.display.update()
@@ -1035,7 +1037,6 @@ while True:
                             ponteiro_2 = 0
                             ponteiro_2_perg = 0
                             pontos_2 = 0
-                            fim = False
                             escolha_modo = True
 
 
@@ -1346,9 +1347,11 @@ while True:
 
                 pygame.display.update()
 
-        while fim:
+        while fim_jogo:
             janela.blit(fundo_infantil, (0, 0))
             fim()
+            if audio == True:
+                pygame.mixer.stop()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -1356,7 +1359,7 @@ while True:
                     if event.key == pygame.K_SPACE:
                         jogo_infantil = False
                         modo_infantil = False
-                        fim = False
+                        fim_jogo = False
                         menu = True
 
             pygame.display.flip()
