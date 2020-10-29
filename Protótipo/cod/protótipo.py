@@ -26,11 +26,12 @@ carro_intro_x = 0
 carro_intro_y = 460
 menu_titulo = fonte_tit.render('MANUAL DAS RUAS', True, (255, 255, 255))
 
-
 escolha = ''
 vencedor = ''
 perdedor = ''
 jogadores = ['Jogador 1', 'Jogador 2']
+customizacao_1_adulto = ''
+customizacao_2_adulto = ''
 
 #Coordenadas da carteira
 carteira_x = [30, 440]
@@ -120,7 +121,6 @@ def modos_jogo():
     escolha_txt = fonte_botao.render('ESCOLHA UM DOS MODOS', True, (255, 255, 255))
     janela.blit(escolha_txt, (190, 150))
     mouse = pygame.mouse.get_pos()
-    janela.blit(botao_volta, (520, 523))
     jog_modo_inf = pygame.draw.rect(janela, (255, 255, 255), (90, 300, 200, 50))
     opc_inf = fonte_botao.render('INFANTIL', True, (0, 0, 0))
     janela.blit(opc_inf, (145, 320))
@@ -695,8 +695,7 @@ while True:
                     customizacao_1 = True
                 elif event.button == pygame.BUTTON_LEFT and 520 > mouse[0] > 320 and 350 > mouse[1] > 300:
                     escolha_modo = False
-                    modo_adulto = True
-                    regra1 = True
+                    customizacao_1_adulto = True
 
         pygame.display.update()
 
@@ -1380,12 +1379,117 @@ while True:
 
             pygame.display.flip()
 
+   #test_inicio
+    while customizacao_1_adulto:
+
+        janela.blit(fundo_menu, (0, 0))
+        menu_txt()
+        custom()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse = pygame.mouse.get_pos()
+                if event.button == pygame.BUTTON_LEFT and 180 > mouse[0] > 80 and 320 > mouse[1] > 220:
+                    carro_img_1 = carro_amarelo
+                    cart_1 = cart_amarela
+                    dado_1 = dado_am
+                    customizacao_1_adulto = False
+                    customizacao_2_adulto = True
+                elif event.button == pygame.BUTTON_LEFT and 340 > mouse[0] > 240 and 320 > mouse[1] > 220:
+                    carro_img_1 = carro_azul
+                    cart_1 = cart_azul
+                    dado_1 = dado_az
+                    customizacao_1_adulto = False
+                    customizacao_2_adulto = True
+                elif event.button == pygame.BUTTON_LEFT and 500 > mouse[0] > 400 and 320 > mouse[1] > 220:
+                    carro_img_1 = carro_rosa
+                    cart_1 = cart_rosa
+                    dado_1 = dado_rosa
+                    customizacao_1_adulto = False
+                    customizacao_2_adulto = True
+                elif event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 160 and 450 > mouse[1] > 350:
+                    carro_img_1 = carro_verde
+                    cart_1 = cart_verde
+                    dado_1 = dado_verde
+                    customizacao_1_adulto = False
+                    customizacao_2_adulto = True
+                elif event.button == pygame.BUTTON_LEFT and 420 > mouse[0] > 320 and 450 > mouse[1] > 350:
+                    carro_img_1 = carro_cinza
+                    cart_1 = cart_cinza
+                    dado_1 = dado_cinza
+                    customizacao_1_adulto = False
+                    customizacao_2_adulto = True
+
+        pygame.display.update()
+
+    while customizacao_2_adulto:
+
+        janela.blit(fundo_menu, (0, 0))
+        menu_txt()
+        custom()
+
+        if carro_img_1 == carro_amarelo:
+            janela.blit(x_vermelho, (90, 230))
+        elif carro_img_1 == carro_azul:
+            janela.blit(x_vermelho, (250, 230))
+        elif carro_img_1 == carro_rosa:
+            janela.blit(x_vermelho, (410, 230))
+        elif carro_img_1 == carro_verde:
+            janela.blit(x_vermelho, (170, 360))
+        elif carro_img_1 == carro_cinza:
+            janela.blit(x_vermelho, (330, 360))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse = pygame.mouse.get_pos()
+                if event.button == pygame.BUTTON_LEFT and 180 > mouse[0] > 80 and 320 > mouse[1] > 220:
+                    carro_img_2 = carro_amarelo
+                    cart_2 = cart_amarela
+                    dado_2 = dado_am
+                    customizacao_2_adulto = False
+                    modo_adulto = True
+                    regra1 = True
+                elif event.button == pygame.BUTTON_LEFT and 340 > mouse[0] > 240 and 320 > mouse[1] > 220:
+                    carro_img_2_adulto = carro_azul
+                    cart_2 = cart_azul
+                    dado_2 = dado_az
+                    customizacao_2_adulto = False
+                    modo_adulto = True
+                    regra1 = True
+                elif event.button == pygame.BUTTON_LEFT and 500 > mouse[0] > 400 and 320 > mouse[1] > 220:
+                    carro_img_2 = carro_rosa
+                    cart_2 = cart_rosa
+                    dado_2 = dado_rosa
+                    customizacao_2_adulto = False
+                    modo_adulto = True
+                    regra1 = True
+                elif event.button == pygame.BUTTON_LEFT and 260 > mouse[0] > 160 and 450 > mouse[1] > 350:
+                    carro_img_2 = carro_verde
+                    cart_2 = cart_verde
+                    dado_2 = dado_verde
+                    customizacao_2_adulto = False
+                    modo_adulto = True
+                    regra1 = True
+                elif event.button == pygame.BUTTON_LEFT and 420 > mouse[0] > 320 and 450 > mouse[1] > 350:
+                    carro_img_2 = carro_cinza
+                    cart_2 = cart_cinza
+                    dado_2 = dado_cinza
+                    customizacao_2_adulto = False
+                    modo_adulto = True
+                    regra1 = True
+
+        pygame.display.update()
+    #teste_fim
+
     while modo_adulto:
 
+        mouse = pygame.mouse.get_pos()
         janela.blit(fundo_adulto, (0, 0))
         botao_mutar()
 
-        mouse = pygame.mouse.get_pos()
         if audio == True:
             musica_adulto = mixer.music.load('../audio/whatislove_8bit.wav')
             mixer.music.play(-1)
