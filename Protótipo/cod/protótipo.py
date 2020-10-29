@@ -71,6 +71,10 @@ dado_2 = ''
 dado_x = 255
 dado_y = 5
 
+#Coordenadas dos nomes
+x_nomes = [75, 85, 95, 70, 100]
+y_nomes = [430, 470, 510, 550, 590]
+
 def dado_regra():
     dado_regra = pygame.image.load(dado_am[0])
     janela.blit(dado_regra,(dado_x, dado_y))
@@ -557,6 +561,18 @@ def fim():
     janela.blit(fim2, (50, 415))
     janela.blit(fim3, (50, 440))
     janela.blit(espaco, (70, 490))
+
+def creditos():
+    gabriela = (fonte_botao.render('GABRIELA XAVIER DE A. FONTES - 5306709', True, (255, 255, 255)))
+    leonardo = (fonte_botao.render('LEONARDO GOULART RODRIGUES - 5306685', True, (255, 255, 255)))
+    lucas = (fonte_botao.render('LUCAS GABRIEL LEITE FARIA - 5306701', True, (255, 255, 255)))
+    maria = (fonte_botao.render('MARIA FERNANDA DE MAIA XAVIER - 5405665', True, (255, 255, 255)))
+    marlon = (fonte_botao.render('MARLON VICTOR R. COIMBRA - 5405689', True, (255, 255, 255)))
+    janela.blit(gabriela, (x_nomes[0], y_nomes[0]))
+    janela.blit(leonardo, (x_nomes[1], y_nomes[1]))
+    janela.blit(lucas, (x_nomes[2], y_nomes[2]))
+    janela.blit(maria, (x_nomes[3], y_nomes[3]))
+    janela.blit(marlon, (x_nomes[4], y_nomes[4]))
 
 pygame.display.flip()
 
