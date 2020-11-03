@@ -10,7 +10,7 @@ carro_intro = pygame.image.load('../img/img_jog_car/carro_intro.png')
 #Imagens de fundo
 fundo_menu = pygame.image.load('../img/pistas/fundo-intro.png')
 fundo_infantil = pygame.image.load('../img/pistas/pista-pca-2.png')
-fundo_adulto = pygame.image.load('../img/pistas/pista_dois.jpg')
+fundo_adulto = pygame.image.load('../img/pistas/pista-pca-2.png')
 fundo_intro = pygame.image.load('../img/img_jog_car/fundo_estradinha.png')
 
 #Imagens complementares

@@ -192,9 +192,9 @@ def botao_mutar():
 
 def botao_voltar():
     if escolha_modo == True:
-        janela.blit(botao_volta, (520, 532))
+        janela.blit(botao_volta, (400, 332))
     elif opcoes == True:
-        janela.blit(botao_volta, (315, 257))
+        janela.blit(botao_volta, (200, 60))
 
 #Regras do modo infantil
 def regra_infantil_1():
