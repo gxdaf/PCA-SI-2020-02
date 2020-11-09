@@ -15,7 +15,8 @@ Data = {
         "difficulty": "Fácil"
     },
     3: {
-        "question": "Diante da placa de regulamentação R-6c, o condutor poderá:": {
+        "question": "Diante da placa de regulamentação R-6c, o condutor poderá:",
+        "options":{
             "A": "Estacionar apenas para carga e descarga.",
             "B": "Estacionar seu veículo.",
             "C": "Parar apenas para embarque e desembarque.",
@@ -75,8 +76,7 @@ Data = {
         "difficulty": "Difícil"
     },
     10: {
-        "question": "Ao atender um motociclista, com alteração de consciência, após ter batido sua cabeça no chão, deve-se:
-",
+        "question": "Ao atender um motociclista, com alteração de consciência, após ter batido sua cabeça no chão, deve-se:",
         "options": {
             "A": "Aplicar gelo na cabeça da vítima, após retirar seu capacete.",
             "B": "Restringir os movimentos da vítima, mantendo suas roupas apertadas.",
@@ -112,36 +112,36 @@ Data = {
         "status": "Buraco"
     },
     14: {
-        "question": "A educação para o trânsito é:",
+        "question": "A manutenção do veículo e muito importante, pois pode evitar o alto consumo de combustível, que tem como uma das causas:",
         "options": {
-            "A": "Para quem é motorista",
-            "B": "É direito só dos agentes de trânsito",
-            "C": "É direito só para quem é alfabetizado",
-            "D": "É direito de todos"
+            "A": "Vazamento de óleo no amortecedor",
+            "B": "Combustível adulterado",
+            "C": "Desgaste no disco de freio",
+            "D": "Defeito nas velas"
         },
         "answer": "D",
-        "difficulty": "Médio"
+        "difficulty": "Fácil"
     },
     15: {
-        "question": "Quando se está dirigindo, é preciso respeitar as áreas dos pedestres. Qual das  opções abaixo não respeita essas regras?",
+        "question": "Camila estacionou o seu veículo em local sem a placa de sinalização de estacionamento regulamentado. Nessa situação, Camila cometeu uma infração de natureza:",
         "options": {
-            "A": "Parar na calçada ou na faixa de pedestres",
-            "B": "Não Parar na calçada ou na faixa de pedestres",
-            "C": "Estacionar em um vaga",
-            "D": "Dirigir nos limites da rua"
+            "A": "Intermediária",
+            "B": "Média",
+            "C": "Grave",
+            "D": "Leve"
     },
-        "answer": "A",
+        "answer": "D",
         "difficulty": "Fácil"
     },
     16: {
-        "question": "No Transito, a segurança é sempre importante, tendo isso em mente qual das  opções abaixo não condiz com essa segurança?",
+        "question": "Os veículos, quando em funcionamento, emitem os seguintes gases:",
         "options": {
-            "A": "Evitar ultrapassagens",
-            "B": "Não dirigir após beber alguma bebida alcoolica",
-            "C": "Não dirigir com Sono",
-            "D": "Não prestar atenção"
+            "A": "Hidrogênio e oxigênio",
+            "B": "Dióxido de carbono (gás carbônico) e monóxido de carbono",
+            "C": "Oxigênio e dióxido de carbono (gás carbônico)",
+            "D": "Dióxido de carbono (gás carbônico) e hidrogênio"
         },
-        "answer": "D",
+        "answer": "B",
         "difficulty": "Fácil"
     },
     17: {
@@ -151,65 +151,65 @@ Data = {
         "status": "Buraco"
     },
     19: {
-        "question": "É preciso ter respeito com as pessoas, e isso também se inclui no transito. Qual  das opções abaixo pode ser considerada uma atitude desrespeitosa?",
+        "question": "Em motocicletas e proibido o transporte de crianças com idade inferior a:",
         "options": {
-            "A": "Dirigir nos limites da velocidade",
-            "B": "Estacionar nos locais certos",
-            "C": "Buzinar fora dos padrões",
-            "D": "Utilizar as setas do veiculo"
+            "A": "7 anos",
+            "B": "12 anos",
+            "C": "8 anos",
+            "D": "10 anos"
         },
-        "answer": "C",
-        "difficulty": "Fácil"
+        "answer": "7",
+        "difficulty": "Mèdia"
     },
     20: {
         "status": "Buraco"
    },
     21: {
-        "question": "Qual das opções abaixo, jamais devem ocorrer no transito.",
+        "question": "Em caso de estouro ou esvaziamento súbito de um pneu, o condutor deve:",
         "options": {
-            "A": "Dar passagem para outro carro",
-            "B": "Jogar água ou sujeira em outros carros ou pessoas.",
-            "C": "Respeitar os sinais de transito.",
-            "D": "Dar passagem a ambulâncias ou carros policiais."
+            "A": "Virar o volante para os dois lados",
+            "B": "Segurar o volante e frear suavemente",
+            "C": "Frear imediatamente",
+            "D": "Colocar a marcha em ponto morto"
         },
         "answer": "B",
-        "difficulty": "Médio"
+        "difficulty": "Difícil"
    },
     22: {
-        "question": "Em uma ultrapassagem, é necessário que o carro da frente tenha boa visão de  onde você vai passar. Tendo isso em mente, por onde você deve passar?",
+        "question": "O proprietário deverá solicitar a baixa do registro do seu veículo quando:",
         "options": {
-            "A": "Por cima do carro, voando",
-            "B": "Por baixo do carro.",
-            "C": "Pela direita, na visão do passageiro",
-            "D": "Pela esquerda, na visão do motorista."
+            "A": "For realizada a compra e venda",
+            "B": "Estiver sem manutenção",
+            "C": "Estiver com mais de 3 anos de vida útil",
+            "D": "For definitivamente desmontado"
         },
         "answer": "D",
-        "difficulty": "Médio"
+        "difficulty": "Difícil"
     },
     23: {
         "status": "Buraco"
     },
     24: {
-        "question": "A segurança é uma das partes mais importantes da direção. Qual das opções  abaixo não é considerado algo seguro?",
+        "question": "O órgão municipal de trânsito tem competência para aplicar medida administrativa, penalidade e multa na infração de:",
         "options": {
-            "A": "Utilizar cinto de segurança",
-            "B": "Ter atenção no transito e em seu redor",
-            "C": "Dirigir com o braço para fora",
-            "D": "Não dirigir utilizando o celular."
+            "A": "Usar indevidamente no veículo aparelho de alarme",
+            "B": "Conduzir veículo com a cor ou característica alterada",
+            "C": "Portar no veículo placas de identificação em desacordo com as especificações do CONTRAN",
+            "D": "Parar o veículo na contramão da direção"
         },
-        "answer": "C",
-        "difficulty": "Médio"
+        "answer": "D",
+        "difficulty": "Difícil"
     },
     25: {
-        "question": "Qual das opções abaixo pode ser considerada a MAIS perigosa, para se cometer  no transito?",
+        "question": "É correto afirmar que o ciclista seguro e defensivo, quando adulto, deve:",
         "options": {
-            "A": "Não utilizar cinto de segurança",
-            "B": "Não dar seta ao fazer a curva",
-            "C": "Conversar enquanto dirige",
-            "D": "Utilizar o volante com um mão."
+            "A": "Circular somente nos parques e praças",
+            "B": "Respeitar o CTB e, consequentemente, a sinalização das vias",
+            "C": "Circular observando somente as regras impostas aos pedestres",
+            "D": "Circular somente onde não haja fluxo de pedestres"
         },
-        "answer": "A",
-        "difficulty": "Difícil"
+        "answer": "B",
+        "difficulty": "Muito difícil"
     },
     26: {
         "status": "Buraco"
@@ -218,34 +218,34 @@ Data = {
         "status": "Buraco"
     },
     28: {
-        "question": "Para se manter seguro, também é necessário estar dirigindo algo seguro, então  para isso, é necessário:",
+        "question": "Por que devo respeitar as distâncias de segurança?. Considerando o CTB e os preceitos de Direção Defensiva, a resposta correta para a questão acima e:",
         "options": {
-            "A": "Dirigir um carro quebrado.",
-            "B": "Dirigir um carro em bom estado de conservação.",
-            "C": "Dirigir com uma das portas abertas.",
-            "D": "Dirigir com pneus furados."
-        },
-        "answer": "B",
-        "difficulty": "Difícil"
-    },
-    29: {
-        "question": "É extremamente importante dirigir com o máximo de atenção possível, por isso,  deve se evitar dirigir após:",
-        "options": {
-            "A": "Beber água.",
-            "B": "Comer Algo.",
-            "C": "Beber algo com álcool.",
-            "D": "Beber Refrigerante."
+            "A": "Para que os veículos que venham no sentido contrário tenham melhor visibilidade",
+            "B": "Para eliminar a possibilidade de erro por parte do condutor",
+            "C": "Para que haja tempo e distância de reação, no caso de freada brusca, evitando colisão",
+            "D": "Para poder se livrar do trânsito pesado"
         },
         "answer": "C",
         "difficulty": "Muito difícil"
     },
-    30: {
-        "question": "O semáforo é utilizado para controlar o trânsito, ele contem três cores,  vermelho, amarelo e verde. O que essas cores significam?",
+    29: {
+        "question": "Para se habilitar na categoria que permite conduzir veículos com lotação maior que 8 passageiros é necessário estar habilitado, há no minimo 2 anos, na categoria:",
         "options": {
-            "A": "Vermelho: Para parar. Amarelo: Para prestar atenção.  Verde: Significa que pode andar.",
-            "B": "Vermelho: Para andar mais rápido. Amarelo: Significa para manter  uma velocidade. Verde: Significa para parar.",
-            "C": "Vermelho: Para prestar atenção. Amarelo: Significa que pode  andar. Verde: Para parar.",
-            "D": "Vermelho: Significa que pode andar. Amarelo: Para prestar  atenção. Verde: Para parar."
+            "A": "C",
+            "B": "B",
+            "C": "A",
+            "D": "D"
+        },
+        "answer": "B",
+        "difficulty": "Muito difícil"
+    },
+    30: {
+        "question": "Todo condutor, numa rodovia, ao perceber que outro veículo no sentido contrário iniciou uma ultrapassagem sem distância suficiente para realizar a manobra, deverá:",
+        "options": {
+            "A": "Reduzir a velocidade, e se necessário, dirigir-se ao acostamento até que o outro veículo conclua a ultrapassagem",
+            "B": "Reduzir a velocidade até parar, para que o outro veículo conclua a ultrapassagem",
+            "C": "Aumentar a velocidade, buzinar e desviar do veículo que iniciou a ultrapassagem",
+            "D": "Aumentar a velocidade, e se necessário, dirigir-se ao acostamento até que o outro veículo conclua a ultrapassagem"
         },
         "answer": "A",
         "difficulty": "Muito difícil"

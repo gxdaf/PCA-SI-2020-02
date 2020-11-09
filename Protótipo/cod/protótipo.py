@@ -537,24 +537,22 @@ def ponte():
 def buraco():
     if num_jog == '2':
         vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
+        janela.blit(vez1, (200, 300))
+        janela.blit(vez2, (210, 325))
     janela.blit(mens_box, (150, 150))
     janela.blit(buraco1, (250, 200))
     janela.blit(buraco2, (190, 225))
-    if num_jog == '2':
-        janela.blit(vez1, (200, 300))
-        janela.blit(vez2, (210, 325))
     janela.blit(espaco_1, (235, 350))
     janela.blit(espaco_2, (230, 375))
 
 def acerto():
     if num_jog == '2':
         vez1 = (fonte_botao.render('A vez é do {}!'.format(escolha), True, (0, 0, 0)))
+        janela.blit(vez1, (200, 270))
+        janela.blit(vez2, (210, 295))
     janela.blit(mens_box, (150, 150))
     janela.blit(acerto1, (225, 220))
     janela.blit(acerto2, (260, 245))
-    if num_jog == '2':
-        janela.blit(vez1, (200, 270))
-        janela.blit(vez2, (210, 295))
     janela.blit(espaco_1, (235, 350))
     janela.blit(espaco_2, (230, 375))
 
