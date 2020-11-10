@@ -63,7 +63,7 @@ ponteiro_2_perg = 0
 
 #Configuração das casas
 perguntas = [2, 3, 4, 5, 7, 9, 10, 11, 12, 14, 15, 16, 19, 21, 22, 24, 25, 28, 29, 30]
-pontes = [6, 8, 17, 18, 21]
+pontes = [6, 8, 17, 18, 24]
 buracos = [1, 13, 20, 26, 27]
 
 #Coordenadas dos dados
