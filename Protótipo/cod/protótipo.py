@@ -1,6 +1,6 @@
 import pygame, math, random, time
 from pygame import mixer
-from questions import Data
+from questions import *
 from imagens import *
 from audio import *
 from eventos import *
@@ -422,89 +422,125 @@ def show_text(txt, x, y, width, color):
 
 
 def ask_1 (number):
-    for key, value in Data.items():
-        # Informa a chave da pergunta e o seu valor
-        if ponteiro_1_perg in perguntas:
+    if carro_img_1 == carro_azul:
+        pygame.draw.rect(janela, (50, 137, 168), (x, y[0], largura, altura))
+        pygame.draw.rect(janela, (50, 137, 168), (x, y[1], largura, altura))
+        pygame.draw.rect(janela, (50, 137, 168), (x, y[2], largura, altura))
+        pygame.draw.rect(janela, (50, 137, 168), (x, y[3], largura, altura))
+    elif carro_img_1 == carro_amarelo:
+        pygame.draw.rect(janela, (222, 188, 0), (x, y[0], largura, altura))
+        pygame.draw.rect(janela, (222, 188, 0), (x, y[1], largura, altura))
+        pygame.draw.rect(janela, (222, 188, 0), (x, y[2], largura, altura))
+        pygame.draw.rect(janela, (222, 188, 0), (x, y[3], largura, altura))
+    elif carro_img_1 == carro_rosa:
+        pygame.draw.rect(janela, (189, 1, 69), (x, y[0], largura, altura))
+        pygame.draw.rect(janela, (189, 1, 69), (x, y[1], largura, altura))
+        pygame.draw.rect(janela, (189, 1, 69), (x, y[2], largura, altura))
+        pygame.draw.rect(janela, (189, 1, 69), (x, y[3], largura, altura))
+    elif carro_img_1 == carro_verde:
+        pygame.draw.rect(janela, (0, 116, 1), (x, y[0], largura, altura))
+        pygame.draw.rect(janela, (0, 116, 1), (x, y[1], largura, altura))
+        pygame.draw.rect(janela, (0, 116, 1), (x, y[2], largura, altura))
+        pygame.draw.rect(janela, (0, 116, 1), (x, y[3], largura, altura))
+    elif carro_img_1 == carro_cinza:
+        pygame.draw.rect(janela, (0, 0, 0), (x, y[0], largura, altura))
+        pygame.draw.rect(janela, (0, 0, 0), (x, y[1], largura, altura))
+        pygame.draw.rect(janela, (0, 0, 0), (x, y[2], largura, altura))
+        pygame.draw.rect(janela, (0, 0, 0), (x, y[3], largura, altura))
 
-            if carro_img_1 == carro_azul:
-                pygame.draw.rect(janela, (50, 137, 168), (x, y[0], largura, altura))
-                pygame.draw.rect(janela, (50, 137, 168), (x, y[1], largura, altura))
-                pygame.draw.rect(janela, (50, 137, 168), (x, y[2], largura, altura))
-                pygame.draw.rect(janela, (50, 137, 168), (x, y[3], largura, altura))
-            elif carro_img_1 == carro_amarelo:
-                pygame.draw.rect(janela, (222, 188, 0), (x, y[0], largura, altura))
-                pygame.draw.rect(janela, (222, 188, 0), (x, y[1], largura, altura))
-                pygame.draw.rect(janela, (222, 188, 0), (x, y[2], largura, altura))
-                pygame.draw.rect(janela, (222, 188, 0), (x, y[3], largura, altura))
-            elif carro_img_1 == carro_rosa:
-                pygame.draw.rect(janela, (189, 1, 69), (x, y[0], largura, altura))
-                pygame.draw.rect(janela, (189, 1, 69), (x, y[1], largura, altura))
-                pygame.draw.rect(janela, (189, 1, 69), (x, y[2], largura, altura))
-                pygame.draw.rect(janela, (189, 1, 69), (x, y[3], largura, altura))
-            elif carro_img_1 == carro_verde:
-                pygame.draw.rect(janela, (0, 116, 1), (x, y[0], largura, altura))
-                pygame.draw.rect(janela, (0, 116, 1), (x, y[1], largura, altura))
-                pygame.draw.rect(janela, (0, 116, 1), (x, y[2], largura, altura))
-                pygame.draw.rect(janela, (0, 116, 1), (x, y[3], largura, altura))
-            elif carro_img_1 == carro_cinza:
-                pygame.draw.rect(janela, (0, 0, 0), (x, y[0], largura, altura))
-                pygame.draw.rect(janela, (0, 0, 0), (x, y[1], largura, altura))
-                pygame.draw.rect(janela, (0, 0, 0), (x, y[2], largura, altura))
-                pygame.draw.rect(janela, (0, 0, 0), (x, y[3], largura, altura))
+    if esc_modo == 'infantil':
+        for key, value in infantil.items():
+            if ponteiro_1_perg in perguntas:
 
-            if key == number:
-                question = '{0}: {1}'.format(key, value['question'])
-                show_text(question, 90, 100, 20, (0, 0, 0))
+                if key == number:
+                    question = '{0}: {1}'.format(key, value['question'])
+                    show_text(question, 90, 100, 20, (0, 0, 0))
 
-                # Show options
-                show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
-                show_text(('[B]: {}'.format(value["options"]["B"])), (x + 10), (y[1] + 18), 20, (255, 255, 255))
-                show_text(('[C]: {}'.format(value["options"]["C"])), (x + 10), (y[2] + 18), 20, (255, 255, 255))
-                show_text(('[D]: {}'.format(value["options"]["D"])), (x + 10), (y[3] + 18), 20, (255, 255, 255))
+                    # Show options
+                    show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
+                    show_text(('[B]: {}'.format(value["options"]["B"])), (x + 10), (y[1] + 18), 20, (255, 255, 255))
+                    show_text(('[C]: {}'.format(value["options"]["C"])), (x + 10), (y[2] + 18), 20, (255, 255, 255))
+                    show_text(('[D]: {}'.format(value["options"]["D"])), (x + 10), (y[3] + 18), 20, (255, 255, 255))
 
-                return value
+                    return value
+    elif esc_modo == 'adulto':
+        for key, value in adulto.items():
+            # Informa a chave da pergunta e o seu valor
+            if ponteiro_1_perg in perguntas:
+
+                if key == number:
+                    question = '{0}: {1}'.format(key, value['question'])
+                    show_text(question, 90, 100, 20, (0, 0, 0))
+
+                    # Show options
+                    show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
+                    show_text(('[B]: {}'.format(value["options"]["B"])), (x + 10), (y[1] + 18), 20, (255, 255, 255))
+                    show_text(('[C]: {}'.format(value["options"]["C"])), (x + 10), (y[2] + 18), 20, (255, 255, 255))
+                    show_text(('[D]: {}'.format(value["options"]["D"])), (x + 10), (y[3] + 18), 20, (255, 255, 255))
+
+                    return value
+
 
 def ask_2 (number):
-    for key, value in Data.items():
-        # Informa a chave da pergunta e o seu valor
-        if ponteiro_2_perg in perguntas:
-            if carro_img_2 == carro_azul:
-                pygame.draw.rect(janela, (50, 137, 168), (x, y[0], largura, altura))
-                pygame.draw.rect(janela, (50, 137, 168), (x, y[1], largura, altura))
-                pygame.draw.rect(janela, (50, 137, 168), (x, y[2], largura, altura))
-                pygame.draw.rect(janela, (50, 137, 168), (x, y[3], largura, altura))
-            elif carro_img_2 == carro_amarelo:
-                pygame.draw.rect(janela, (222, 188, 0), (x, y[0], largura, altura))
-                pygame.draw.rect(janela, (222, 188, 0), (x, y[1], largura, altura))
-                pygame.draw.rect(janela, (222, 188, 0), (x, y[2], largura, altura))
-                pygame.draw.rect(janela, (222, 188, 0), (x, y[3], largura, altura))
-            elif carro_img_2 == carro_rosa:
-                pygame.draw.rect(janela, (189, 1, 69), (x, y[0], largura, altura))
-                pygame.draw.rect(janela, (189, 1, 69), (x, y[1], largura, altura))
-                pygame.draw.rect(janela, (189, 1, 69), (x, y[2], largura, altura))
-                pygame.draw.rect(janela, (189, 1, 69), (x, y[3], largura, altura))
-            elif carro_img_2 == carro_verde:
-                pygame.draw.rect(janela, (0, 116, 1), (x, y[0], largura, altura))
-                pygame.draw.rect(janela, (0, 116, 1), (x, y[1], largura, altura))
-                pygame.draw.rect(janela, (0, 116, 1), (x, y[2], largura, altura))
-                pygame.draw.rect(janela, (0, 116, 1), (x, y[3], largura, altura))
-            elif carro_img_2 == carro_cinza:
-                pygame.draw.rect(janela, (0, 0, 0), (x, y[0], largura, altura))
-                pygame.draw.rect(janela, (0, 0, 0), (x, y[1], largura, altura))
-                pygame.draw.rect(janela, (0, 0, 0), (x, y[2], largura, altura))
-                pygame.draw.rect(janela, (0, 0, 0), (x, y[3], largura, altura))
+    if carro_img_2 == carro_azul:
+        pygame.draw.rect(janela, (50, 137, 168), (x, y[0], largura, altura))
+        pygame.draw.rect(janela, (50, 137, 168), (x, y[1], largura, altura))
+        pygame.draw.rect(janela, (50, 137, 168), (x, y[2], largura, altura))
+        pygame.draw.rect(janela, (50, 137, 168), (x, y[3], largura, altura))
+    elif carro_img_2 == carro_amarelo:
+        pygame.draw.rect(janela, (222, 188, 0), (x, y[0], largura, altura))
+        pygame.draw.rect(janela, (222, 188, 0), (x, y[1], largura, altura))
+        pygame.draw.rect(janela, (222, 188, 0), (x, y[2], largura, altura))
+        pygame.draw.rect(janela, (222, 188, 0), (x, y[3], largura, altura))
+    elif carro_img_2 == carro_rosa:
+        pygame.draw.rect(janela, (189, 1, 69), (x, y[0], largura, altura))
+        pygame.draw.rect(janela, (189, 1, 69), (x, y[1], largura, altura))
+        pygame.draw.rect(janela, (189, 1, 69), (x, y[2], largura, altura))
+        pygame.draw.rect(janela, (189, 1, 69), (x, y[3], largura, altura))
+    elif carro_img_2 == carro_verde:
+        pygame.draw.rect(janela, (0, 116, 1), (x, y[0], largura, altura))
+        pygame.draw.rect(janela, (0, 116, 1), (x, y[1], largura, altura))
+        pygame.draw.rect(janela, (0, 116, 1), (x, y[2], largura, altura))
+        pygame.draw.rect(janela, (0, 116, 1), (x, y[3], largura, altura))
+    elif carro_img_2 == carro_cinza:
+        pygame.draw.rect(janela, (0, 0, 0), (x, y[0], largura, altura))
+        pygame.draw.rect(janela, (0, 0, 0), (x, y[1], largura, altura))
+        pygame.draw.rect(janela, (0, 0, 0), (x, y[2], largura, altura))
+        pygame.draw.rect(janela, (0, 0, 0), (x, y[3], largura, altura))
 
-            if key == number:
-                question = '{0}: {1}'.format(key, value['question'])
-                show_text(question, 90, 100, 20, (0, 0, 0))
+    if esc_modo == 'infantil':
+        for key, value in infantil.items():
+            # Informa a chave da pergunta e o seu valor
+            if ponteiro_2_perg in perguntas:
 
-                # Show options
-                show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
-                show_text(('[B]: {}'.format(value["options"]["B"])), (x + 10), (y[1] + 18), 20, (255, 255, 255))
-                show_text(('[C]: {}'.format(value["options"]["C"])), (x + 10), (y[2] + 18), 20, (255, 255, 255))
-                show_text(('[D]: {}'.format(value["options"]["D"])), (x + 10), (y[3] + 18), 20, (255, 255, 255))
+                if key == number:
+                    question = '{0}: {1}'.format(key, value['question'])
+                    show_text(question, 90, 100, 20, (0, 0, 0))
 
-                return value
+                    # Show options
+                    show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
+                    show_text(('[B]: {}'.format(value["options"]["B"])), (x + 10), (y[1] + 18), 20, (255, 255, 255))
+                    show_text(('[C]: {}'.format(value["options"]["C"])), (x + 10), (y[2] + 18), 20, (255, 255, 255))
+                    show_text(('[D]: {}'.format(value["options"]["D"])), (x + 10), (y[3] + 18), 20, (255, 255, 255))
+
+                    return value
+
+    elif esc_modo == 'adulto':
+        for key, value in adulto.items():
+            # Informa a chave da pergunta e o seu valor
+            if ponteiro_2_perg in perguntas:
+
+                if key == number:
+                    question = '{0}: {1}'.format(key, value['question'])
+                    show_text(question, 90, 100, 20, (0, 0, 0))
+
+                    # Show options
+                    show_text(('[A]: {}'.format(value["options"]["A"])), (x + 10), (y[0] + 18), 20, (255, 255, 255))
+                    show_text(('[B]: {}'.format(value["options"]["B"])), (x + 10), (y[1] + 18), 20, (255, 255, 255))
+                    show_text(('[C]: {}'.format(value["options"]["C"])), (x + 10), (y[2] + 18), 20, (255, 255, 255))
+                    show_text(('[D]: {}'.format(value["options"]["D"])), (x + 10), (y[3] + 18), 20, (255, 255, 255))
+
+                    return value
 
 def placas_dif():
     if difficulty == "Fácil":
@@ -719,11 +755,11 @@ while True:
                 if event.button == pygame.BUTTON_LEFT and 290 > mouse[0] > 90 and 350 > mouse[1] > 300:
                     escolha_modo = False
                     esc_num_jog = True
-                    esc_modo += 1
+                    esc_modo = 'infantil'
                 elif event.button == pygame.BUTTON_LEFT and 520 > mouse[0] > 320 and 350 > mouse[1] > 300:
                     escolha_modo = False
                     esc_num_jog = True
-                    esc_modo += 2
+                    esc_modo = 'adulto'
 
         pygame.display.update()
 
@@ -740,22 +776,22 @@ while True:
                 if event.button == pygame.BUTTON_LEFT and 600 > mouse[0] > 80 and 603 > mouse[1] > 523:
                     escolha_modo = False
                     menu = True
-                if event.button == pygame.BUTTON_LEFT and 290 > mouse[0] > 90 and 350 > mouse[1] > 300 and (esc_modo % 2) != 0:
+                if event.button == pygame.BUTTON_LEFT and 290 > mouse[0] > 90 and 350 > mouse[1] > 300 and esc_modo == 'infantil':
                     escolha_modo = False
                     esc_num_jog = False
                     num_jog = '1'
                     customizacao_1 = True
-                elif event.button == pygame.BUTTON_LEFT and 520 > mouse[0] > 320 and 350 > mouse[1] > 300 and (esc_modo % 2) != 0:
+                elif event.button == pygame.BUTTON_LEFT and 520 > mouse[0] > 320 and 350 > mouse[1] > 300 and esc_modo == 'infantil':
                     escolha_modo = False
                     esc_num_jog = False
                     num_jog = '2'
                     customizacao_1 = True
-                elif event.button == pygame.BUTTON_LEFT and 290 > mouse[0] > 90 and 350 > mouse[1] > 300 and (esc_modo % 2) == 0:
+                elif event.button == pygame.BUTTON_LEFT and 290 > mouse[0] > 90 and 350 > mouse[1] > 300 and esc_modo == 'adulto':
                     escolha_modo = False
                     esc_num_jog = False
                     num_jog = '1'
                     customizacao_1_adulto = True
-                elif event.button == pygame.BUTTON_LEFT and 520 > mouse[0] > 320 and 350 > mouse[1] > 300 and (esc_modo % 2) == 0:
+                elif event.button == pygame.BUTTON_LEFT and 520 > mouse[0] > 320 and 350 > mouse[1] > 300 and esc_modo == 'adulto':
                     escolha_modo = False
                     esc_num_jog = False
                     num_jog = '2'
@@ -1148,7 +1184,7 @@ while True:
                             pontos_1 = 0
                             escolha_modo = True
                             num_jog = ''
-                            esc_modo = 0
+                            esc_modo = ''
                             if num_jog == '2':
                                 ponteiro_2 = 0
                                 ponteiro_2_perg = 0
@@ -1885,7 +1921,7 @@ while True:
                             pontos_1 = 0
                             escolha_modo = True
                             num_jog = ''
-                            esc_modo = 0
+                            esc_modo = ''
                             if num_jog == '2':
                                 ponteiro_2 = 0
                                 ponteiro_2_perg = 0
