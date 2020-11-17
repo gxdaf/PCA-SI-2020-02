@@ -1,10 +1,10 @@
 import pygame, random
-from questions import Data
+from questions import infantil
 
 pygame.init()
 pygame.font.init()
 
-screen = pygame.display.set_mode((600, 600))
+screen = pygame.display.set_mode((500, 600))
 name = pygame.display.set_caption(('Manual das Ruas'))
 runing = True
 sorteio = True
@@ -12,9 +12,9 @@ texto_sorteio = 'Aperte TAB em seu teclado para efetuar o sorteio!'
 jogo = False
 
 
-x = 50
+x = 10
 y = [70, 130, 190, 250]
-largura = 500
+largura = 480
 altura = 50
 
 perguntas = [2, 3, 4, 5, 7, 9, 10, 11, 12, 14, 15, 16, 19, 21, 22, 24, 25, 28, 29, 30]
@@ -31,19 +31,29 @@ jogadores = ['Amarelo', 'Azul']
 def show_text(txt, x, y, width, color):
     sys_font = pygame.font.SysFont('None', width)
     wrap = txt.find('  ')
+    wrap2 = txt.find('   ')
 
-    if wrap > 0:
+    if wrap > 0 and wrap2 < 0:
         top_text = sys_font.render(txt[:wrap], True, color)
         bottom_text = sys_font.render(txt[wrap:], True, color)
         screen.blit(top_text, (x, y - 9))
         screen.blit(bottom_text, (x, y + 9))
-    else:
+
+    if wrap2 > 0:
+        top_text = sys_font.render(txt[:wrap], True, color)
+        bottom_text = sys_font.render(txt[wrap:wrap2], True, color)
+        third_row = sys_font.render(txt[wrap2:], True, color)
+        screen.blit(top_text, (x, y - 13))
+        screen.blit(bottom_text, (x, y))
+        screen.blit(third_row, (x - 4, y + 13))
+
+    if wrap < 0 and wrap2 < 0:
         text = sys_font.render(txt, True, color)
         screen.blit(text, (x, y))
 
 
 def ask(number):
-    for key, value in Data.items():
+    for key, value in infantil.items():
         # Informa a chave da pergunta e o seu valor
         if case in perguntas:
 
@@ -78,11 +88,11 @@ while runing:
                     escolha = random.choice(jogadores)
                     print('O primeiro a jogar será o: {}!'.format(escolha))
                 if event.key == pygame.K_SPACE and escolha == 'Amarelo':
-                    dado = random.randint(1, 6)
+                    dado = 1
                     case += dado
                     pygame.display.update()
                 elif event.key == pygame.K_SPACE and escolha == 'Azul':
-                    dado = random.randint(1, 6)
+                    dado = 1
                     case += dado
                     pygame.display.flip()
             # Evento de Click

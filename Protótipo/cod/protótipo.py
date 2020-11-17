@@ -410,15 +410,25 @@ def mens_txt_sort_ad():
 def show_text(txt, x, y, width, color):
     sys_font = pygame.font.SysFont('None', width)
     wrap = txt.find('  ')
+    wrap2 = txt.find('   ')
 
-    if wrap > 0:
-        top_text = sys_font.render(txt[:wrap - 5], True, color)
+    if wrap > 0 and wrap2 < 0:
+        top_text = sys_font.render(txt[:wrap], True, color)
         bottom_text = sys_font.render(txt[wrap:], True, color)
-        janela.blit(top_text, (x, y - 9))
-        janela.blit(bottom_text, (x, y + 9))
-    else:
+        screen.blit(top_text, (x, y - 9))
+        screen.blit(bottom_text, (x, y + 9))
+
+    if wrap2 > 0:
+        top_text = sys_font.render(txt[:wrap], True, color)
+        bottom_text = sys_font.render(txt[wrap:wrap2], True, color)
+        third_row = sys_font.render(txt[wrap2:], True, color)
+        screen.blit(top_text, (x, y - 13))
+        screen.blit(bottom_text, (x, y))
+        screen.blit(third_row, (x - 4, y + 13))
+
+    if wrap < 0 and wrap2 < 0:
         text = sys_font.render(txt, True, color)
-        janela.blit(text, (x, y))
+        screen.blit(text, (x, y))
 
 
 def ask_1 (number):
