@@ -415,20 +415,20 @@ def show_text(txt, x, y, width, color):
     if wrap > 0 and wrap2 < 0:
         top_text = sys_font.render(txt[:wrap], True, color)
         bottom_text = sys_font.render(txt[wrap:], True, color)
-        screen.blit(top_text, (x, y - 9))
-        screen.blit(bottom_text, (x, y + 9))
+        janela.blit(top_text, (x, y - 9))
+        janela.blit(bottom_text, (x, y + 9))
 
     if wrap2 > 0:
         top_text = sys_font.render(txt[:wrap], True, color)
         bottom_text = sys_font.render(txt[wrap:wrap2], True, color)
         third_row = sys_font.render(txt[wrap2:], True, color)
-        screen.blit(top_text, (x, y - 13))
-        screen.blit(bottom_text, (x, y))
-        screen.blit(third_row, (x - 4, y + 13))
+        janela.blit(top_text, (x, y - 13))
+        janela.blit(bottom_text, (x, y))
+        janela.blit(third_row, (x - 4, y + 13))
 
     if wrap < 0 and wrap2 < 0:
         text = sys_font.render(txt, True, color)
-        screen.blit(text, (x, y))
+        janela.blit(text, (x, y))
 
 
 def ask_1 (number):
