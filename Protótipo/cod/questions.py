@@ -412,7 +412,7 @@ adulto = {
             "C": "8 anos",
             "D": "10 anos"
         },
-        "answer": "7",
+        "answer": "A",
         "difficulty": "Mèdia"
     },
     20: {
